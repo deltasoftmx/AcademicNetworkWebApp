@@ -39,26 +39,32 @@ guardado en el directorio de ese módulo o componente y registrado en el módulo
 
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 10.0.0.
 
-### Development server
+### Instalar dependencias.
+
+Ejecutar `npm ci` después de clonar el repositorio para descargar las dependencias del proyecto.
+
+Para agregar una nueva dependencia usar `npm install [nombre-paquete]`.
+
+### Development server.
 
 Ejecutar `ng serve` para un servidor de desarrollo. Ir a `http://localhost:4200/`. La aplicación automáticamente se recargará si hay cambios en los archivos.
 
-### Code scaffolding
+### Code scaffolding.
 
 Ejecutar `ng generate component component-name` Para generar un nuevo componente. También se puede usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-### Build
+### Build.
 
 Ejecutar `ng build` Para compilar el proyecto. El resultado de la compilación se guardará en el directorio `dist/`. Usar la opción `--prod` para una compilación para producción.
 
-### Running unit tests
+### Running unit tests.
 
 Ejecutar `ng test` para ejecutar pruebas unitarias vía [Karma](https://karma-runner.github.io).
 
-### Running end-to-end tests
+### Running end-to-end tests.
 
 Ejecutar `ng e2e` para correr las pruebas end-to-end vía [Protractor](http://www.protractortest.org/).
 
-### Further help
+### Further help.
 
 Para obtener más ayuda con Angular CLI use `ng help` o revise el [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
