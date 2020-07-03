@@ -1,0 +1,15 @@
+<div class="container global-flex-centering-container">
+  <div class="custom-container">
+    <h1 class="global-main-title">Inicio de sesión</h1>
+    <app-single-field-form-n2options
+    label="Usuario"
+    placeholder="Escriba su usuario o email"
+    left-btn="Cancelar"
+    right-btn="Continuar"
+    type="text"
+    required="true"
+    forward-btn="right"
+    (btn-pressed)="catch_user($event)">
+    </app-single-field-form-n2options>
+  </div>
+</div>

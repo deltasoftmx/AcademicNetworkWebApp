@@ -1,0 +1,15 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar {
+  position: fixed;
+}
+
+.sidenav {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0;
+  left: 0;
+}

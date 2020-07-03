@@ -1,27 +1,64 @@
 # AcademyNetworkWebApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
+## Índice.
 
-## Development server
+* [Sobre el proyecto](#Sobre-el-proyecto)
+* [Directorios de interés](#Directorios-de-interés)
+  * [Módulos](#Módulos)
+  * [Servicios](#Servicios)
+* [Notas útiles](#Notas-útiles)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Sobre el proyecto.
 
-## Code scaffolding
+Esta es la aplicación cliente para el proyecto AcademyNetwork, el cuál es un proyecto de software libre para acercar a los
+estudiantes con los profesores y personal administrativo de una escula, proveyendo de los servicios comunes de redes sociales.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Directorios de interés.
 
-## Build
+### Módulos.
+Este proyecto separa sus funcionalidades en dirferentes módulos para mejorar el mantenimiento del mismo y su fácil modificación.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Los módulos que usa son:
 
-## Running unit tests
+* MaterialModule: Exporta los componentes de Angular Material a utilizar.
+* AppComponensModule: Exporta todos los componentes que no son vistas en la aplicación. Estos componentes son fácilmente reutilizables.
+* ViewsModule: Exporta los componentes que serán usados como vistas. Estos componentes son los usados por el enrutador en Angular para desplegar vistas.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Estos módulos se encuntran en `src/app/modules/`
 
-## Running end-to-end tests
+En cada directorio de módulo se encuentran los componentes que exportan.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Revisar sus directorios para más información.
 
-## Further help
+### Servicios.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Los servicios globales se guardan en `src/app/services`. Si un servicio será únicamente usado en un módulo o un compoenente, el servivicio deberá ser
+guardado en el directorio de ese módulo o componente y registrado en el módulo o componente en el que será usado.
+
+## Notas útiles.
+
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 10.0.0.
+
+### Development server
+
+Ejecutar `ng serve` para un servidor de desarrollo. Ir a `http://localhost:4200/`. La aplicación automáticamente se recargará si hay cambios en los archivos.
+
+### Code scaffolding
+
+Ejecutar `ng generate component component-name` Para generar un nuevo componente. También se puede usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+### Build
+
+Ejecutar `ng build` Para compilar el proyecto. El resultado de la compilación se guardará en el directorio `dist/`. Usar la opción `--prod` para una compilación para producción.
+
+### Running unit tests
+
+Ejecutar `ng test` para ejecutar pruebas unitarias vía [Karma](https://karma-runner.github.io).
+
+### Running end-to-end tests
+
+Ejecutar `ng e2e` para correr las pruebas end-to-end vía [Protractor](http://www.protractortest.org/).
+
+### Further help
+
+Para obtener más ayuda con Angular CLI use `ng help` o revise el [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
