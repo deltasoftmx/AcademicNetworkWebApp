@@ -15,7 +15,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
   @Input('type') type;
   @Input('required') isreq:boolean;
   @Input('forward-btn') forward_btn;
-  @Input('footer') footer;
+  @Input('error-msg') footer;
 
   @Output('btn-pressed') btn_pressed: EventEmitter<any> = new EventEmitter();
 

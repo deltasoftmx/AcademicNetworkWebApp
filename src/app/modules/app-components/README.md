@@ -32,6 +32,7 @@ y dos botones (izquierdo y derecho) que que sirven para preguntar algo al usuari
 * `type`: Tipo de la entrada de texto. String.
 * `required`: Booleano indicando si es requerido.
 * `forward-btn`: El botón que se considera el de avanzar (`left`|`right`). String.
+* `error-msg`: El mensaje de error que se desplegará cuando `required` = `true` y el campo esté vacío.
 
 **Salidas:**
 * `btn-pressed`: Evento que retorna un objeto indicando el valor en el campo de texto al momento de ser presionado y el botón presionado. Si se presiona la tecla de retorno en el campo de texto en lugar de uno de los botones, se indicará en el campo `btn`.
