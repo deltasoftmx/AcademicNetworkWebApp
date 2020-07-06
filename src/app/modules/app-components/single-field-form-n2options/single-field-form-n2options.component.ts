@@ -15,6 +15,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
   @Input('type') type;
   @Input('required') isreq:boolean;
   @Input('forward-btn') forward_btn;
+  @Input('footer') footer;
 
   @Output('btn-pressed') btn_pressed: EventEmitter<any> = new EventEmitter();
 
@@ -45,7 +46,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
         icon: 'error',
         title: '<strong> Error </strong>',
         text: `El campo ${this.label} es requerido.`,
-        footer: 'Parece que has olvidado poner tu usuario.'
+        footer: this.footer
       });
       return;
     }
