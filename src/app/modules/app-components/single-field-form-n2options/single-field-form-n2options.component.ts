@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-single-field-form-n2options',
@@ -14,6 +15,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
   @Input('type') type;
   @Input('required') isreq:boolean;
   @Input('forward-btn') forward_btn;
+  @Input('error-msg') footer;
 
   @Output('btn-pressed') btn_pressed: EventEmitter<any> = new EventEmitter();
 
@@ -34,8 +36,18 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
     //Evitar la ejecución del flujo si el campo es
     //requerido y está vacío.
     if(!val && this.isreq && (btn == this.forward_btn || btn == 'return')) {
-      //usar algún servicio de alertas en lugar del alert del navegador.
-      alert(`El campo ${this.label} es requerido.`);
+      //Muestra una alerta de error al usuario.
+      //Descripción de las propiedades del objeto como parámetro:
+      //1. icon = agrega un icono (success, error, warning, info y question)
+      //2. title = título de la alerta.
+      //3. text = descripción del mensaje/alerta.
+      //4. footer = footer de la alerta.
+      swal.fire({
+        icon: 'error',
+        title: '<strong> Error </strong>',
+        text: `El campo ${this.label} es requerido.`,
+        footer: this.footer
+      });
       return;
     }
 
