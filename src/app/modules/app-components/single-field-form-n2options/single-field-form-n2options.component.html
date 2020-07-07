@@ -10,7 +10,10 @@
 
     <div class="custom-sub-container global-btn-right">
       <button mat-raised-button color="primary" (click)="onclick($event, input.value, 'left')">{{lbtn}}</button>
-      <button mat-raised-button color="primary" (click)="onclick($event, input.value, 'right')" autofocus="true">{{rbtn}}</button>
+      <button id="btn-right" mat-raised-button color="primary" (click)="onclick($event, input.value, 'right')" autofocus="true" [routerLink]="link">
+        {{rbtn}}
+      </button>
     </div>
   </form>
 </div>
+<router-outlet></router-outlet>

@@ -16,6 +16,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
   @Input('required') isreq:boolean;
   @Input('forward-btn') forward_btn;
   @Input('error-msg') footer;
+  @Input('link') link;
 
   @Output('btn-pressed') btn_pressed: EventEmitter<any> = new EventEmitter();
 
@@ -26,7 +27,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
 
   onclick(event, val, btn) {
     event.preventDefault();
-
+    
     //Detecta si se presiono la tecla de retorno
     //en lugar de un botón.
     if (event.explicitOriginalTarget.tagName == 'INPUT') {
@@ -55,6 +56,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
       value: val,
       btn: btn
     })
+
   }
 
 }
