@@ -13,7 +13,6 @@ mat-icon {
   text-align: center;
 }
 
-<<<<<<< HEAD
 .active {
   display: inline-block;
 }
@@ -22,8 +21,3 @@ mat-icon {
   display: none;
 }
 
-=======
-.get-password {
-  display: none;
-}
->>>>>>> bc5ab5f4ac736d7745cc566a4864adfa635848ac
