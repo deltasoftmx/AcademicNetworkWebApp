@@ -26,7 +26,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
 
   onclick(event, val, btn) {
     event.preventDefault();
-
+    
     //Detecta si se presiono la tecla de retorno
     //en lugar de un botón.
     if (event.explicitOriginalTarget.tagName == 'INPUT') {
@@ -54,7 +54,8 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
     this.btn_pressed.emit({
       value: val,
       btn: btn
-    })
+    });
+
   }
 
 }
