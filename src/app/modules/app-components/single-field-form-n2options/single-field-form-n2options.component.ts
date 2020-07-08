@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import swal from 'sweetalert2';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-field-form-n2options',
@@ -17,11 +16,10 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
   @Input('required') isreq:boolean;
   @Input('forward-btn') forward_btn;
   @Input('error-msg') footer;
-  @Input('link') link;
 
   @Output('btn-pressed') btn_pressed: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -52,10 +50,6 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
       });
       return;
     }
-
-    //Navegamos al enlace correspondiente
-    //dependiendo del valor de entrada de link.
-    this.router.navigate([this.link]);
 
     this.btn_pressed.emit({
       value: val,

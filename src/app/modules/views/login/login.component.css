@@ -5,3 +5,14 @@
   right: 0;
   left: 0;
 }
+
+mat-icon {
+  font-size: 142px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.get-password {
+  display: none;
+}
