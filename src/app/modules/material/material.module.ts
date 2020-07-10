@@ -6,7 +6,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu'; 
-import { MatCardModule } from '@angular/material/card'; 
+import { MatCardModule } from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';  
 
 let modules = [
   MatToolbarModule, 
@@ -16,7 +17,8 @@ let modules = [
   MatFormFieldModule,
   MatInputModule,
   MatMenuModule,
-  MatCardModule
+  MatCardModule,
+  MatSelectModule
 ]
 
 

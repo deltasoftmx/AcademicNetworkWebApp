@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
 
 import { AppComponentsModule } from '../app-components/app-components.module'; //All components that are not views.
 
 import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    SignUpComponent,
   ],
   imports: [
     //MaterialModule,
-    AppComponentsModule
+    AppComponentsModule,
+    FormsModule,
+    CommonModule
   ],
   exports: [
     //MaterialModule,
