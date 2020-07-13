@@ -42,15 +42,15 @@ export class SignUpService {
   }
 
   //Métodos.
-  getCareers() {
+  getCareers(): Career[] {
     return this.careers;
   }
 
-  getStudents() {
+  getStudents(): Student[] {
     return this.students;
   }
 
-  newStudent() {
+  newStudent(): Student {
     return {
       id: this.students.length,
       name: '',
