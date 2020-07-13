@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../../services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +11,20 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private session: SessionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.set_form_visibility('passwd', 'hide');
     this.set_form_visibility('username', 'show');
+  }
+
+  //Si el usuario presiona el boton de registrar
+  //lo manda al formulario correspondiente.
+  showSignUp(user_form_data) {
+    if(user_form_data.btn == 'left') {
+      this.router.navigate(['/sign-up']);
+    }
   }
 
   catch_user(user_form_data) {

@@ -1,0 +1,66 @@
+<div class="container global-flex-centering-container">
+  <div class="custom-container">
+    <h1 class="global-main-title ">Registrate</h1>
+    <div class="custom-container global-shadow global-container-bg-color">
+      <form>
+
+        <div class="custom-sub-container">
+          <mat-form-field appearance="standard" class="custom-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput name="name" [(ngModel)]="student.name" required="true">
+          </mat-form-field>
+        </div>
+        
+        <div class="custom-sub-container">
+          <mat-form-field appearance="standard" class="custom-field">
+            <mat-label>Apellidos</mat-label>
+            <input matInput name="surnames" [(ngModel)]="student.surnames" required="true">
+          </mat-form-field>
+        </div>
+
+        <div class="custom-sub-container">
+          <mat-form-field appearance="standard" class="custom-field">
+            <mat-label>Correo institucional</mat-label>
+            <input matInput name="email" [(ngModel)]="student.email" required="true">
+          </mat-form-field>
+        </div>
+
+        <div class="custom-sub-container">
+          <mat-form-field appearance="standard" class="custom-field">
+            <mat-label>Contraseña (Máximo 8 caracteres)</mat-label>
+            <input type="password" maxlength="8" matInput name="password" [(ngModel)]="student.password" required="true">
+          </mat-form-field>
+        </div>
+
+        <div class="custom-sub-container">
+          <mat-form-field appearance="standard" class="custom-field">
+            <mat-label>Confirmar contraseña (Máximo 8 caracteres)</mat-label>
+            <input type="password" maxlength="8" matInput name="passwordConfirmation" [(ngModel)]="student.passwordConfirmation" required="true">
+          </mat-form-field>
+        </div>
+
+        <div class="custom-sub-container">
+          <mat-form-field appearance="standard" class="custom-field">
+            <mat-label>Programa educativo</mat-label>
+            <mat-select name="career" [(ngModel)]="student.career" required="true">
+              <mat-option *ngFor="let career of careers" [value]="career.name"> {{ career.name }} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="custom-sub-container">
+          <mat-form-field appearance="standard" class="custom-field">
+            <mat-label>Descripción, interes, algo que decir, etc.</mat-label>
+            <input name="description" matInput [(ngModel)]="student.description">
+          </mat-form-field>
+        </div>
+
+        <div class="custom-sub-container global-btn-right">
+          <button mat-raised-button color="primary"(click)="onClick($event)">Volver</button>
+          <button mat-raised-button color="primary" autofocus="true" (click)="onClick($event)">Registrarse</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
