@@ -1,0 +1,21 @@
+<div class="global-flex-centering-container custom-container">
+  <div class="sub-container">
+    <h1 class="global-main-title">Grupos disponibles</h1>
+
+    <div class="form-container">
+      
+      <form>
+        <mat-form-field class="full-width">
+          <mat-label>Nombre del grupo</mat-label>
+          <input matInput #message maxlength="256" placeholder="Algún nombre..." >
+          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+        </mat-form-field>
+      </form>
+
+    </div>
+    
+      <app-data-list title="Grupos disponibles" [data]="availableGroups"></app-data-list>
+  </div>
+</div>
+
+

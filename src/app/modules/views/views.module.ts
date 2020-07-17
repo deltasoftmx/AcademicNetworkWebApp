@@ -6,6 +6,7 @@ import { AppComponentsModule } from '../app-components/app-components.module'; /
 
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AvailableGroupsComponent } from './available-groups/available-groups.component';
 
 
 
@@ -14,6 +15,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   declarations: [
     LoginComponent,
     SignUpComponent,
+    AvailableGroupsComponent,
   ],
   imports: [
     //MaterialModule,
