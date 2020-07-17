@@ -67,11 +67,9 @@ export class LoginComponent implements OnInit {
     }
 
     if(state == 'hide') {
-      comp.classList.remove('active');
       comp.classList.add('inactive');
     } else if(state == 'show') {
       comp.classList.remove('inactive');
-      comp.classList.add('active');
     }
   }
 
