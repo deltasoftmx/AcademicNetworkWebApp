@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataListComponent } from './data-list.component';
+import { ElementCardComponent } from './element-card.component';
 
-describe('DataListComponent', () => {
-  let component: DataListComponent;
-  let fixture: ComponentFixture<DataListComponent>;
+describe('ElementCardComponent', () => {
+  let component: ElementCardComponent;
+  let fixture: ComponentFixture<ElementCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataListComponent ]
+      declarations: [ ElementCardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataListComponent);
+    fixture = TestBed.createComponent(ElementCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,13 +4,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { SingleFieldFormN2optionsComponent } from './single-field-form-n2options/single-field-form-n2options.component';
-import { DataComponent } from './data/data.component';
-import { DataListComponent } from './data-list/data-list.component';
+import { ElementCardComponent } from './element-card/element-card.component';
+import { ElementCardBoxComponent } from './element-card-box/element-card-box.component';
 
 let components = [
   SingleFieldFormN2optionsComponent,
-  DataComponent,
-  DataListComponent
+  ElementCardComponent,
+  ElementCardBoxComponent
 ]
 
 let externalModules = [

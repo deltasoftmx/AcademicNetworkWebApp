@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataComponent } from './data.component';
+import { ElementCardBoxComponent } from './element-card-box.component';
 
-describe('DataComponent', () => {
-  let component: DataComponent;
-  let fixture: ComponentFixture<DataComponent>;
+describe('ElementCardBoxComponent', () => {
+  let component: ElementCardBoxComponent;
+  let fixture: ComponentFixture<ElementCardBoxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataComponent ]
+      declarations: [ ElementCardBoxComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataComponent);
+    fixture = TestBed.createComponent(ElementCardBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
