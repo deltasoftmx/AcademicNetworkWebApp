@@ -7,6 +7,7 @@ import { AppComponentsModule } from '../app-components/app-components.module'; /
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AvailableGroupsComponent } from './available-groups/available-groups.component';
+import { MyGroupsComponent } from './my-groups/my-groups.component';
 
 
 
@@ -16,6 +17,7 @@ import { AvailableGroupsComponent } from './available-groups/available-groups.co
     LoginComponent,
     SignUpComponent,
     AvailableGroupsComponent,
+    MyGroupsComponent,
   ],
   imports: [
     //MaterialModule,
