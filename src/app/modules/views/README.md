@@ -17,14 +17,26 @@ Cada vista agregada debe ser documentada. Los datos que deben incluirse son:
 ### Índice.
 
 * [Login](#Login)
-* [Sign-Up](#Sign-Up)
+* [SignUp](#SignUp)
+* [AvailableGroups](#AvailableGroups)
+* [MyGroups](#MyGroups)
 
 ### Login.
 
 **Descripción**: Se pregunta por el nombre de usuario, el cuál es validado en el backend, posteriormente se pregunta por la contraseña la cuál también es validada. Finalmente se guardan los datos de session y se continúa a la vista de feed de usuario.
 
-### Sign-Up.
+### SignUp.
 
 **Descripción**: Se pregunta datos del usuario para su registro, estos son: nombre, apellidos, correo institucional,
 contraseña, confirmación de la contraseña, programa educativo y una descripción. El formulario es validado para que
 todos los datos se guarden a excepción del campo de descripción que puede estar vacío.
+
+### AvailableGroups
+
+**Descripción**: Despliega una lista de los grupos disponibles actualmente en el sistema, además, 
+contiene un input que permite escribir el nombre del grupo a buscar.
+
+### MyGroups
+
+**Descripción**: Despliega la lista de grupos dónde el estudiante ha sido inscrito, además,
+contiene un input que permite escribir el nombre del grupo a buscar.
