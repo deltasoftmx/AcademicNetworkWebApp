@@ -18,12 +18,6 @@ mat-drawer {
   width: 50%;
 }
 
-mat-drawer button {
-  display: block;
-  padding: 2%;
-  margin-left: 3%;
-}
-
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
   mat-drawer {
@@ -36,6 +30,13 @@ mat-drawer button {
   mat-drawer {
     width: 25%;
   }
+}
+
+.sidenav-btn {
+  width: 100%;
+  padding: 1%;
+  margin-left: 2%;
+  text-align: left;
 }
 
 

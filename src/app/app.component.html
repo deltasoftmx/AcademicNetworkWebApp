@@ -45,14 +45,14 @@
   <mat-drawer #drawer mode="over">
     <!--Este bontón es un ejemplo y debe ser editado para enlazar a una
     sección de la aplicación usando el routerLink.-->
-    <button mat-button (click)="drawer.toggle()" routerLink="/"> <mat-icon>home</mat-icon> INICIO</button>
-    <button mat-button (click)="drawer.toggle()" routerLink="/available-groups"> <mat-icon>supervisor_account</mat-icon> GRUPOS</button>
-    <button mat-button (click)="drawer.toggle()" routerLink="/my-groups"> <mat-icon>supervisor_account</mat-icon> MIS GRUPOS</button>
-    <button mat-button (click)="drawer.toggle()" routerLink="/"> <mat-icon>person</mat-icon> USUARIOS</button>
-    <button mat-button (click)="drawer.toggle()" routerLink="/"> <mat-icon>person_outline</mat-icon> SEGUIDORES</button>
-    <button mat-button (click)="drawer.toggle()" routerLink="/"> <mat-icon>person_outline</mat-icon> SEGUIDOS</button>
-    <button mat-button (click)="drawer.toggle()" routerLink="/"> <mat-icon>favorite</mat-icon> FAVORITOS</button>
-    <button mat-button (click)="drawer.toggle()" routerLink="/"> <mat-icon>chat</mat-icon> CHAT</button>
+    <button mat-button class="sidenav-btn" (click)="drawer.toggle()" routerLink="/"> <mat-icon>home</mat-icon> INICIO</button>
+    <button mat-button class="sidenav-btn" (click)="drawer.toggle()" routerLink="/available-groups"> <mat-icon>supervisor_account</mat-icon> GRUPOS</button>
+    <button mat-button class="sidenav-btn" (click)="drawer.toggle()" routerLink="/my-groups"> <mat-icon>supervisor_account</mat-icon> MIS GRUPOS</button>
+    <button mat-button class="sidenav-btn" (click)="drawer.toggle()" routerLink="/"> <mat-icon>person</mat-icon> USUARIOS</button>
+    <button mat-button class="sidenav-btn" (click)="drawer.toggle()" routerLink="/"> <mat-icon>person_outline</mat-icon> SEGUIDORES</button>
+    <button mat-button class="sidenav-btn" (click)="drawer.toggle()" routerLink="/"> <mat-icon>person_outline</mat-icon> SEGUIDOS</button>
+    <button mat-button class="sidenav-btn" (click)="drawer.toggle()" routerLink="/"> <mat-icon>favorite</mat-icon> FAVORITOS</button>
+    <button mat-button class="sidenav-btn" (click)="drawer.toggle()" routerLink="/"> <mat-icon>chat</mat-icon> CHAT</button>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>
