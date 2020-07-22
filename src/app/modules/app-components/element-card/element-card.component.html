@@ -1,4 +1,7 @@
 <article>
   <mat-icon>{{ icon }}</mat-icon>
   <p class="global-text-center">{{ name }}</p>
+  <div *ngIf="icon == 'account_circle'">
+    <p class="global-text-center"> {{ surnames }} </p>
+  </div>
 </article>

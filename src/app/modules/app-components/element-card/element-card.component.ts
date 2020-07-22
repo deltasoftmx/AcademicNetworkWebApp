@@ -10,6 +10,7 @@ export class ElementCardComponent implements OnInit {
   
   @Input() icon: string;
   @Input() name: string;
+  @Input() surnames: string;
 
   constructor() { }
 
