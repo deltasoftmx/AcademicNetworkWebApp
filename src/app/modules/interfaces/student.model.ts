@@ -13,3 +13,8 @@ export interface Career {
   id: number;
   name: string;
 }
+
+export interface ElementCard {
+  icon: string;
+  text: string;
+}

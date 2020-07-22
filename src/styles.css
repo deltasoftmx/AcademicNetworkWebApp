@@ -39,3 +39,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 100%;
   text-align: center;
 }
+
+.global-card-element {
+  width: 100%;
+  height: 75%;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}

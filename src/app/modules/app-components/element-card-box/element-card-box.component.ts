@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ElementCard } from '../../interfaces/student.model';
 
 @Component({
   selector: 'app-element-card-box',
@@ -7,7 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ElementCardBoxComponent implements OnInit {
 
-  @Input() data: Object[];
+  @Input() defaultIcon: string;
+  @Input() data: ElementCard[];
 
   constructor() { }
 

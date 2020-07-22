@@ -1,7 +1,5 @@
 <article>
-  <mat-icon>{{ icon }}</mat-icon>
-  <p class="global-text-center">{{ name }}</p>
-  <div *ngIf="icon == 'account_circle'">
-    <p class="global-text-center"> {{ surnames }} </p>
-  </div>
+  <mat-icon *ngIf="card.icon == ''; else customIcon">{{ defaultIcon }}</mat-icon>
+  <ng-template #customIcon> <img class="global-card-element" [src]="card.icon"> </ng-template>
+  <p class="global-text-center">{{ card.text }}</p>
 </article>
