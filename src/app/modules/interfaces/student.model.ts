@@ -14,7 +14,12 @@ export interface Career {
   name: string;
 }
 
+export interface TextFormat {
+  text: string;
+  style: string;
+}
+
 export interface ElementCard {
   icon: string;
-  text: string;
+  text: TextFormat[];
 }

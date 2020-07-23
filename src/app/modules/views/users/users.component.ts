@@ -21,52 +21,52 @@ export class UsersComponent implements OnInit {
     this.users = [
       {
         icon: 'https://rietveld-ict.nl/wp-content/uploads/2014/01/users.png',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
   
       {
         icon: 'https://juliocsantaman.com/assets/img/juliocsantaman.jpg',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
   
       {
         icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
   
       {
         icon: 'https://avatars1.githubusercontent.com/u/33400166?s=96&v=4',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
   
       {
         icon: 'https://avatars3.githubusercontent.com/u/67294504?s=96&v=4',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
   
       {
         icon: 'https://avatars2.githubusercontent.com/u/52019284?s=96&v=4',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
   
       {
         icon: '',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
   
       {
         icon: '',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
 
        {
         icon: '',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       },
   
       {
         icon: '',
-        text: 'Nombre Apellidos'
+        text: [{text: 'Nombre Apellidos', style: 'h2'}]
       }
     ];
   }

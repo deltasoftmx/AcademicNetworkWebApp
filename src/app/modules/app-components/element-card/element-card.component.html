@@ -1,5 +1,8 @@
 <article>
   <mat-icon *ngIf="card.icon == ''; else customIcon">{{ defaultIcon }}</mat-icon>
   <ng-template #customIcon> <img class="global-card-element" [src]="card.icon"> </ng-template>
-  <p class="global-text-center">{{ card.text }}</p>
+  <div *ngFor="let t of card.text">
+    <h2 *ngIf="t.style == 'h2'">{{ t.text }}</h2>
+    <p *ngIf="t.style == 'p'">{{ t.text }}</p>
+  </div>
 </article>
