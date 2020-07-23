@@ -8,6 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AvailableGroupsComponent } from './available-groups/available-groups.component';
 import { MyGroupsComponent } from './my-groups/my-groups.component';
+import { UsersComponent } from './users/users.component';
+import { FollowersComponent } from './followers/followers.component';
+import { FollowingComponent } from './following/following.component';
 
 
 
@@ -18,6 +21,9 @@ import { MyGroupsComponent } from './my-groups/my-groups.component';
     SignUpComponent,
     AvailableGroupsComponent,
     MyGroupsComponent,
+    UsersComponent,
+    FollowersComponent,
+    FollowingComponent,
   ],
   imports: [
     //MaterialModule,

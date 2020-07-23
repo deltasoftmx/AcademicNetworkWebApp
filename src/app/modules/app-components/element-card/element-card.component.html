@@ -1,4 +1,8 @@
 <article>
-  <mat-icon>{{ icon }}</mat-icon>
-  <p class="global-text-center">{{ name }}</p>
+  <mat-icon *ngIf="card.icon == ''; else customIcon">{{ defaultIcon }}</mat-icon>
+  <ng-template #customIcon> <img class="global-card-element" [src]="card.icon"> </ng-template>
+  <div *ngFor="let t of card.text">
+    <h2 *ngIf="t.style == 'h2'" class="global-text-center">{{ t.text }}</h2>
+    <p *ngIf="t.style == 'p'" class="global-text-center">{{ t.text }}</p>
+  </div>
 </article>
