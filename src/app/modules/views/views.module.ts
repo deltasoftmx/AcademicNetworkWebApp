@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from "@angular/common";
 
 import { AppComponentsModule } from '../app-components/app-components.module'; //All components that are not views.
@@ -29,7 +29,8 @@ import { FollowingComponent } from './following/following.component';
     //MaterialModule,
     AppComponentsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     //MaterialModule,
