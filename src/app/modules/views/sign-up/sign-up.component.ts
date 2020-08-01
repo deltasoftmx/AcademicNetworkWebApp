@@ -15,11 +15,11 @@ export class SignUpComponent implements OnInit {
   public student: Student;
   public careers: Career[];
   public expressions = {
-    name: /^[a-zA-ZÀ-ÿ\s]{5,40}$/, // Letras y espacios, pueden llevar acentos.
-    surnames: /^[a-zA-ZÀ-ÿ\s]{5,40}$/, // Letras y espacios, pueden llevar acentos.
-    email: /^[a-zA-Z0-9_.-]+@[a-zA-Z]+\.[a-zA-Z]+$/, // Estructura de correo.
+    name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    surnames: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    email: /^[a-zA-Z0-9_.-]+@[a-zA-Z]+(\.[a-zA-Z]+|\.[a-zA-Z]+\.[a-zA-Z]+)$/, // Estructura de correo.
     password: /^.{4,12}$/, // 4 a 12 digitos.
-    career: /^[a-zA-ZÀ-ÿ\s\.]{1,40}$/, // Letras y espacios, pueden llevar acentos.,
+    career: /^[a-zA-ZÀ-ÿ\s\.]{1,40}$/, // Letras y espacios, pueden llevar acentos.
   };
   public myForm: FormGroup;
 
@@ -90,7 +90,7 @@ export class SignUpComponent implements OnInit {
           '',
           [Validators.required, Validators.pattern(this.expressions.career)],
         ],
-        description: ['', [Validators.minLength(0), Validators.maxLength(250)]],
+        description: ['', [Validators.minLength(0), Validators.maxLength(500)]],
       },
       {
         validators: passwordMatch,

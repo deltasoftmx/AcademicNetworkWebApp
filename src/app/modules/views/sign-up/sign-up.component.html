@@ -16,7 +16,7 @@
             <mat-icon matSuffix *ngIf="getError('name')">error_outline</mat-icon>
             <mat-icon matSuffix *ngIf="!getError2('name')">check_circle_outline</mat-icon>
             <mat-error *ngIf="getError('name')">
-              Solo se pueden poner letras (5 a 40 caracteres).
+              Solo se pueden poner letras (1 a 40 caracteres).
             </mat-error>
           </mat-form-field>
         </div>
@@ -33,7 +33,7 @@
             <mat-icon matSuffix *ngIf="getError('surnames')">error_outline</mat-icon>
             <mat-icon matSuffix *ngIf="!getError2('surnames')">check_circle_outline</mat-icon>
             <mat-error *ngIf="getError('surnames')">
-              Solo se pueden poner letras (5 a 40 caracteres).
+              Solo se pueden poner letras (1 a 40 caracteres).
             </mat-error>
           </mat-form-field>
         </div>
@@ -114,9 +114,9 @@
             <input name="description" matInput formControlName="description" #desc>
             <mat-icon matSuffix *ngIf="getError('description')">error_outline</mat-icon>
             <mat-icon matSuffix *ngIf="!getError2('description')">check_circle_outline</mat-icon>
-            <mat-hint align="end">{{desc.value.length}} / 250</mat-hint>
+            <mat-hint align="end">{{desc.value.length}} / 500</mat-hint>
             <mat-error *ngIf="getError('description')">
-              Solo se pueden poner letras (máximo 250 caracteres).
+              Solo se pueden poner letras (máximo 500 caracteres).
             </mat-error>
           </mat-form-field>
         </div>
