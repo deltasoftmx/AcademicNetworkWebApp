@@ -37,6 +37,12 @@ export class SignUpComponent implements OnInit {
   }
 
   //Métodos.
+
+  /*
+    Método que contiene todos los campos del formulario,
+    además, tiene validaciones para que la información que 
+    se envie sea la correcta.
+  */
   private buildForm() {
     this.myForm = this.fb.group(
       {
@@ -92,9 +98,10 @@ export class SignUpComponent implements OnInit {
     );
   }
 
+  // Errores para el formulario.
   getError(controlName: string): boolean {
     const control = this.myForm.get(controlName);
-    return control.touched && control.errors != null;
+    return (control.touched || control.dirty) && control.errors != null;
   }
 
   getError2(controlName: string): boolean {
@@ -102,29 +109,33 @@ export class SignUpComponent implements OnInit {
     return control.errors != null;
   }
 
-  getErrorPassword(): boolean {
+  getErrorPassword2(): boolean {
     return this.myForm.hasError('passwordMismatch');
   }
+  // Fin errores para el formulario.
 
+  // Método que se ejecuta si el formulario  es correcto.
   onSubmit(event) {
     event.preventDefault();
-
+    
     if (event.explicitOriginalTarget.textContent == 'Volver') {
       this.goBack();
       return;
     }
 
-    this.student = this.myForm.value;
-    console.log(this.student);
+    if(this.myForm.valid) {  
+      this.student = this.myForm.value;
+  
+      //Agrega al nuevo estudiante (simulado :v).
+      this.signUpService.addNewStudent(this.student);
+      this.student = this.signUpService.newStudent();
+  
+      this.notifService.success('Correcto', 'Has sido registrado correctamente');
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 1000);
+    }
 
-    //Agrega al nuevo estudiante (simulado :v).
-    this.signUpService.addNewStudent(this.student);
-    this.student = this.signUpService.newStudent();
-
-    this.notifService.success('Correcto', 'Has sido registrado correctamente');
-    setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 1000);
   }
 
   //Regresa al inicio de sesión.

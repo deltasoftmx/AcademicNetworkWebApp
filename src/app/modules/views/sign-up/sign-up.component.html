@@ -7,7 +7,7 @@
         <!-- Grupo: Nombre -->
         <div class="custom-sub-container group-name">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Nombre</mat-label>
+            <mat-label>Nombre *</mat-label>
             <input 
             matInput 
             name="name" 
@@ -24,7 +24,7 @@
         <!-- Grupo: Apellidos -->
         <div class="custom-sub-container group-surnames">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Apellidos</mat-label>
+            <mat-label>Apellidos *</mat-label>
             <input 
             matInput 
             name="surnames"
@@ -41,7 +41,7 @@
         <!-- Grupo: Correo Institucional -->
         <div class="custom-sub-container group-email">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Correo institucional</mat-label>
+            <mat-label>Correo institucional *</mat-label>
             <input 
             matInput 
             name="email" 
@@ -58,7 +58,7 @@
         <!-- Grupo: Contraseña -->
         <div class="custom-sub-container group-password">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Contraseña</mat-label>
+            <mat-label>Contraseña *</mat-label>
             <input 
             type="password" 
             matInput 
@@ -75,19 +75,19 @@
         <!-- Grupo: Contraseña 2 -->
         <div class="custom-sub-container group-password2">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Confirmar contraseña</mat-label>
+            <mat-label>Confirmar contraseña *</mat-label>
             <input 
             type="password" 
             matInput 
             name="password2" 
             formControlName="password2">
-            <mat-icon matSuffix *ngIf="getError('password2') || getErrorPassword()">error_outline</mat-icon>
-            <mat-icon matSuffix *ngIf="!getError2('password2') && !getErrorPassword()">check_circle_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="getError('password2') || getErrorPassword2()">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="!getError2('password2') && !getErrorPassword2()">check_circle_outline</mat-icon>
             <mat-error *ngIf="getError('password2')">
               Este campo es requerido.
             </mat-error>
           </mat-form-field>
-          <span class="password2-err" *ngIf="myForm.hasError('passwordMismatch') && (myForm.get('password2').touched || myForm.get('password2').dirty)">
+          <span class="password2-err" *ngIf="getError('password2') || getErrorPassword2()">
             Las contraseñas no coinciden.
           </span>
         </div>
@@ -95,7 +95,7 @@
         <!-- Grupo: Programa Educativo -->
         <div class="custom-sub-container group-career">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Programa educativo</mat-label>
+            <mat-label>Programa educativo *</mat-label>
             <mat-select name="career" formControlName="career">
               <mat-option *ngFor="let career of careers" [value]="career.name"> {{ career.name }} </mat-option>
             </mat-select>
