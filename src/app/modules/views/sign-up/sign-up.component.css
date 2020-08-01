@@ -21,8 +21,14 @@
   margin-bottom: 10px;
 }
 
+.password2-err {
+  color: #f44336;
+  font-size: 75%;
+}
+
 @media(max-width: 500px) {
   .custom-container {
     width: 100%;
+    padding: 0%;
   }
 }

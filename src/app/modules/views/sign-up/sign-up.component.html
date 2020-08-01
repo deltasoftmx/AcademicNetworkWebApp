@@ -2,62 +2,129 @@
   <div class="custom-container">
     <h1 class="global-main-title ">Registrate</h1>
     <div class="custom-container global-shadow global-container-bg-color">
-      <form>
+      <form [formGroup]="myForm">
 
-        <div class="custom-sub-container">
+        <!-- Grupo: Nombre -->
+        <div class="custom-sub-container group-name">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Nombre</mat-label>
-            <input matInput name="name" [(ngModel)]="student.name" required="true">
+            <mat-label>Nombre *</mat-label>
+            <input 
+            matInput 
+            name="name" 
+            placeholder="Jhon"
+            formControlName="name">
+            <mat-icon matSuffix *ngIf="getError('name')">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="!getError2('name')">check_circle_outline</mat-icon>
+            <mat-error *ngIf="getError('name')">
+              Solo se pueden poner letras (1 a 40 caracteres).
+            </mat-error>
           </mat-form-field>
         </div>
         
-        <div class="custom-sub-container">
+        <!-- Grupo: Apellidos -->
+        <div class="custom-sub-container group-surnames">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Apellidos</mat-label>
-            <input matInput name="surnames" [(ngModel)]="student.surnames" required="true">
+            <mat-label>Apellidos *</mat-label>
+            <input 
+            matInput 
+            name="surnames"
+            placeholder="Doe" 
+            formControlName="surnames">
+            <mat-icon matSuffix *ngIf="getError('surnames')">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="!getError2('surnames')">check_circle_outline</mat-icon>
+            <mat-error *ngIf="getError('surnames')">
+              Solo se pueden poner letras (1 a 40 caracteres).
+            </mat-error>
           </mat-form-field>
         </div>
 
-        <div class="custom-sub-container">
+        <!-- Grupo: Correo Institucional -->
+        <div class="custom-sub-container group-email">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Correo institucional</mat-label>
-            <input matInput name="email" [(ngModel)]="student.email" required="true">
+            <mat-label>Correo institucional *</mat-label>
+            <input 
+            matInput 
+            name="email" 
+            placeholder="jhon.doe@gmail.com"
+            formControlName="email">
+            <mat-icon matSuffix *ngIf="getError('email')">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="!getError2('email')">check_circle_outline</mat-icon>
+            <mat-error *ngIf="getError('email')">
+              Tienes que poner un correo válido.
+            </mat-error>
           </mat-form-field>
         </div>
 
-        <div class="custom-sub-container">
+        <!-- Grupo: Contraseña -->
+        <div class="custom-sub-container group-password">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Contraseña (Máximo 8 caracteres)</mat-label>
-            <input type="password" maxlength="8" matInput name="password" [(ngModel)]="student.password" required="true">
+            <mat-label>Contraseña *</mat-label>
+            <input 
+            type="password" 
+            matInput 
+            name="password" 
+            formControlName="password">
+            <mat-icon matSuffix *ngIf="getError('password')">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="!getError2('password')">check_circle_outline</mat-icon>
+            <mat-error *ngIf="getError('password')">
+              La contraseña tiene que ser de 4 a 12 dígitos.
+            </mat-error>
           </mat-form-field>
         </div>
 
-        <div class="custom-sub-container">
+        <!-- Grupo: Contraseña 2 -->
+        <div class="custom-sub-container group-password2">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Confirmar contraseña (Máximo 8 caracteres)</mat-label>
-            <input type="password" maxlength="8" matInput name="passwordConfirmation" [(ngModel)]="student.passwordConfirmation" required="true">
+            <mat-label>Confirmar contraseña *</mat-label>
+            <input 
+            type="password" 
+            matInput 
+            name="password2" 
+            formControlName="password2">
+            <mat-icon matSuffix *ngIf="getError('password2') || getErrorPassword2()">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="!getError2('password2') && !getErrorPassword2()">check_circle_outline</mat-icon>
+            <mat-error *ngIf="getError('password2')">
+              Este campo es requerido.
+            </mat-error>
           </mat-form-field>
+          <span class="password2-err" *ngIf="getError('password2') || getErrorPassword2()">
+            Las contraseñas no coinciden.
+          </span>
         </div>
 
-        <div class="custom-sub-container">
+        <!-- Grupo: Programa Educativo -->
+        <div class="custom-sub-container group-career">
           <mat-form-field appearance="standard" class="custom-field">
-            <mat-label>Programa educativo</mat-label>
-            <mat-select name="career" [(ngModel)]="student.career" required="true">
+            <mat-label>Programa educativo *</mat-label>
+            <mat-select name="career" formControlName="career">
               <mat-option *ngFor="let career of careers" [value]="career.name"> {{ career.name }} </mat-option>
             </mat-select>
+            <mat-icon matSuffix *ngIf="getError('career')">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="!getError2('career')">check_circle_outline</mat-icon>
+            <mat-error *ngIf="getError('career')">
+              Tienes que elegir un programa educativo.
+            </mat-error>
           </mat-form-field>
         </div>
 
-        <div class="custom-sub-container">
+        <!-- Grupo: Descripción -->
+        <div class="custom-sub-container group-description">
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Descripción, interes, algo que decir, etc.</mat-label>
-            <input name="description" matInput [(ngModel)]="student.description">
+            <input name="description" matInput formControlName="description" #desc>
+            <mat-icon matSuffix *ngIf="getError('description')">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="!getError2('description')">check_circle_outline</mat-icon>
+            <mat-hint align="end">{{desc.value.length}} / 500</mat-hint>
+            <mat-error *ngIf="getError('description')">
+              Solo se pueden poner letras (máximo 500 caracteres).
+            </mat-error>
           </mat-form-field>
         </div>
 
+        <!-- Grupo: Bótones -->
         <div class="custom-sub-container global-btn-right">
-          <button mat-raised-button color="primary"(click)="onClick($event)">Volver</button>
-          <button mat-raised-button color="primary" autofocus="true" (click)="onClick($event)">Registrarse</button>
+          <button mat-raised-button color="primary"(click)="onSubmit($event)">Volver</button>
+          <button type="submit" mat-raised-button color="primary" autofocus="true" (click)="onSubmit($event)" [disabled]="myForm.invalid">Registrarse</button>
         </div>
 
       </form>

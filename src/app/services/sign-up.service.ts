@@ -52,12 +52,11 @@ export class SignUpService {
 
   newStudent(): Student {
     return {
-      id: this.students.length,
       name: '',
       surnames: '',
       email: '',
       password: '',
-      passwordConfirmation: '',
+      password2: '',
       career: '',
       description: ''
     }
