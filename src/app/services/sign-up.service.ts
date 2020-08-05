@@ -1,68 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Student, Career } from '../modules/interfaces/student.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignUpService {
 
-  public students: Student[];
-  public careers: Career[];
-
-  constructor() { 
-    this.careers = 
-    [
-      {
-        id: 0,
-        name: 'Ingeniería en Desarrollo de Software'
-      },
-
-      {
-        id: 1,
-        name: 'Licenciatura en Administración'
-      },
-
-      {
-        id: 2,
-        name: 'Licenciatura en Diseño Gráfico'
-      },
-
-      {
-        id: 3,
-        name: 'Licenciatura en Nutrición'
-      },
-
-      {
-        id: 4,
-        name: 'Licenciatura en Negocios Internacionales'
-      }
-    ];
-
-    this.students = [];
+  constructor(private http: HttpClient) { 
   }
 
   //Métodos.
-  getCareers(): Career[] {
-    return this.careers;
-  }
+  getCareers(): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-api-key': 'df7033daa9692e8c37596d95834435e0435488bd68dd58c00b4cd7ce12629f11',
+      'Content-Type': 'application/json'
+    });
 
-  getStudents(): Student[] {
-    return this.students;
-  }
-
-  newStudent(): Student {
-    return {
-      name: '',
-      surnames: '',
-      email: '',
-      password: '',
-      password2: '',
-      career: '',
-      description: ''
-    }
+    return this.http.get('http://ec2-100-25-170-221.compute-1.amazonaws.com/v1/api/social-network/users/majors', {headers});
   }
 
   addNewStudent(student: Student) {
-    this.students.push(student);
+    let headers = new HttpHeaders({
+      'x-api-key': 'df7033daa9692e8c37596d95834435e0435488bd68dd58c00b4cd7ce12629f11',
+      'Content-Type': 'application/json'
+    });
+    
+
+    return this.http.post('http://ec2-100-25-170-221.compute-1.amazonaws.com/v1/api/social-network/users/signup', student, {headers}).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  getUserTypes(): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-api-key': 'df7033daa9692e8c37596d95834435e0435488bd68dd58c00b4cd7ce12629f11',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get('http://ec2-100-25-170-221.compute-1.amazonaws.com/v1/api/social-network/users/types', {headers});
   }
 }

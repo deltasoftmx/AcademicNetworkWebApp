@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NotificationsService } from '../../../services/notifications.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { passwordMatch, whiteSpaces } from './my-validations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,8 @@ import { passwordMatch, whiteSpaces } from './my-validations';
 })
 export class SignUpComponent implements OnInit {
   public student: Student;
-  public careers: Career[];
+  public userTypeId: number;
+  public careers: Career;
   public expressions = {
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     surnames: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -31,9 +33,21 @@ export class SignUpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.careers = this.signUpService.getCareers();
-    this.student = this.signUpService.newStudent();
+    this.signUpService.getCareers().subscribe(d => {
+      
+      this.careers = d.data.majors;
+      console.log(this.careers);
+    });
+
+    this.signUpService.getUserTypes().subscribe(userTypes => {
+      this.userTypeId = userTypes.data.user_types[0].id;
+      console.log(this.userTypeId);
+    });
+    
+    // this.student.user_type_id = this.userTypes;
+
     this.buildForm();
+    
   }
 
   //Métodos.
@@ -46,7 +60,7 @@ export class SignUpComponent implements OnInit {
   private buildForm() {
     this.myForm = this.fb.group(
       {
-        name: [
+        firstname: [
           '',
           [
             Validators.required,
@@ -54,7 +68,7 @@ export class SignUpComponent implements OnInit {
             whiteSpaces,
           ],
         ],
-        surnames: [
+        lastname: [
           '',
           [
             Validators.required,
@@ -70,7 +84,7 @@ export class SignUpComponent implements OnInit {
             whiteSpaces,
           ],
         ],
-        password: [
+        passwd: [
           '',
           [
             Validators.required,
@@ -86,11 +100,11 @@ export class SignUpComponent implements OnInit {
             whiteSpaces,
           ],
         ],
-        career: [
-          '',
-          [Validators.required, Validators.pattern(this.expressions.career)],
-        ],
         description: ['', [Validators.minLength(0), Validators.maxLength(500)]],
+        user_type_id: [1],
+        major_id: [
+          '', Validators.required,
+        ]
       },
       {
         validators: passwordMatch,
@@ -125,10 +139,11 @@ export class SignUpComponent implements OnInit {
 
     if(this.myForm.valid) {  
       this.student = this.myForm.value;
+      delete this.student.password2;
+      console.log(this.student)
   
-      //Agrega al nuevo estudiante (simulado :v).
+      //Agrega al nuevo estudiante.
       this.signUpService.addNewStudent(this.student);
-      this.student = this.signUpService.newStudent();
   
       this.notifService.success('Correcto', 'Has sido registrado correctamente');
       setTimeout(() => {

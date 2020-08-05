@@ -1,11 +1,12 @@
 export interface Student {
-  name: string,
-  surnames: string,
+  firstname: string,
+  lastname: string,
   email: string,
-  password: string,
+  passwd: string,
   password2: string,
-  career: string,
-  description: string
+  description: string,
+  user_type_id: number,
+  major_id: number
 }
 
 export interface Career {
