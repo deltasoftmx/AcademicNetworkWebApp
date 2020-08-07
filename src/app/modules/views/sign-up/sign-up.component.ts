@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { NotificationsService } from '../../../services/notifications.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { passwordMatch, whiteSpaces } from './my-validations';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -140,14 +139,14 @@ export class SignUpComponent implements OnInit {
     if(this.myForm.valid) {  
       this.student = this.myForm.value;
       delete this.student.password2;
-      console.log(this.student)
+      // console.log(this.student)
   
       //Agrega al nuevo estudiante.
       this.signUpService.addNewStudent(this.student);
   
       this.notifService.success('Correcto', 'Has sido registrado correctamente');
       setTimeout(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/user-feed']);
       }, 1000);
     }
 

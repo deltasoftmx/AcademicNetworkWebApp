@@ -7,6 +7,7 @@ import { MyGroupsComponent } from './modules/views/my-groups/my-groups.component
 import { UsersComponent } from './modules/views/users/users.component';
 import { FollowersComponent } from './modules/views/followers/followers.component';
 import { FollowingComponent } from './modules/views/following/following.component';
+import { UserFeedComponent } from './modules/views/user-feed/user-feed.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'my-groups', component: MyGroupsComponent },
   { path: 'users', component: UsersComponent },
   { path: 'followers', component: FollowersComponent },
-  { path: 'following', component: FollowingComponent }
+  { path: 'following', component: FollowingComponent },
+  { path: 'user-feed', component: UserFeedComponent }
 ];
 
 @NgModule({

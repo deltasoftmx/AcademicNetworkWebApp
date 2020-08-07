@@ -11,6 +11,7 @@ import { MyGroupsComponent } from './my-groups/my-groups.component';
 import { UsersComponent } from './users/users.component';
 import { FollowersComponent } from './followers/followers.component';
 import { FollowingComponent } from './following/following.component';
+import { UserFeedComponent } from './user-feed/user-feed.component';
 
 
 
@@ -24,6 +25,7 @@ import { FollowingComponent } from './following/following.component';
     UsersComponent,
     FollowersComponent,
     FollowingComponent,
+    UserFeedComponent,
   ],
   imports: [
     //MaterialModule,
