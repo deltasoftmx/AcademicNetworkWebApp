@@ -42,8 +42,6 @@ export class SignUpComponent implements OnInit {
       this.userTypeId = userTypes.data.user_types[0].id;
       console.log(this.userTypeId);
     });
-    
-    // this.student.user_type_id = this.userTypes;
 
     this.buildForm();
     
@@ -139,7 +137,7 @@ export class SignUpComponent implements OnInit {
     if(this.myForm.valid) {  
       this.student = this.myForm.value;
       delete this.student.password2;
-      // console.log(this.student)
+      console.log(this.student)
   
       //Agrega al nuevo estudiante.
       this.signUpService.addNewStudent(this.student);
