@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class SessionService {
     'session_token': 'shdbdshbjhdfbjekuncjnvjdncjkejnjkenrjndjnjcncjkn'
   };
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   //Establece un campo en el conjunto de datos de usuario.
   set_userdata(field, val) {
