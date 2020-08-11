@@ -3,6 +3,7 @@ import { Student } from '../modules/interfaces/student.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SessionService } from './session.service'; 
+import { apikey, domain} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { SessionService } from './session.service';
 export class SignUpService {
 
   public headers = new HttpHeaders({
-    'x-api-key': 'df7033daa9692e8c37596d95834435e0435488bd68dd58c00b4cd7ce12629f11',
+    'x-api-key': apikey,
     'Content-Type': 'application/json'
   });
 
@@ -22,19 +23,19 @@ export class SignUpService {
 
   //Métodos.
   getCareers(): Observable<any> {
-    return this.http.get('http://ec2-100-25-170-221.compute-1.amazonaws.com/v1/api/social-network/users/majors', {headers: this.headers});
+    return this.http.get(`${domain}/v1/api/social-network/users/majors`, {headers: this.headers});
   }
-
+  
   addNewStudent(student: Student) {
-    return this.http.post('http://ec2-100-25-170-221.compute-1.amazonaws.com/v1/api/social-network/users/signup', student, {headers: this.headers}).subscribe(data => {
+    return this.http.post(`${domain}/v1/api/social-network/users/signup`, student, {headers: this.headers}).subscribe(data => {
       // Guarda el token del registro en el session storage.
-      this.sessionService.saveToken("session_token", data);
+      this.sessionService.saveToken(data);
     });
 
   }
 
   getUserTypes(): Observable<any> {
-    return this.http.get('http://ec2-100-25-170-221.compute-1.amazonaws.com/v1/api/social-network/users/types', {headers: this.headers});
+    return this.http.get(`${domain}/v1/api/social-network/users/types`, {headers: this.headers});
   }
   
 } 

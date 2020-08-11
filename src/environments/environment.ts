@@ -6,6 +6,9 @@ export const environment = {
   production: false
 };
 
+export const apikey = 'df7033daa9692e8c37596d95834435e0435488bd68dd58c00b4cd7ce12629f11';
+export const domain = 'http://ec2-100-25-170-221.compute-1.amazonaws.com';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
