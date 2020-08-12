@@ -184,7 +184,7 @@ export class SignUpComponent implements OnInit {
       break;
   
       case 4:
-      this.notifService.error('Código de error: 4', 'El tipo de usuario ya existe');
+      this.notifService.error('Código de error: 4', 'El tipo de usuario no existe');
       break;
   
       case 5:
