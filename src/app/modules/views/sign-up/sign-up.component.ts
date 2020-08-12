@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NotificationsService } from '../../../services/notifications.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { passwordMatch, whiteSpaces } from './my-validations';
+import { SessionService } from '../../../services/session.service'; 
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,8 @@ import { passwordMatch, whiteSpaces } from './my-validations';
 })
 export class SignUpComponent implements OnInit {
   public student: Student;
-  public careers: Career[];
+  public userTypeId: number;
+  public careers: Career;
   public expressions = {
     name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     surnames: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -27,13 +29,24 @@ export class SignUpComponent implements OnInit {
     private signUpService: SignUpService,
     private router: Router,
     private notifService: NotificationsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private sessionService: SessionService
   ) {}
 
   ngOnInit(): void {
-    this.careers = this.signUpService.getCareers();
-    this.student = this.signUpService.newStudent();
+    this.signUpService.getCareers().subscribe(d => {
+      
+      this.careers = d.data.majors;
+      console.log(this.careers);
+    });
+
+    this.signUpService.getUserTypes().subscribe(userTypes => {
+      this.userTypeId = userTypes.data.user_types[0].id;
+      console.log(this.userTypeId);
+    });
+
     this.buildForm();
+    
   }
 
   //Métodos.
@@ -46,7 +59,7 @@ export class SignUpComponent implements OnInit {
   private buildForm() {
     this.myForm = this.fb.group(
       {
-        name: [
+        firstname: [
           '',
           [
             Validators.required,
@@ -54,7 +67,7 @@ export class SignUpComponent implements OnInit {
             whiteSpaces,
           ],
         ],
-        surnames: [
+        lastname: [
           '',
           [
             Validators.required,
@@ -70,7 +83,7 @@ export class SignUpComponent implements OnInit {
             whiteSpaces,
           ],
         ],
-        password: [
+        passwd: [
           '',
           [
             Validators.required,
@@ -86,11 +99,11 @@ export class SignUpComponent implements OnInit {
             whiteSpaces,
           ],
         ],
-        career: [
-          '',
-          [Validators.required, Validators.pattern(this.expressions.career)],
-        ],
         description: ['', [Validators.minLength(0), Validators.maxLength(500)]],
+        user_type_id: [1],
+        major_id: [
+          '', Validators.required,
+        ]
       },
       {
         validators: passwordMatch,
@@ -125,15 +138,23 @@ export class SignUpComponent implements OnInit {
 
     if(this.myForm.valid) {  
       this.student = this.myForm.value;
+      delete this.student.password2;
+      // console.log(this.student)
   
-      //Agrega al nuevo estudiante (simulado :v).
-      this.signUpService.addNewStudent(this.student);
-      this.student = this.signUpService.newStudent();
+      //Agrega al nuevo estudiante.
+      this.signUpService.addNewStudent(this.student).subscribe(data => {
+        // console.log(data);
+        if(this.showMessage(data) == 0) {
+          // Guarda el token del registro en el session storage.
+          this.sessionService.saveToken(data);
+
+          setTimeout(() => {
+            this.router.navigate(['/user-feed']);
+          }, 1000);
+        }
+      });
   
-      this.notifService.success('Correcto', 'Has sido registrado correctamente');
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 1000);
+     
     }
 
   }
@@ -142,4 +163,38 @@ export class SignUpComponent implements OnInit {
   goBack() {
     this.router.navigate(['/login']);
   }
+
+  /* 
+    Muestra mensajes al usuario dependiendo del
+    código de error recibido en la petición para agregar
+    a un nuevo estudiante.
+  */
+  showMessage(data: any) {
+    switch(data.code) {
+      case 1:
+      this.notifService.error('Código de error: 1', 'Nombre de dominio no permitido');
+      break;
+  
+      case 2:
+      this.notifService.error('Código de error: 2', 'El correo ya existe');
+      break;
+  
+      case 3:
+      this.notifService.error('Código de error: 3', 'El nombre de usuario ya existe');
+      break;
+  
+      case 4:
+      this.notifService.error('Código de error: 4', 'El tipo de usuario no existe');
+      break;
+  
+      case 5:
+      this.notifService.error('Código de error: 5', 'La carrera no existe');
+      break;
+
+      case 0:
+        this.notifService.success('Correcto', 'Has sido registrado correctamente');
+        return 0;
+    }
+  }
+
 }

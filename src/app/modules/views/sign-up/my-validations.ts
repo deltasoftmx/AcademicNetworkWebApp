@@ -6,7 +6,7 @@ import { ValidatorFn, FormGroup, ValidationErrors, AbstractControl } from '@angu
   el objeto con la bandera y su valor.
 */
 export const passwordMatch: ValidatorFn = (formGroup: FormGroup): ValidationErrors | null => {
-  return formGroup.get('password').value === formGroup.get('password2').value ?
+  return formGroup.get('passwd').value === formGroup.get('password2').value ?
     null : { 'passwordMismatch': true };
 }
 

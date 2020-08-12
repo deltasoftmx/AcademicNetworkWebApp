@@ -1,68 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Student, Career } from '../modules/interfaces/student.model';
+import { Student } from '../modules/interfaces/student.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { apikey, domain} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignUpService {
 
-  public students: Student[];
-  public careers: Career[];
+  public headers = new HttpHeaders({
+    'x-api-key': apikey,
+    'Content-Type': 'application/json'
+  });
 
-  constructor() { 
-    this.careers = 
-    [
-      {
-        id: 0,
-        name: 'Ingeniería en Desarrollo de Software'
-      },
-
-      {
-        id: 1,
-        name: 'Licenciatura en Administración'
-      },
-
-      {
-        id: 2,
-        name: 'Licenciatura en Diseño Gráfico'
-      },
-
-      {
-        id: 3,
-        name: 'Licenciatura en Nutrición'
-      },
-
-      {
-        id: 4,
-        name: 'Licenciatura en Negocios Internacionales'
-      }
-    ];
-
-    this.students = [];
+  constructor(
+    private http: HttpClient,
+    ) { 
   }
 
   //Métodos.
-  getCareers(): Career[] {
-    return this.careers;
+  getCareers(): Observable<any> {
+    return this.http.get(`${domain}/v1/api/social-network/users/majors`, {headers: this.headers});
   }
-
-  getStudents(): Student[] {
-    return this.students;
-  }
-
-  newStudent(): Student {
-    return {
-      name: '',
-      surnames: '',
-      email: '',
-      password: '',
-      password2: '',
-      career: '',
-      description: ''
-    }
-  }
-
+  
   addNewStudent(student: Student) {
-    this.students.push(student);
+    return this.http.post(`${domain}/v1/api/social-network/users/signup`, student, {headers: this.headers});
   }
-}
+
+  getUserTypes(): Observable<any> {
+    return this.http.get(`${domain}/v1/api/social-network/users/types`, {headers: this.headers});
+  }
+  
+} 
