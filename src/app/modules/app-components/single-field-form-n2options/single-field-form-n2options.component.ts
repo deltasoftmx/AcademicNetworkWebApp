@@ -24,14 +24,15 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onkeyup(event, val) {
+    console.log(event)
+    if(event.charCode == 13) {
+      this.onclick(event, val, 'return')
+    }
+  }
+
   onclick(event, val, btn) {
     event.preventDefault();
-    
-    //Detecta si se presiono la tecla de retorno
-    //en lugar de un botón.
-    if (event.explicitOriginalTarget.tagName == 'INPUT') {
-      btn = 'return';
-    }
 
     //Evitar la ejecución del flujo si el campo es
     //requerido y está vacío.
