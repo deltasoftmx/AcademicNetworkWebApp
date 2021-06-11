@@ -28,6 +28,7 @@ Los datos que se deben incluir son:
 * [Session](#Session)
 * [Sign-Up](#Sign-Up)
 * [Notifications](#Notifications)
+* [StringFormat](#StringFormat)
 
 ### Session.
 
@@ -119,5 +120,18 @@ sólo estan disponibles mientras el navegador esté corriendo.
       * `footer?`: parámetro opcional que puede contener un footer en la alerta. 
       * **Tipo de dato de retorno**: `void`.
 
+### StringFormat.
 
+**Clase**: StringFormatService
 
+**Descripción**: Realiza deversos tipos de procesamintos sobre strings.
+
+**Atributos públicos**: Ninguno.
+
+**Métodos públicos**:
+
+* `splitByEOF`
+  * **Descripción**: Divide un string a partir de los saltos de línea que contiene y elimina los saltos extra.
+  * **Parámetros**: 
+    * `text`: String que será procesado.
+  * **Tipo de dato de retorno**: `Array<string>`.

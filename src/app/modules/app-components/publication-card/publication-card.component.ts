@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { StringFormatService } from '../../../services/string-format.service'
 
 @Component({
   selector: 'app-publication-card',
@@ -16,9 +17,10 @@ export class PublicationCardComponent implements OnInit {
   public altProfileImg = 'Ávatar de ' + this.profileName;
   public altPublicationImg = 'Publicación de ' + this.profileName;
 
-  constructor() { }
+  constructor(public stringFormat: StringFormatService) { }
 
   ngOnInit(): void {
+    console.log(this.stringFormat.splitByEOL(this.text))
   }
 
   eventHandler(eventName) {

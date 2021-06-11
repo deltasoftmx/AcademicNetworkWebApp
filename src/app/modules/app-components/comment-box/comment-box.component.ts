@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Comment } from '../../interfaces/publication.model'
+import { StringFormatService } from '../../../services/string-format.service'
 
 @Component({
   selector: 'app-comment-box',
@@ -12,7 +13,7 @@ export class CommentBoxComponent implements OnInit {
   @Output() moreComments: EventEmitter<any> = new EventEmitter();
   @Output() newComment: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(public stringFormat: StringFormatService) { }
 
   ngOnInit(): void {
   }
@@ -22,15 +23,7 @@ export class CommentBoxComponent implements OnInit {
   }
 
   adjustTextOfComment(text) {
-    let splitedByLines = text.split('\n')
-    for (let j = 0; j < splitedByLines.length; j++) {
-      if(splitedByLines[j] == '') {
-        splitedByLines.splice(j, 1);
-        j -= 1;
-      }
-    }
-    
-    return splitedByLines;
+    return this.stringFormat.splitByEOL(text)
   }
 
   handlerForNewComment(event) {
