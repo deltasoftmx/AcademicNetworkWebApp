@@ -7,11 +7,7 @@
   </mat-card-header>
   <img mat-card-image [src]="publicationImgSrc" [alt]="altPublicationImg" *ngIf = "publicationImgSrc">
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
+    <p *ngFor = "let p of stringFormat.splitByEOL(text)">{{p}}</p>
   </mat-card-content>
   <mat-card-actions class="global-text-right">
     <button mat-icon-button (click) = "eventHandler('comment')"><mat-icon>insert_comment</mat-icon></button>
