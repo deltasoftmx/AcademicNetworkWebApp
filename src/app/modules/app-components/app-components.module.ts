@@ -6,11 +6,17 @@ import { CommonModule } from '@angular/common';
 import { SingleFieldFormN2optionsComponent } from './single-field-form-n2options/single-field-form-n2options.component';
 import { ElementCardComponent } from './element-card/element-card.component';
 import { ElementCardBoxComponent } from './element-card-box/element-card-box.component';
+import { PublicationCardComponent } from './publication-card/publication-card.component';
+import { CommentBoxComponent } from './comment-box/comment-box.component';
+import { TextAndImageFormComponent } from './text-and-image-form/text-and-image-form.component'
 
 let components = [
   SingleFieldFormN2optionsComponent,
   ElementCardComponent,
-  ElementCardBoxComponent
+  ElementCardBoxComponent,
+  PublicationCardComponent,
+  CommentBoxComponent,
+  TextAndImageFormComponent
 ]
 
 let externalModules = [
