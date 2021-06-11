@@ -1,0 +1,9 @@
+.form {
+    width: inherit;
+    max-width: inherit;
+    min-width: inherit;
+}
+
+.image-preview {
+    width: 100%;
+}

@@ -15,7 +15,6 @@ import { UserFeedComponent } from './user-feed/user-feed.component';
 
 
 
-
 @NgModule({
   declarations: [
     LoginComponent,
