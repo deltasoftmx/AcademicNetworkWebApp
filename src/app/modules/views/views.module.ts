@@ -12,6 +12,7 @@ import { UsersComponent } from './users/users.component';
 import { FollowersComponent } from './followers/followers.component';
 import { FollowingComponent } from './following/following.component';
 import { UserFeedComponent } from './user-feed/user-feed.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 
 
@@ -25,6 +26,7 @@ import { UserFeedComponent } from './user-feed/user-feed.component';
     FollowersComponent,
     FollowingComponent,
     UserFeedComponent,
+    PostDetailsComponent,
   ],
   imports: [
     //MaterialModule,

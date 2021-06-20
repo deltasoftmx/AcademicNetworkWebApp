@@ -12,6 +12,7 @@ export class CommentBoxComponent implements OnInit {
   @Input() comments: Array<Comment>;
   @Output() moreComments: EventEmitter<any> = new EventEmitter();
   @Output() newComment: EventEmitter<any> = new EventEmitter();
+  private _focusInput: number;
 
   constructor(public stringFormat: StringFormatService) { }
 
@@ -28,6 +29,10 @@ export class CommentBoxComponent implements OnInit {
 
   handlerForNewComment(event) {
     this.newComment.emit(event)
+  }
+
+  @Input() set focusInput(val) {
+    this._focusInput = val;
   }
 
 }

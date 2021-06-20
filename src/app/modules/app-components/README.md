@@ -107,14 +107,20 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
 **Descripción**: Card para desplegar la información de una publicación.
 
 **Entradas**:
-`profileImgSrc`: `string`. La URL de la imagen de perfil del usuario autor de la publicación.
-`profileName`: `string`. Nombre completo del usuario autor.
-`publicationImgSrc`: `string`. URL de la imagen de la publicación.
-`text`: `string`. Texto de la publicación.
-`subtitle`: `string`. Texto debajo del nombre del usuario.
+* `profileImgSrc`: `string`. La URL de la imagen de perfil del usuario autor de la publicación.
+* `profileName`: `string`. Nombre completo del usuario autor.
+* `publicationImgSrc`: `string`. URL de la imagen de la publicación.
+* `text`: `string`. Texto de la publicación.
+* `subtitle`: `string`. Texto debajo del nombre del usuario.
 
 **Salidas**:
 * `action`: Evento que informa que comando se ejecuto en la publicación. Datos retornados:
   * `name`: `string`. El nombre del comando (`comment`|`share`|`favorite`)
+* `favorite`: Cuando se hace clic en el botón de "favorito".
+  * `favoriteStatus`: Si es usuario marcó como favorita la publicación (`1`|`0`).
+* `share`: Evento que se dispara cuando el usuario da clic en el botón de compartir la publicación.
+  * `publicationId`: ID de la publicación compartida.
+* `comment`: Evento que se dispara cuando el usuario da clic en el botón comentar la publicación.
+  * `publicationId`: ID de la publicación compartida.
 
-**Selector**: `app-comment-box`.
+**Selector**: `app-publication-card`.

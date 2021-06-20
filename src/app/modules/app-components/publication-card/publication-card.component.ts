@@ -8,12 +8,18 @@ import { StringFormatService } from '../../../services/string-format.service'
 })
 export class PublicationCardComponent implements OnInit {
 
+  @Input() postId: number;
   @Input() profileImgSrc:string;
   @Input() profileName:string = '';
   @Input() publicationImgSrc:string;
   @Input() text:string;
   @Input() subtitle:string;
-  @Output('action') eventManager: EventEmitter<any> = new EventEmitter();
+  @Input() createdAt: string;
+  @Input() likeCounter: number;
+  @Input() liked: number;
+  @Output() favorite: EventEmitter<any> = new EventEmitter();
+  @Output() share: EventEmitter<any> = new EventEmitter();
+  @Output() comment: EventEmitter<any> = new EventEmitter();
   public altProfileImg = 'Ávatar de ' + this.profileName;
   public altPublicationImg = 'Publicación de ' + this.profileName;
 
@@ -23,9 +29,29 @@ export class PublicationCardComponent implements OnInit {
     console.log(this.stringFormat.splitByEOL(this.text))
   }
 
-  eventHandler(eventName) {
-    this.eventManager.emit({
-      name: eventName
+  favoriteEvent() {
+    if(this.liked == null || this.liked == 0) {
+      this.liked = 1;
+      this.likeCounter++;
+    } else {
+      this.liked = 0;
+      this.likeCounter--;
+    }
+
+    this.favorite.emit({
+      favoriteStatus: this.liked
+    })
+  }
+
+  shareEvent() {
+    this.share.emit({
+      publicationId: this.postId
+    })
+  }
+
+  commentEvent() {
+    this.comment.emit({
+      publicationId: this.postId
     })
   }
 
