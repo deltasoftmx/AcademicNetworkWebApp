@@ -3,6 +3,7 @@
     <img mat-card-avatar [src]="profileImgSrc" [alt]="altProfileImg">
     <mat-card-title>{{profileName}}</mat-card-title>
     <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
+    <mat-card-subtitle>{{createdAt}}</mat-card-subtitle>
     <span class="separator"></span>
   </mat-card-header>
   <img mat-card-image [src]="publicationImgSrc" [alt]="altPublicationImg" *ngIf = "publicationImgSrc">
@@ -10,8 +11,10 @@
     <p *ngFor = "let p of stringFormat.splitByEOL(text)">{{p}}</p>
   </mat-card-content>
   <mat-card-actions class="global-text-right">
-    <button mat-icon-button (click) = "eventHandler('comment')"><mat-icon>insert_comment</mat-icon></button>
-    <button mat-icon-button (click) = "eventHandler('favorite')"><mat-icon>favorite</mat-icon></button>
-    <button mat-icon-button (click) = "eventHandler('share')"><mat-icon>share</mat-icon></button>
+    {{likeCounter}}
+    <button *ngIf = "liked" mat-icon-button (click) = "favoriteEvent()"><mat-icon>favorite</mat-icon></button>
+    <button *ngIf = "!liked" mat-icon-button (click) = "favoriteEvent()"><mat-icon>favorite_border</mat-icon></button>
+    <button mat-icon-button (click) = "commentEvent()"><mat-icon>insert_comment</mat-icon></button>
+    <button mat-icon-button (click) = "shareEvent()"><mat-icon>share</mat-icon></button>
   </mat-card-actions>
 </mat-card>

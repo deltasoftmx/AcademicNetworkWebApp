@@ -11,9 +11,21 @@ export class TextAndImageFormComponent implements OnInit {
   @Input() textInputPlaceholder: string;
   @Output() newContent: EventEmitter<any> = new EventEmitter();
 
+  public textInputId: string;
+
+  @Input() set focusInput(val) {
+    let input = document.getElementById(this.textInputId)
+    if(input) {
+      input.focus();
+    }
+  }
+
   constructor() { }
 
   ngOnInit(): void {
+    let randId = Math.round(Math.random() * Math.pow(10, 10))
+    this.textInputId = '__text_input_' + randId.toString();
+    console.log('text input id', this.textInputId);
   }
 
   setTextareSize(element) {

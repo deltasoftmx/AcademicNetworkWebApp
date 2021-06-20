@@ -19,6 +19,7 @@
       *ngIf = "c.image_src">
     <hr>
   </div>
+  <p *ngIf = "!comments.length">No hay comentarios.</p>
   <mat-card-actions class="global-text-right">
     <button mat-button (click) = "handlerForSeeMoreComments()">Ver más comentarios</button>
   </mat-card-actions>
@@ -26,6 +27,7 @@
   <!-- Creación de nuevos comentarios -->
   <app-text-and-image-form
     class = "comment-field"
+    [focusInput] = "_focusInput"
     textInputLabel = "Escribe un comentario..."
     textInputPlaceholder = "Se amable."
     (newContent) = "handlerForNewComment($event)">

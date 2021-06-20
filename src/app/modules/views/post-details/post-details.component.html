@@ -1,0 +1,23 @@
+<div class="global-publication-container">
+  <app-publication-card
+    [postId] = "publication.id"
+    [profileImgSrc] = "publication.profile_image_src"
+    [profileName] = "publication.firstname + ' ' + publication.lastname"
+    [publicationImgSrc] = "publication.img_src"
+    [text] = "publication.content"
+    [subtitle] = "'@' + publication.username"
+    [likeCounter] = "publication.like_counter"
+    [createdAt] = "publication.created_at"
+    [liked] = "publication.liked_by_user"
+    (favorite) = "favoriteEventHandler($event)"
+    (share) = "shareEventHandler($event)"
+    (comment) = "commentEventHandler($event)">
+  </app-publication-card>
+
+  <app-comment-box
+    [comments] = "comments"
+    [focusInput] = "focusInput"
+    (moreComments) = "handlerForMoreComments($event)"
+    (newComment) = "handerForNewComment($event)">
+  </app-comment-box>
+</div>

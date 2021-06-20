@@ -1,6 +1,7 @@
 <mat-form-field appearance="fill" class="form">
   <mat-label>{{textInputLabel}}</mat-label>
   <textarea matInput [placeholder] = "textInputPlaceholder" 
+    [id] = "textInputId"
     (keyup)="typingHandlerForTextbox(textInput, imageInput, imagePreview, $event)" 
     (keydown)="setTextareSize(textInput)"
     #textInput></textarea> 
