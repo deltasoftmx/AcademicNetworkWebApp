@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Comment } from '../../interfaces/publication.model';
+import { Publication } from '../../interfaces/publication.model';
 
 @Component({
   selector: 'app-user-feed',
@@ -8,9 +8,18 @@ import { Comment } from '../../interfaces/publication.model';
 })
 export class UserFeedComponent implements OnInit {
 
+  public publications: Array<Publication> = [];
+
   constructor() { }
 
   ngOnInit(): void {
+    this.publications = [
+      //
+    ]
+  }
+
+  newPublicationHandler(event) {
+    console.log(event);
   }
 
 }

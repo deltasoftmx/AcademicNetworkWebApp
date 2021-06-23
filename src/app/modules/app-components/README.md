@@ -112,6 +112,7 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
 * `publicationImgSrc`: `string`. URL de la imagen de la publicación.
 * `text`: `string`. Texto de la publicación.
 * `subtitle`: `string`. Texto debajo del nombre del usuario.
+* `createdAt`: `string`. Texto indicando la fecha de creación de la publicación.
 
 **Salidas**:
 * `action`: Evento que informa que comando se ejecuto en la publicación. Datos retornados:
