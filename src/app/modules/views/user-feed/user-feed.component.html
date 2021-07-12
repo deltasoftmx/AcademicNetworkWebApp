@@ -1,3 +1,42 @@
-<p>user-feed works!</p>
+<div class = "global-publication-container custom-container">
+  <!-- Box to create publications -->
+  <app-text-and-image-form
+    class = "publication-form"
+    textInputLabel = "Comparte algo con tus seguidores."
+    textInputPlaceholder = "Dí lo que necesites."
+    (newContent) = "newPublicationHandler($event)">
+  </app-text-and-image-form>
 
+  <!-- Publication list -->
+  <app-publication-card
+    class = "pub-card"
+    *ngFor = "let p of publications"
+    [postId] = "p.id"
+    [profileImgSrc] = "p.profile_image_src"
+    [profileName] = "p.firstname + ' ' + p.lastname"
+    [publicationImgSrc] = "p.img_src"
+    [text] = "p.content"
+    [username] = "p.username"
+    [createdAt] = "p.created_at"
+    [groupId] = "p.group_id"
+    [groupName] = "p.group_name"
+    [liked] = "p.liked_by_user"
+    [likeCounter] = "p.like_counter"
 
+    [isSharedContent] = "pubFmt.isSharedContent(p)"
+    [subProfileImgSrc] = "pubFmt.getReferencedField(p, 'profile_image_src')"
+    [subProfileName] = "pubFmt.getReferencedField(p, 'profile_name')"
+    [subPublicationImgSrc] = "pubFmt.getReferencedField(p, 'img_src')"
+    [subText] = "pubFmt.getReferencedField(p, 'content')"
+    [subUsername] = "pubFmt.getReferencedField(p, 'subtitle')"
+    [subCreatedAt] = "pubFmt.getReferencedField(p, 'created_at')"
+    [subGroupId] = "pubFmt.getReferencedField(p, 'group_id')"
+    [subGroupName] = "pubFmt.getReferencedField(p, 'group_name')"
+
+    [activeButtons] = "['share', 'favorite', 'comment']"
+
+    (favorite) = "favoriteEventHandler($event)"
+    (comment) = "commentEventHandler($event)"
+    (share) = "shareEventHandler($event)">
+  </app-publication-card>
+</div>

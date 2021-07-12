@@ -13,10 +13,23 @@ export class PublicationCardComponent implements OnInit {
   @Input() profileName:string = '';
   @Input() publicationImgSrc:string;
   @Input() text:string;
-  @Input() subtitle:string;
+  @Input() username:string;
+  @Input() groupName: string;
+  @Input() groupId: number; // to link the gorup in the view
   @Input() createdAt: string;
   @Input() likeCounter: number;
   @Input() liked: number;
+  @Input() isSharedContent: boolean;
+  @Input() subPostId: number;
+  @Input() subProfileImgSrc:string;
+  @Input() subProfileName:string = '';
+  @Input() subPublicationImgSrc:string;
+  @Input() subText:string;
+  @Input() subUsername:string;
+  @Input() subGroupName: string;
+  @Input() subGroupId: number; // to link the gorup in the view
+  @Input() subCreatedAt: string;
+  @Input() activeButtons: Array<string> = [];
   @Output() favorite: EventEmitter<any> = new EventEmitter();
   @Output() share: EventEmitter<any> = new EventEmitter();
   @Output() comment: EventEmitter<any> = new EventEmitter();
@@ -39,6 +52,7 @@ export class PublicationCardComponent implements OnInit {
     }
 
     this.favorite.emit({
+      publicationId: this.postId,
       favoriteStatus: this.liked
     })
   }
@@ -53,6 +67,20 @@ export class PublicationCardComponent implements OnInit {
     this.comment.emit({
       publicationId: this.postId
     })
+  }
+
+  isButtonInList(name) {
+    //If there is no restriction, show all.
+    if(!this.activeButtons.length) {
+      return true
+    }
+    //show it only if it is in list.
+    for(let btnName of this.activeButtons) {
+      if(btnName == name)
+        return true
+    }
+
+    return false
   }
 
 }

@@ -12,7 +12,7 @@ export class CommentBoxComponent implements OnInit {
   @Input() comments: Array<Comment>;
   @Output() moreComments: EventEmitter<any> = new EventEmitter();
   @Output() newComment: EventEmitter<any> = new EventEmitter();
-  private _focusInput: number;
+  public _focusInput: number;
 
   constructor(public stringFormat: StringFormatService) { }
 
