@@ -25,9 +25,9 @@
         [alt]="'Imagen de ' + subProfileName">
       <mat-card-title>
         {{subProfileName}}
-        <mat-card-subtitle class="usrname">{{subUsername}}</mat-card-subtitle>
+        <mat-card-subtitle class="usrname">@{{subUsername}}</mat-card-subtitle>
       </mat-card-title>
-      <mat-card-subtitle>{{subGroupName}}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf = "subGroupName">@{{subGroupName}}</mat-card-subtitle>
       <mat-card-subtitle>{{subCreatedAt}}</mat-card-subtitle>
       <span class="separator"></span>
     </mat-card-header>

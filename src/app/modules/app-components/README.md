@@ -134,8 +134,6 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
   Valores váildos: `"['share', 'favorite', 'comment']"`
 
 **Salidas**:
-* `action`: Evento que informa que comando se ejecuto en la publicación. Datos retornados:
-  * `name`: `string`. El nombre del comando (`comment`|`share`|`favorite`)
 * `favorite`: Cuando se hace clic en el botón de "favorito".
   * `publicationId`: ID de la publicación compartida.
   * `favoriteStatus`: Si es usuario marcó como favorita la publicación (`1`|`0`).
@@ -145,3 +143,24 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
   * `publicationId`: ID de la publicación compartida.
 
 **Selector**: `app-publication-card`.
+
+### PublicationDisplay.
+
+**Descripción**: Componente que muestra un `PublicationCard` a partir de un objeto de clase `Publication`.
+
+**Entradas**:
+* `publication`: `Publication`. La publicación a mostrar.
+* `activeButtons`: `Array<string>`. Los botones que serán desplegados. 
+  Si no se proporciona este dato, se mostrarán todos. 
+  Valores váildos: `"['share', 'favorite', 'comment']"`
+
+**Salidas**:
+* `favorite`: Cuando se hace clic en el botón de "favorito".
+  * `publicationId`: ID de la publicación compartida.
+  * `favoriteStatus`: Si es usuario marcó como favorita la publicación (`1`|`0`).
+* `share`: Evento que se dispara cuando el usuario da clic en el botón de compartir la publicación.
+  * `publicationId`: ID de la publicación compartida.
+* `comment`: Evento que se dispara cuando el usuario da clic en el botón comentar la publicación.
+  * `publicationId`: ID de la publicación compartida.
+
+**Selector**: `app-publication-display`.

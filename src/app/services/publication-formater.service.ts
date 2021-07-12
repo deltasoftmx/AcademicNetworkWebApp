@@ -20,12 +20,6 @@ export class PublicationFormaterService {
           data += p.referenced_post.lastname;
           return data;
 
-        case 'subtitle':
-          return '@' + p.referenced_post.username;
-
-        case 'group_name':
-          return '@' + p.group_name;
-
         default:
           return p.referenced_post[field];
       }
