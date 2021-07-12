@@ -111,13 +111,33 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
 * `profileName`: `string`. Nombre completo del usuario autor.
 * `publicationImgSrc`: `string`. URL de la imagen de la publicación.
 * `text`: `string`. Texto de la publicación.
-* `subtitle`: `string`. Texto debajo del nombre del usuario.
+* `username`: `string`. Nombre de usuario en la plataforma.
+* `groupName`: `string`. Nombre del grupo en el que se hizo la publicación.
+* `groupId`: `number`. Id del grupo en el que se hizo la publicación.
 * `createdAt`: `string`. Texto indicando la fecha de creación de la publicación.
+* `likeCounter`: `number`. La cantidad de likes que tiene la publicación.
+* `liked`: `number`. 1 =  el usuario logeado añadió a favoritos la publicación,
+  0 = caso contrario.
+* `isSharedContent`: `boolean`. Si la publicación está compartiendo otra publicación.
+* `subPostId`: `number`. Id de la publicación compartida. Requerido `isSharedContent` = `true`.
+* `subProfileImgSrc`: `string`. URL de la imágen de perfil del usuario autor 
+  de la publicación referenciada.
+* `subProfileName`:`string`. Nombre completo del usuario autor de la publicación referenciada.
+* `subPublicationImgSrc`:`string`. URL de la imagen de la publicación referenciada.
+* `subText`:`string`. Texto de la publicación referenciada.
+* `subUsername`:`string`. Nombre de usuario del autor de la publicación referenciada.
+* `subGroupName`: `string`. Nombre del grupo en el que se hizo la publicación referenciada.
+* `subGroupId`: `number`; Id del grupo en el que se hizo la publicación referenciada.
+* `subCreatedAt`: `string`; Fecha en la que se hizo la publicación referenciada.
+* `activeButtons`: `Array<string>`. Los botones que serán desplegados. 
+  Si no se proporciona este dato, se mostrarán todos. 
+  Valores váildos: `"['share', 'favorite', 'comment']"`
 
 **Salidas**:
 * `action`: Evento que informa que comando se ejecuto en la publicación. Datos retornados:
   * `name`: `string`. El nombre del comando (`comment`|`share`|`favorite`)
 * `favorite`: Cuando se hace clic en el botón de "favorito".
+  * `publicationId`: ID de la publicación compartida.
   * `favoriteStatus`: Si es usuario marcó como favorita la publicación (`1`|`0`).
 * `share`: Evento que se dispara cuando el usuario da clic en el botón de compartir la publicación.
   * `publicationId`: ID de la publicación compartida.
