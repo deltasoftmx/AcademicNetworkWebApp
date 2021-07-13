@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Publication } from '../../interfaces/publication.model';
-import { PublicationFormaterService } from '../../../services/publication-formater.service'
+import { PublicationFormaterService } from '../../../services/publication-formater/publication-formater.service'
 
 @Component({
   selector: 'app-publication-display',

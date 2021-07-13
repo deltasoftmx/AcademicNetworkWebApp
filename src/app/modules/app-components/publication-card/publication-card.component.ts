@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StringFormatService } from '../../../services/string-format.service'
+import { StringFormatService } from '../../../services/string-format/string-format.service'
 
 @Component({
   selector: 'app-publication-card',

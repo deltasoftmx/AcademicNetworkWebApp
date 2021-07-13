@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Publication, Comment } from '../../interfaces/publication.model';
-import { PublicationFormaterService } from '../../../services/publication-formater.service'
 
 @Component({
   selector: 'app-post-details',
@@ -18,7 +17,6 @@ export class PostDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public pubFmt: PublicationFormaterService
   ) { }
 
   ngOnInit(): void {

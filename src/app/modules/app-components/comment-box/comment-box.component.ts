@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Comment } from '../../interfaces/publication.model'
-import { StringFormatService } from '../../../services/string-format.service'
+import { StringFormatService } from '../../../services/string-format/string-format.service'
 
 @Component({
   selector: 'app-comment-box',
