@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../../../services/session.service';
+import { SessionService } from '../../../services/session/session.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   //Muestra un formulario para que
   //el usuario pueda ingresar su contraseña
-  //si el input del username no está vacío. 
+  //si el input del username no está vacío.
   catchPassword(user_form_data) {
     if(user_form_data.btn == 'left') {
       this.set_form_visibility('passwd', 'hide');

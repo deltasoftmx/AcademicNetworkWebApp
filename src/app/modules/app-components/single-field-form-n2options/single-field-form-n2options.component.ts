@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NotificationsService } from '../../../services/notifications.service';
+import { NotificationsService } from '../../../services/notifications/notifications.service';
 
 @Component({
   selector: 'app-single-field-form-n2options',

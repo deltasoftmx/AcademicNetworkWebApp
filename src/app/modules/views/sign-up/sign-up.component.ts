@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Student, Career } from '../../interfaces/student.model';
-import { SignUpService } from '../../../services/sign-up.service';
+import { SignUpService } from '../../../services/sign-up/sign-up.service';
 import { Router } from '@angular/router';
-import { NotificationsService } from '../../../services/notifications.service';
+import { NotificationsService } from '../../../services/notifications/notifications.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { passwordMatch, whiteSpaces } from './my-validations';
-import { SessionService } from '../../../services/session.service'; 
+import { SessionService } from '../../../services/session/session.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -35,7 +35,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpService.getCareers().subscribe(d => {
-      
+
       this.careers = d.data.majors;
       console.log(this.careers);
     });
@@ -46,14 +46,14 @@ export class SignUpComponent implements OnInit {
     });
 
     this.buildForm();
-    
+
   }
 
   //Métodos.
 
   /*
     Método que contiene todos los campos del formulario,
-    además, tiene validaciones para que la información que 
+    además, tiene validaciones para que la información que
     se envie sea la correcta.
   */
   private buildForm() {
@@ -130,17 +130,17 @@ export class SignUpComponent implements OnInit {
   // Método que se ejecuta si el formulario  es correcto.
   onSubmit(event) {
     event.preventDefault();
-    
+
     if (event.explicitOriginalTarget.textContent == 'Volver') {
       this.goBack();
       return;
     }
 
-    if(this.myForm.valid) {  
+    if(this.myForm.valid) {
       this.student = this.myForm.value;
       delete this.student.password2;
       // console.log(this.student)
-  
+
       //Agrega al nuevo estudiante.
       this.signUpService.addNewStudent(this.student).subscribe(data => {
         // console.log(data);
@@ -153,8 +153,8 @@ export class SignUpComponent implements OnInit {
           }, 1000);
         }
       });
-  
-     
+
+
     }
 
   }
@@ -164,7 +164,7 @@ export class SignUpComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  /* 
+  /*
     Muestra mensajes al usuario dependiendo del
     código de error recibido en la petición para agregar
     a un nuevo estudiante.
@@ -174,19 +174,19 @@ export class SignUpComponent implements OnInit {
       case 1:
       this.notifService.error('Código de error: 1', 'Nombre de dominio no permitido');
       break;
-  
+
       case 2:
       this.notifService.error('Código de error: 2', 'El correo ya existe');
       break;
-  
+
       case 3:
       this.notifService.error('Código de error: 3', 'El nombre de usuario ya existe');
       break;
-  
+
       case 4:
       this.notifService.error('Código de error: 4', 'El tipo de usuario no existe');
       break;
-  
+
       case 5:
       this.notifService.error('Código de error: 5', 'La carrera no existe');
       break;

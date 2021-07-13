@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Publication } from '../../interfaces/publication.model';
-import { PublicationFormaterService } from '../../../services/publication-formater.service'
 
 @Component({
   selector: 'app-user-feed',
@@ -13,7 +12,6 @@ export class UserFeedComponent implements OnInit {
   public publications: Array<Publication> = [];
 
   constructor(
-    public pubFmt: PublicationFormaterService,
     public router: Router
   ) { }
 
