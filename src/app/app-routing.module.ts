@@ -9,6 +9,7 @@ import { FollowersComponent } from './modules/views/followers/followers.componen
 import { FollowingComponent } from './modules/views/following/following.component';
 import { UserFeedComponent } from './modules/views/user-feed/user-feed.component';
 import { PostDetailsComponent } from './modules/views/post-details/post-details.component';
+import { FavoritePostsComponent } from './modules/views/favorite-posts/favorite-posts.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,10 @@ const routes: Routes = [
   { path: 'followers', component: FollowersComponent },
   { path: 'following', component: FollowingComponent },
   { path: 'user-feed', component: UserFeedComponent },
-  { path: 'post/:id', component: PostDetailsComponent }
+  { path: 'post', children: [
+    { path: 'favorites', component: FavoritePostsComponent },
+    { path: ':id', component: PostDetailsComponent },
+  ] }
 ];
 
 @NgModule({
