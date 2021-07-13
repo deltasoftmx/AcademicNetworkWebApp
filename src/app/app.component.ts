@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Academy Network'; //Título del toolbar.
+  title = 'Academic Network'; //Título del toolbar.
 
   //Establece observadores en los eventos onready y onresize
   //para mantener el contenido de la app en la posición correcta.
