@@ -1,8 +1,41 @@
-article {
+.container {
   height: 150px;
   width: 100px;
+  margin: inherit;
+}
+/*
+.default-icon {
+  width: 100%;
+  font-size: 100%;
+}*/
+
+.img-icon {
+  width: 20%;
+  display: block;
+  margin: auto;
+  border-radius: 50%;
 }
 
-mat-icon {
-  font-size: 100px;
+/**  -----------  */
+.card {
+  /*display: inline-block;*/
+  display: inherit;
+  width: inherit;
+  height: inherit;
+  margin: inherit;
+}
+
+.image {
+  width: 50%;
+  display: block;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.default-icon {
+  /*display: block;*/
+  width: 100%;
+  /*font-size: 15em;*/
+  /*font-size: 1000%;*/
+  text-align: center;
 }

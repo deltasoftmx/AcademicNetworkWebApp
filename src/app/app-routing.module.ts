@@ -10,7 +10,7 @@ import { FollowingComponent } from './modules/views/following/following.componen
 import { UserFeedComponent } from './modules/views/user-feed/user-feed.component';
 import { PostDetailsComponent } from './modules/views/post-details/post-details.component';
 import { FavoritePostsComponent } from './modules/views/favorite-posts/favorite-posts.component';
-
+import { ProfileViewComponent } from './modules/views/profile-view/profile-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,7 +18,10 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'available-groups', component: AvailableGroupsComponent },
   { path: 'my-groups', component: MyGroupsComponent },
-  { path: 'users', component: UsersComponent },
+  { path: 'users', children: [
+    { path: '', component: UsersComponent },
+    { path: ':username', component: ProfileViewComponent }
+  ] },
   { path: 'followers', component: FollowersComponent },
   { path: 'following', component: FollowingComponent },
   { path: 'user-feed', component: UserFeedComponent },
