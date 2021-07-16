@@ -14,6 +14,7 @@ import { FollowingComponent } from './following/following.component';
 import { UserFeedComponent } from './user-feed/user-feed.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { FavoritePostsComponent } from './favorite-posts/favorite-posts.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 
 
@@ -29,6 +30,7 @@ import { FavoritePostsComponent } from './favorite-posts/favorite-posts.componen
     UserFeedComponent,
     PostDetailsComponent,
     FavoritePostsComponent,
+    ProfileViewComponent,
   ],
   imports: [
     //MaterialModule,

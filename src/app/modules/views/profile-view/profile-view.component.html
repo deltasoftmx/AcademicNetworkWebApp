@@ -1,0 +1,17 @@
+<div class="global-publication-container">
+  <app-element-card
+    class="centered-box"
+    [defaultIcon] = "profileDefaultIcon"
+    [card] = "user">
+  </app-element-card>
+
+  <!-- Publication list -->
+  <app-publication-display
+    class = "global-publication-card"
+    *ngFor = "let p of publications"
+    [publication] = "p"
+    [activeButtons] = "['comment', 'favorite']"
+    (favorite) = "favoriteEventHandler($event)"
+    (comment) = "commentEventHandler($event)">
+  </app-publication-display>
+</div>
