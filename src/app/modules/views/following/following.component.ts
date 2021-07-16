@@ -69,4 +69,9 @@ export class FollowingComponent implements OnInit {
       }
     ];
   }
+
+  searchUsers(search) {
+    console.log(search)
+  }
+
 }
