@@ -1,4 +1,4 @@
-export interface UserPublicData {
+export class UserPublicData {
   username: string
   firstname: string
   lastname: string
@@ -9,7 +9,7 @@ export interface UserPublicData {
   major: string;
 }
 
-export interface Response<T> {
+export class Response<T> {
   code: number;
   data: T;
   messages: string[];

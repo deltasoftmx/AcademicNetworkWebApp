@@ -2,15 +2,15 @@
   <div class="custom-container">
     <h1 class="global-main-title ">Registrate</h1>
     <div class="custom-container global-shadow global-container-bg-color">
-      <form [formGroup]="myForm">
+      <form [formGroup]="myForm" (submit) = "onSubmit($event)">
 
         <!-- Grupo: Nombre -->
         <div class="custom-sub-container group-name">
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Nombre *</mat-label>
-            <input 
-            matInput 
-            name="firstname" 
+            <input
+            matInput
+            name="firstname"
             placeholder="Jhon"
             formControlName="firstname">
             <mat-icon matSuffix *ngIf="getError('firstname')">error_outline</mat-icon>
@@ -20,15 +20,15 @@
             </mat-error>
           </mat-form-field>
         </div>
-        
+
         <!-- Grupo: Apellidos -->
         <div class="custom-sub-container group-surnames">
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Apellidos *</mat-label>
-            <input 
-            matInput 
+            <input
+            matInput
             name="lastname"
-            placeholder="Doe" 
+            placeholder="Doe"
             formControlName="lastname">
             <mat-icon matSuffix *ngIf="getError('lastname')">error_outline</mat-icon>
             <mat-icon matSuffix *ngIf="!getError2('lastname')">check_circle_outline</mat-icon>
@@ -42,9 +42,9 @@
         <div class="custom-sub-container group-email">
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Correo institucional *</mat-label>
-            <input 
-            matInput 
-            name="email" 
+            <input
+            matInput
+            name="email"
             placeholder="jhon.doe@gmail.com"
             formControlName="email">
             <mat-icon matSuffix *ngIf="getError('email')">error_outline</mat-icon>
@@ -59,10 +59,10 @@
         <div class="custom-sub-container group-password">
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Contraseña *</mat-label>
-            <input 
-            type="password" 
-            matInput 
-            name="passwd" 
+            <input
+            type="password"
+            matInput
+            name="passwd"
             formControlName="passwd">
             <mat-icon matSuffix *ngIf="getError('passwd')">error_outline</mat-icon>
             <mat-icon matSuffix *ngIf="!getError2('passwd')">check_circle_outline</mat-icon>
@@ -76,10 +76,10 @@
         <div class="custom-sub-container group-password2">
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Confirmar contraseña *</mat-label>
-            <input 
-            type="password" 
-            matInput 
-            name="password2" 
+            <input
+            type="password"
+            matInput
+            name="password2"
             formControlName="password2">
             <mat-icon matSuffix *ngIf="getError('password2') || getErrorPassword2()">error_outline</mat-icon>
             <mat-icon matSuffix *ngIf="!getError2('password2') && !getErrorPassword2()">check_circle_outline</mat-icon>
@@ -123,7 +123,7 @@
 
         <!-- Grupo: Bótones -->
         <div class="custom-sub-container global-btn-right">
-          <button mat-raised-button color="primary"(click)="onSubmit($event)">Volver</button>
+          <button type="button" mat-raised-button color="primary"(click)="goBack()">Volver</button>
           <button type="submit" mat-raised-button color="primary" autofocus="true" (click)="onSubmit($event)" [disabled]="myForm.invalid">Registrarse</button>
         </div>
 

@@ -1,4 +1,4 @@
-export interface Comment {
+export class Comment {
     user_id: number;
     post_id: number;
     firstname: string;
@@ -9,7 +9,7 @@ export interface Comment {
     created_at: string;
 }
 
-export interface Publication {
+export class Publication {
     id: number;
     user_id: number;
     username: string;

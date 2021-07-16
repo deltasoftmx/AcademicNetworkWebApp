@@ -6,6 +6,7 @@ import { NotificationsService } from '../../../services/notifications/notificati
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { passwordMatch, whiteSpaces } from './my-validations';
 import { SessionService } from '../../../services/session/session.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,7 +31,8 @@ export class SignUpComponent implements OnInit {
     private router: Router,
     private notifService: NotificationsService,
     private fb: FormBuilder,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    public location: Location
   ) {}
 
   ngOnInit(): void {
@@ -138,11 +140,7 @@ export class SignUpComponent implements OnInit {
   // Método que se ejecuta si el formulario  es correcto.
   onSubmit(event) {
     event.preventDefault();
-
-    if (event.explicitOriginalTarget.textContent == 'Volver') {
-      this.goBack();
-      return;
-    }
+    console.log('submit');
 
     if(this.myForm.valid) {
       this.student = this.myForm.value;
@@ -161,15 +159,12 @@ export class SignUpComponent implements OnInit {
           }, 1000);
         }
       });
-
-
     }
-
   }
 
   //Regresa al inicio de sesión.
   goBack() {
-    this.router.navigate(['/login']);
+    this.location.back();
   }
 
   /*

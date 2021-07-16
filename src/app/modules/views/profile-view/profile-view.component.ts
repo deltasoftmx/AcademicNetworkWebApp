@@ -12,7 +12,7 @@ import { UserPublicData } from '../../interfaces/academic-network.model';
 })
 export class ProfileViewComponent implements OnInit {
 
-  public user: ElementCard;
+  public user: ElementCard = new ElementCard();
   public userData: UserPublicData;
   public profileDefaultIcon: string = "/assets/account_circle-black-18dp.svg";
   public publications: Publication[] = [];
