@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student, Career } from '../../interfaces/student.model';
-import { SignUpService } from '../../../services/sign-up/sign-up.service';
+import { AcademicNetworkService } from '../../../services/academic-network/academic-network.service'
 import { Router } from '@angular/router';
 import { NotificationsService } from '../../../services/notifications/notifications.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
   public myForm: FormGroup;
 
   constructor(
-    private signUpService: SignUpService,
+    private academicNetworkService: AcademicNetworkService,
     private router: Router,
     private notifService: NotificationsService,
     private fb: FormBuilder,
@@ -34,15 +34,23 @@ export class SignUpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.signUpService.getCareers().subscribe(d => {
+    this.academicNetworkService.getCareers().subscribe(d => {
 
-      this.careers = d.data.majors;
-      console.log(this.careers);
+      if(d.code == 0) {
+        this.careers = d.data.majors;
+        console.log(this.careers);
+      } else {
+        console.log('something gone wrong')
+        console.log(d)
+      }
+
     });
 
-    this.signUpService.getUserTypes().subscribe(userTypes => {
-      this.userTypeId = userTypes.data.user_types[0].id;
-      console.log(this.userTypeId);
+    this.academicNetworkService.getUserTypes().subscribe(userTypes => {
+      if(userTypes.code == 0)  {
+        this.userTypeId = userTypes.data.user_types[0].id;
+        console.log(this.userTypeId);
+      }
     });
 
     this.buildForm();
@@ -142,7 +150,7 @@ export class SignUpComponent implements OnInit {
       // console.log(this.student)
 
       //Agrega al nuevo estudiante.
-      this.signUpService.addNewStudent(this.student).subscribe(data => {
+      this.academicNetworkService.addNewStudent(this.student).subscribe(data => {
         // console.log(data);
         if(this.showMessage(data) == 0) {
           // Guarda el token del registro en el session storage.

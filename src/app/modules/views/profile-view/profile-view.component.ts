@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ElementCard } from '../../interfaces/student.model';
 import { Publication } from '../../interfaces/publication.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
+import { UserPublicData } from '../../interfaces/academic-network.model';
 
 @Component({
   selector: 'app-profile-view',
@@ -11,35 +13,55 @@ import { Router } from '@angular/router';
 export class ProfileViewComponent implements OnInit {
 
   public user: ElementCard;
+  public userData: UserPublicData;
   public profileDefaultIcon: string = "/assets/account_circle-black-18dp.svg";
   public publications: Publication[] = [];
 
   constructor(
-    public router: Router
+    public router: Router,
+    private academicNetworkService: AcademicNetworkService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.user = {
-      icon: 'https://holatelcel.com/wp-content/uploads/2020/09/cheems-memes-9.jpg',
-      text: [
-        {
-          text: 'Cheems Balltze',
-          style: 'h2'
-        },
-        {
-          text: 'Ingeniería de Datos',
-          style: 'p'
-        },
-        {
-          text: '@cheems',
-          style: 'p'
-        },
-        {
-          text: 'Estudiante',
-          style: 'p'
-        }
-      ]
-    };
+    let username = this.route.snapshot.paramMap.get('username');
+    this.academicNetworkService
+      .getUserPublicData(username)
+        .subscribe(res => {
+          console.log(res)
+          if(res.code == 0) {
+            this.userData = res.data
+            this.user = {
+              icon: this.userData.profile_img_src,
+              text: [
+                {
+                  text: `${this.userData.firstname} ${this.userData.lastname}`,
+                  style: 'h2'
+                },
+                {
+                  text: this.userData.major,
+                  style: 'p'
+                },
+                {
+                  text: `@${this.userData.username}`,
+                  style: 'p'
+                },
+                {
+                  text: this.userData.type_user,
+                  style: 'p'
+                },
+                {
+                  text: this.userData.created_at,
+                  style: 'p'
+                },
+                {
+                  text: this.userData.description,
+                  style: 'p'
+                }
+              ]
+            }
+          }
+        });
 
     this.publications = [
       {
