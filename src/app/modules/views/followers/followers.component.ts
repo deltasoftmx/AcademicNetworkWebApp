@@ -69,4 +69,8 @@ export class FollowersComponent implements OnInit {
       }
     ];
   }
+
+  searchUsers(search) {
+    console.log(search)
+  }
 }

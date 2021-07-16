@@ -71,4 +71,8 @@ export class UsersComponent implements OnInit {
     ];
   }
 
+  searchUsers(search) {
+    console.log(search)
+  }
+
 }
