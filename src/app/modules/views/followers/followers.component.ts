@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ElementCard } from '../../interfaces/student.model';
+import { ElementCard } from '../../classes/student.model';
 
 @Component({
   selector: 'app-followers',

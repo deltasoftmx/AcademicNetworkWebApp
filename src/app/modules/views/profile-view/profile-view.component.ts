@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ElementCard } from '../../interfaces/student.model';
-import { Publication } from '../../interfaces/publication.model';
+import { ElementCard } from '../../classes/student.model';
+import { Publication } from '../../classes/publication.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
-import { UserPublicData } from '../../interfaces/academic-network.model';
+import { UserPublicData } from '../../classes/academic-network.model';
 
 @Component({
   selector: 'app-profile-view',

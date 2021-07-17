@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from './services/session/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'Academic Network'; //Título del toolbar.
+
+  constructor(
+    public session: SessionService,
+    private router: Router
+  ) { }
 
   //Establece observadores en los eventos onready y onresize
   //para mantener el contenido de la app en la posición correcta.
@@ -21,5 +28,10 @@ export class AppComponent implements OnInit {
     let toolbar = document.getElementById('toolbar');
     let sidenav = document.getElementById('sidenav');
     sidenav.style.top = `${toolbar.offsetHeight}px`;
+  }
+
+  endSession() {
+    this.session.end_session();
+    this.router.navigate(['/']);
   }
 }

@@ -1,6 +1,6 @@
 <div class="container global-flex-centering-container">
   <div class="custom-container">
-    
+
     <div class="get-username">
       <h1 class="global-main-title">Inicio de sesión</h1>
       <app-single-field-form-n2options
@@ -18,13 +18,14 @@
 
     <div class="get-password inactive">
       <mat-icon>account_circle</mat-icon>
-      <h1 class="global-main-title">Nombre Apellidos</h1>
+      <h1 class="global-main-title">{{displayName}}</h1>
+      <p class="global-main-title">@{{username}}</p>
       <app-single-field-form-n2options
       label="Contraseña"
       placeholder="Escriba su contraseña"
       left-btn="CAMBIAR USUARIO"
       right-btn="INICIAR"
-      type="text"
+      type="password"
       required="true"
       forward-btn="right"
       (btn-pressed)="catchPassword($event)"

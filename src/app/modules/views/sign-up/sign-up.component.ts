@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Student, Career } from '../../interfaces/student.model';
+import { Student, Career } from '../../classes/student.model';
 import { AcademicNetworkService } from '../../../services/academic-network/academic-network.service'
 import { Router } from '@angular/router';
 import { NotificationsService } from '../../../services/notifications/notifications.service';
@@ -140,19 +140,20 @@ export class SignUpComponent implements OnInit {
   // Método que se ejecuta si el formulario  es correcto.
   onSubmit(event) {
     event.preventDefault();
-    console.log('submit');
 
     if(this.myForm.valid) {
       this.student = this.myForm.value;
       delete this.student.password2;
-      // console.log(this.student)
 
       //Agrega al nuevo estudiante.
       this.academicNetworkService.addNewStudent(this.student).subscribe(data => {
-        // console.log(data);
         if(this.showMessage(data) == 0) {
           // Guarda el token del registro en el session storage.
-          this.sessionService.saveToken(data);
+          this.sessionService.saveToken(data.data.session_token);
+          this.sessionService.set_userdata('username', data.data.username);
+          this.sessionService.set_userdata('firstname', data.data.firstname);
+          this.sessionService.set_userdata('lastname', data.data.lastname);
+          this.sessionService.set_userdata('profile_img_src', data.data.profile_img_src);
 
           setTimeout(() => {
             this.router.navigate(['/user-feed']);

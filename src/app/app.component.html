@@ -17,7 +17,7 @@
     <button mat-menu-item routerLink = "/users/ale">Perfil</button>
     <button mat-menu-item>Editar perfil</button>
     <button mat-menu-item>Crear grupo</button>
-    <button mat-menu-item>Cerrar sesión</button>
+    <button mat-menu-item (click) = "endSession()">Cerrar sesión</button>
   </mat-menu>
 
   <mat-menu #notifications="matMenu">

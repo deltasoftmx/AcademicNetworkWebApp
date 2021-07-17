@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Publication } from '../../interfaces/publication.model';
+import { Publication } from '../../classes/publication.model';
 import { Router } from '@angular/router';
 
 @Component({
