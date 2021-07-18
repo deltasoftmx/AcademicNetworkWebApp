@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ElementCard } from '../../interfaces/student.model';
-import { Publication } from '../../interfaces/publication.model';
+import { ElementCard } from '../../classes/student.model';
+import { Publication } from '../../classes/publication.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
-import { UserPublicData } from '../../interfaces/academic-network.model';
+import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -12,56 +13,37 @@ import { UserPublicData } from '../../interfaces/academic-network.model';
 })
 export class ProfileViewComponent implements OnInit {
 
-  public user: ElementCard;
-  public userData: UserPublicData;
+  public user: ElementCard = new ElementCard();
   public profileDefaultIcon: string = "/assets/account_circle-black-18dp.svg";
   public publications: Publication[] = [];
+  public displayPublicationForm: boolean;
 
   constructor(
     public router: Router,
     private academicNetworkService: AcademicNetworkService,
     private route: ActivatedRoute,
+    private notifications: NotificationsService,
+    private session: SessionService
   ) { }
 
   ngOnInit(): void {
-    let username = this.route.snapshot.paramMap.get('username');
-    this.academicNetworkService
-      .getUserPublicData(username)
-        .subscribe(res => {
-          console.log(res)
-          if(res.code == 0) {
-            this.userData = res.data
-            this.user = {
-              icon: this.userData.profile_img_src,
-              text: [
-                {
-                  text: `${this.userData.firstname} ${this.userData.lastname}`,
-                  style: 'h2'
-                },
-                {
-                  text: this.userData.major,
-                  style: 'p'
-                },
-                {
-                  text: `@${this.userData.username}`,
-                  style: 'p'
-                },
-                {
-                  text: this.userData.type_user,
-                  style: 'p'
-                },
-                {
-                  text: this.userData.created_at,
-                  style: 'p'
-                },
-                {
-                  text: this.userData.description,
-                  style: 'p'
-                }
-              ]
+    this.route.params.subscribe(params => {
+      let username = params['username'];
+      this.academicNetworkService
+        .getUserPublicData(username)
+          .subscribe(res => {
+            console.log(res)
+            if(res.code == 0) {
+              this.setUserData(res.data);
+              this.updatePublicationForm(res.data.username);
+            } else if(res.code == 1) {
+              this.notifications.error(
+                'El usuario no existe.',
+                'Si llegasta hasta aquí a través de una URL,' +
+                ' revisa si el nombre de usario de la URL es correcto.');
             }
-          }
-        });
+          });
+    });
 
     this.publications = [
       {
@@ -150,6 +132,38 @@ export class ProfileViewComponent implements OnInit {
     ];
   }
 
+  setUserData(userData) {
+    this.user = {
+      icon: userData.profile_img_src,
+      text: [
+        {
+          text: `${userData.firstname} ${userData.lastname}`,
+          style: 'h2'
+        },
+        {
+          text: userData.major,
+          style: 'p'
+        },
+        {
+          text: `@${userData.username}`,
+          style: 'p'
+        },
+        {
+          text: userData.type_user,
+          style: 'p'
+        },
+        {
+          text: userData.created_at,
+          style: 'p'
+        },
+        {
+          text: userData.description,
+          style: 'p'
+        }
+      ]
+    }
+  }
+
   favoriteEventHandler(event) {
     console.log(event)
   }
@@ -157,6 +171,21 @@ export class ProfileViewComponent implements OnInit {
   commentEventHandler(event) {
     console.log(event)
     this.router.navigateByUrl(`/post/${event.publicationId}`)
+  }
+
+  updatePublicationForm(username) {
+    let userData = this.session.get_userdata();
+    if(userData) {
+      if(userData.username == username) {
+        this.displayPublicationForm = true;
+        return;
+      }
+    }
+    this.displayPublicationForm = false;
+  }
+
+  newPublicationHandler(event) {
+    console.log(event);
   }
 
 }

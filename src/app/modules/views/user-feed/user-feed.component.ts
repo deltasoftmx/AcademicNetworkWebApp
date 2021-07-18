@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Publication } from '../../interfaces/publication.model';
+import { Publication } from '../../classes/publication.model';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -12,10 +13,14 @@ export class UserFeedComponent implements OnInit {
   public publications: Array<Publication> = [];
 
   constructor(
-    public router: Router
+    public router: Router,
+    private session: SessionService
   ) { }
 
   ngOnInit(): void {
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+    }
     this.publications = [
       {
         id: 1112,

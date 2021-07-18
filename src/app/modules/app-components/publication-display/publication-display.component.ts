@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Publication } from '../../interfaces/publication.model';
+import { Publication } from '../../classes/publication.model';
 import { PublicationFormaterService } from '../../../services/publication-formater/publication-formater.service'
 
 @Component({

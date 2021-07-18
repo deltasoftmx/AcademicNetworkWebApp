@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Student, Career } from '../../interfaces/student.model';
+import { Student, Career } from '../../classes/student.model';
 import { AcademicNetworkService } from '../../../services/academic-network/academic-network.service'
 import { Router } from '@angular/router';
 import { NotificationsService } from '../../../services/notifications/notifications.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { passwordMatch, whiteSpaces } from './my-validations';
 import { SessionService } from '../../../services/session/session.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,10 +31,16 @@ export class SignUpComponent implements OnInit {
     private router: Router,
     private notifService: NotificationsService,
     private fb: FormBuilder,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    public location: Location
   ) {}
 
   ngOnInit(): void {
+    if(this.sessionService.get_userdata()) {
+      this.router.navigateByUrl('/user-feed');
+      return;
+    }
+
     this.academicNetworkService.getCareers().subscribe(d => {
 
       if(d.code == 0) {
@@ -139,37 +146,31 @@ export class SignUpComponent implements OnInit {
   onSubmit(event) {
     event.preventDefault();
 
-    if (event.explicitOriginalTarget.textContent == 'Volver') {
-      this.goBack();
-      return;
-    }
-
     if(this.myForm.valid) {
       this.student = this.myForm.value;
       delete this.student.password2;
-      // console.log(this.student)
 
       //Agrega al nuevo estudiante.
       this.academicNetworkService.addNewStudent(this.student).subscribe(data => {
-        // console.log(data);
         if(this.showMessage(data) == 0) {
           // Guarda el token del registro en el session storage.
-          this.sessionService.saveToken(data);
+          this.sessionService.saveToken(data.data.session_token);
+          this.sessionService.set_userdata('username', data.data.username);
+          this.sessionService.set_userdata('firstname', data.data.firstname);
+          this.sessionService.set_userdata('lastname', data.data.lastname);
+          this.sessionService.set_userdata('profile_img_src', data.data.profile_img_src);
 
           setTimeout(() => {
             this.router.navigate(['/user-feed']);
           }, 1000);
         }
       });
-
-
     }
-
   }
 
   //Regresa al inicio de sesión.
   goBack() {
-    this.router.navigate(['/login']);
+    this.location.back();
   }
 
   /*

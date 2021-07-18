@@ -44,7 +44,7 @@ export class SessionService {
   }
 
   // Guarda token del registro en session storage.
-  saveToken(d: any) {
-    sessionStorage.setItem(this.keys.session_token, d.data.session_token);
+  saveToken(sessionToken: string) {
+    sessionStorage.setItem(this.keys.session_token, sessionToken);
   }
 }

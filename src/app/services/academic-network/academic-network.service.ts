@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Student } from '../../modules/interfaces/student.model';
+import { Student } from '../../modules/classes/student.model';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { apikey, domain} from '../../../environments/environment';
-import * as ans from '../../modules/interfaces/academic-network.model';
+import * as ans from '../../modules/classes/academic-network.model';
 
 @Injectable({
   providedIn: 'root'
@@ -94,6 +94,25 @@ export class AcademicNetworkService {
       { headers: headers })
         .pipe(catchError(
           this.handleError<ans.Response<ans.UserPublicData>>('Get User Public Data')));
+  }
+
+  signin(username, passwd): Observable<ans.Response<ans.SigninData>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json'
+    });
+
+    let user = {
+      username,
+      passwd
+    };
+
+    return this.http.post<ans.Response<ans.SigninData>>(
+      `${domain}/v1/api/social-network/users/signin`,
+      user,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.SigninData>>('Signin')));
   }
 
 }
