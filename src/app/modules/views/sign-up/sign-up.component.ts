@@ -36,6 +36,11 @@ export class SignUpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(this.sessionService.get_userdata()) {
+      this.router.navigateByUrl('/user-feed');
+      return;
+    }
+
     this.academicNetworkService.getCareers().subscribe(d => {
 
       if(d.code == 0) {

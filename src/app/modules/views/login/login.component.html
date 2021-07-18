@@ -16,10 +16,19 @@
       </app-single-field-form-n2options>
     </div>
 
-    <div class="get-password inactive">
+    <div class="get-password inactive ">
+
+      <app-element-card
+        class="user-card"
+        [defaultIcon] = "profileDefaultIcon"
+        [card] = "user">
+      </app-element-card>
+
+      <!--
       <mat-icon>account_circle</mat-icon>
       <h1 class="global-main-title">{{displayName}}</h1>
       <p class="global-main-title">@{{username}}</p>
+      -->
       <app-single-field-form-n2options
       label="Contraseña"
       placeholder="Escriba su contraseña"

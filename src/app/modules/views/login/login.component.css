@@ -21,3 +21,7 @@ mat-icon {
   display: none;
 }
 
+.user-card {
+  margin: auto;
+  width: 400px;
+}

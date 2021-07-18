@@ -34,4 +34,32 @@ export class AppComponent implements OnInit {
     this.session.end_session();
     this.router.navigate(['/']);
   }
+
+  goMyProfile() {
+    let userData = this.session.get_userdata()
+    if(userData) {
+      this.router.navigateByUrl(`/users/${userData.username}`);
+    }
+  }
+
+  isThereSession() {
+    return this.session.get_userdata() != null;
+  }
+
+  isThereUserImage() {
+    let userData = this.session.get_userdata();
+    if(!userData) {
+      return false;
+    }
+    if(userData.profile_img_src) {
+      return true;
+    }
+    return false;
+  }
+
+  get userImgSrc() {
+    let userData = this.session.get_userdata();
+    if(userData)
+      return userData.profile_img_src || '';
+  }
 }

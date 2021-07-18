@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ElementCard } from '../../classes/student.model';
+import { SessionService } from 'src/app/services/session/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-groups',
@@ -11,9 +13,15 @@ export class MyGroupsComponent implements OnInit {
   public defaultIcon: string = '/assets/people-black-18dp.svg';
   public myGroups: ElementCard[];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private session: SessionService
+  ) { }
 
   ngOnInit(): void {
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+    }
 
     //Simulando que estos son los grupos
     //a los que está inscrito el estudiante.

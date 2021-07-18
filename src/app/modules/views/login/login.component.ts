@@ -3,6 +3,7 @@ import { SessionService } from '../../../services/session/session.service';
 import { Router } from '@angular/router';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { ElementCard } from '../../classes/student.model';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   public displayName: string;
   public username: string;
+  public profileDefaultIcon: string = "/assets/account_circle-black-18dp.svg";
+  public user: ElementCard = new ElementCard();
 
   constructor(
     private session: SessionService,
@@ -22,6 +25,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //Si hay una sesión iniciada, no se puede estar
+    //en la vista de login.
+    if(this.session.get_userdata()) {
+      this.router.navigateByUrl('/user-feed');
+    }
+
     this.set_form_visibility('passwd', 'hide');
     this.set_form_visibility('username', 'show');
   }
@@ -45,6 +54,7 @@ export class LoginComponent implements OnInit {
           if(res.code == 0) {
             this.displayName = res.data.firstname + ' ' + res.data.lastname;
             this.username = res.data.username;
+            this.setUserCard(res.data);
             this.set_form_visibility('username', 'hide');
             this.set_form_visibility('passwd', 'show');
           } else if(res.code == 1) {
@@ -108,6 +118,22 @@ export class LoginComponent implements OnInit {
       comp.classList.add('inactive');
     } else if(state == 'show') {
       comp.classList.remove('inactive');
+    }
+  }
+
+  setUserCard(userData) {
+    this.user = {
+      icon: userData.profile_img_src,
+      text: [
+        {
+          text: `${userData.firstname} ${userData.lastname}`,
+          style: 'h2'
+        },
+        {
+          text: `@${userData.username}`,
+          style: 'p'
+        }
+      ]
     }
   }
 
