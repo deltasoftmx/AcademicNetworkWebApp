@@ -4,6 +4,7 @@ import { Publication } from '../../classes/publication.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -15,12 +16,14 @@ export class ProfileViewComponent implements OnInit {
   public user: ElementCard = new ElementCard();
   public profileDefaultIcon: string = "/assets/account_circle-black-18dp.svg";
   public publications: Publication[] = [];
+  public displayPublicationForm: boolean;
 
   constructor(
     public router: Router,
     private academicNetworkService: AcademicNetworkService,
     private route: ActivatedRoute,
-    private notifications: NotificationsService
+    private notifications: NotificationsService,
+    private session: SessionService
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +35,7 @@ export class ProfileViewComponent implements OnInit {
             console.log(res)
             if(res.code == 0) {
               this.setUserData(res.data);
+              this.updatePublicationForm(res.data.username);
             } else if(res.code == 1) {
               this.notifications.error(
                 'El usuario no existe.',
@@ -167,6 +171,21 @@ export class ProfileViewComponent implements OnInit {
   commentEventHandler(event) {
     console.log(event)
     this.router.navigateByUrl(`/post/${event.publicationId}`)
+  }
+
+  updatePublicationForm(username) {
+    let userData = this.session.get_userdata();
+    if(userData) {
+      if(userData.username == username) {
+        this.displayPublicationForm = true;
+        return;
+      }
+    }
+    this.displayPublicationForm = false;
+  }
+
+  newPublicationHandler(event) {
+    console.log(event);
   }
 
 }
