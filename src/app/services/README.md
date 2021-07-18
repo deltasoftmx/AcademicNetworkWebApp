@@ -26,6 +26,9 @@ Los datos que se deben incluir son:
 ### Índice.
 
 * [Session](#Session)
+* [Sign-Up](#Sign-Up)
+* [Notifications](#Notifications)
+* [StringFormat](#StringFormat)
 
 ### Session.
 
@@ -53,3 +56,82 @@ sólo estan disponibles mientras el navegador esté corriendo.
   * **Parámetros**: `Void`.
   * **Tipo de dato de retorno**: `Void`.
 
+  ### Sign-Up
+  
+  **Clase**: SignUpService
+
+  **Descripción**: Hace el registro de los datos del usuario para que pueda ser almacenado en la base de datos.
+
+  **Atributos públicos**:
+
+    **Nombre**: `students`.
+    **Descripción**: Almacena la lista de estudiantes registrados.
+    **Tipo**: `Student`.
+
+    **Nombre**: `careers`.
+    **Descripción**: Almacena la lista de carreras de los estudiantes.
+    **Tipo**: `Career`.
+
+    **Métodos públicos**:
+
+    * `getCareers`
+      * **Descripción**: Devuelve la lista de carreras registradas en la institución.
+      * **Parámetros**: `void`.
+      * **Tipo de dato de retorno**: `Career[]`.
+
+    * `getStudents`
+      * **Descripción**: Devuelve la lista de estudiantes registrados en la institución.
+      * **Parámetros**: `void`.
+      * **Tipo de dato de retorno**: `Student[]`.
+
+    * `newStudent`
+      * **Descripción**: Devuelve un objeto vacío de tipo estudiante.
+      * **Parámetros**: `void`.
+      * **Tipo de dato de retorno**: `Student`.
+
+    * `addNewStudent`
+      * **Descripción**: Agrega un nuevo estudiante a la lista.
+      * **Parámetros**: `student`: Objeto de tipo estudiante que almacena los datos de registro.
+      * **Tipo de dato de retorno**: `void`.
+
+  ### Notifications
+
+  **Clase**: NotificationsService
+
+  **Descripción**: Contiene métodos de notificaciones que nos permite dar mensajes al usuario.
+
+  **Atributos públicos**: Ninguno.
+
+  **Métodos públicos**:
+
+    * `error`
+      * **Descripción**: Muestra una alerta de error al usuario.
+      * **Parámetros**: 
+      * `title`: String representando el título de la alerta.
+      * `text`: Mensaje de la alerta.
+      * `footer?`: parámetro opcional que puede contener un footer en la alerta. 
+      * **Tipo de dato de retorno**: `void`.
+
+    * `success`
+      * **Descripción**: Muestra una alerta de éxito al usuario.
+      * **Parámetros**: 
+      * `title`: String representando el título de la alerta.
+      * `text`: Mensaje de la alerta.
+      * `footer?`: parámetro opcional que puede contener un footer en la alerta. 
+      * **Tipo de dato de retorno**: `void`.
+
+### StringFormat.
+
+**Clase**: StringFormatService
+
+**Descripción**: Realiza deversos tipos de procesamintos sobre strings.
+
+**Atributos públicos**: Ninguno.
+
+**Métodos públicos**:
+
+* `splitByEOF`
+  * **Descripción**: Divide un string a partir de los saltos de línea que contiene y elimina los saltos extra.
+  * **Parámetros**: 
+    * `text`: String que será procesado.
+  * **Tipo de dato de retorno**: `Array<string>`.

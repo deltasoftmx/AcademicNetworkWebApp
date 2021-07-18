@@ -1,0 +1,16 @@
+<h1 class="global-main-title">Usuarios</h1>
+<div class="form-container">
+  <form (submit) = "searchUsers(message.value)">
+    <mat-form-field class="full-width">
+      <mat-label>Nombre de usuario</mat-label>
+      <input matInput #message maxlength="256" placeholder="Algún nombre...">
+      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+  </form>
+</div>
+
+<div class="global-flex-centering-container global-card-element-container global-container-bg-color global-shadow">
+  <div class="sub-container">
+    <app-element-card-box [data]="users" [defaultIcon]="defaultIcon"></app-element-card-box>
+  </div>
+</div>

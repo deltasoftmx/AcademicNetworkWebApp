@@ -5,3 +5,23 @@
   right: 0;
   left: 0;
 }
+
+.custom-container {
+  width: 100%;
+}
+
+mat-icon {
+  font-size: 142px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.inactive {
+  display: none;
+}
+
+.user-card {
+  margin: auto;
+  width: 400px;
+}

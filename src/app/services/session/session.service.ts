@@ -8,7 +8,8 @@ export class SessionService {
   //Cláves para los diferentes datos guardados en el
   //sessionStorage. Pueden ser strings arbitrarios.
   private keys = {
-    'userdata': 'yag6s7ghasd7igas78tdqyfa65fravhjqgwd87gdsayg76asgqya'
+    'userdata': 'yag6s7ghasd7igas78tdqyfa65fravhjqgwd87gdsayg76asgqya',
+    'session_token': 'shdbdshbjhdfbjekuncjnvjdncjkejnjkenrjndjnjcncjkn'
   };
 
   constructor() { }
@@ -40,5 +41,10 @@ export class SessionService {
   end_session() {
     sessionStorage.clear()
     //Incluir una instrucción para volver a la vista de login.
+  }
+
+  // Guarda token del registro en session storage.
+  saveToken(sessionToken: string) {
+    sessionStorage.setItem(this.keys.session_token, sessionToken);
   }
 }

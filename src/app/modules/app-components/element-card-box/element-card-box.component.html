@@ -1,0 +1,9 @@
+<div class="global-flex-centering-container">
+  <article *ngFor="let d of data">
+    <app-element-card
+      [card]="d"
+      [defaultIcon]="defaultIcon"
+      class="element-card">
+    </app-element-card>
+  </article>
+</div>

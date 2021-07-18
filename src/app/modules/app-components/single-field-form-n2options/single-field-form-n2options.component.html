@@ -1,10 +1,10 @@
 
 <div class="custom-container global-shadow global-container-bg-color">
-  <form >
+  <form>
     <div class="custom-sub-container">
       <mat-form-field appearance="standard" class="custom-field">
         <mat-label>{{label}}</mat-label>
-        <input matInput [placeholder]="plh" [type]="type" [required]="isreq" #input>
+        <input matInput [placeholder]="plh" [type]="type" [required]="isreq" (keypress)="onkeyup($event, input.value)" #input>
       </mat-form-field>
     </div>
 
@@ -14,3 +14,4 @@
     </div>
   </form>
 </div>
+

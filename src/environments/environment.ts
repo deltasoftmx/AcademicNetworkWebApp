@@ -6,6 +6,9 @@ export const environment = {
   production: false
 };
 
+export const apikey = '5743baa2a29e90b16fbb23a54e151c02d67150fecb7bc34d75efa54ebc63ab0b';
+export const domain = 'http://localhost:3000';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

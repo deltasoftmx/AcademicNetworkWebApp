@@ -23,6 +23,7 @@ Los módulos que usa son:
 * MaterialModule: Exporta los componentes de Angular Material a utilizar.
 * AppComponensModule: Exporta todos los componentes que no son vistas en la aplicación. Estos componentes son fácilmente reutilizables.
 * ViewsModule: Exporta los componentes que serán usados como vistas. Estos componentes son los usados por el enrutador en Angular para desplegar vistas.
+* Interfaces: Exporta las interfaces a utilizar en la aplicación.
 
 Estos módulos se encuntran en `src/app/modules/`
 

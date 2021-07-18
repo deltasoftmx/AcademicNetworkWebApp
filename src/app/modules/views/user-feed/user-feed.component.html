@@ -1,0 +1,20 @@
+<div class = "global-publication-container custom-container">
+  <!-- Box to create publications -->
+  <app-text-and-image-form
+    class = "publication-form"
+    textInputLabel = "Comparte algo con tus seguidores."
+    textInputPlaceholder = "Dí lo que necesites."
+    (newContent) = "newPublicationHandler($event)">
+  </app-text-and-image-form>
+
+  <!-- Publication list -->
+  <app-publication-display
+    class = "global-publication-card"
+    *ngFor = "let p of publications"
+    [publication] = "p"
+    [activeButtons] = "['comment', 'share', 'favorite']"
+    (favorite) = "favoriteEventHandler($event)"
+    (comment) = "commentEventHandler($event)"
+    (share) = "shareEventHandler($event)">
+  </app-publication-display>
+</div>

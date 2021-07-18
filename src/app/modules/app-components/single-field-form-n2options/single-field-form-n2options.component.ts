@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import swal from 'sweetalert2';
+import { NotificationsService } from '../../../services/notifications/notifications.service';
 
 @Component({
   selector: 'app-single-field-form-n2options',
@@ -19,42 +19,33 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
 
   @Output('btn-pressed') btn_pressed: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private notifService: NotificationsService) { }
 
   ngOnInit(): void {
+  }
+
+  onkeyup(event, val) {
+    console.log(event)
+    if(event.charCode == 13) {
+      this.onclick(event, val, 'return')
+    }
   }
 
   onclick(event, val, btn) {
     event.preventDefault();
 
-    //Detecta si se presiono la tecla de retorno
-    //en lugar de un botón.
-    if (event.explicitOriginalTarget.tagName == 'INPUT') {
-      btn = 'return';
-    }
-
     //Evitar la ejecución del flujo si el campo es
     //requerido y está vacío.
     if(!val && this.isreq && (btn == this.forward_btn || btn == 'return')) {
-      //Muestra una alerta de error al usuario.
-      //Descripción de las propiedades del objeto como parámetro:
-      //1. icon = agrega un icono (success, error, warning, info y question)
-      //2. title = título de la alerta.
-      //3. text = descripción del mensaje/alerta.
-      //4. footer = footer de la alerta.
-      swal.fire({
-        icon: 'error',
-        title: '<strong> Error </strong>',
-        text: `El campo ${this.label} es requerido.`,
-        footer: this.footer
-      });
+      this.notifService.error('Error', `El campo ${this.label} es requerido.`, this.footer);
       return;
     }
 
     this.btn_pressed.emit({
       value: val,
       btn: btn
-    })
+    });
+
   }
 
 }
