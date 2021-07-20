@@ -54,7 +54,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .global-publication-container {
-  width: 500px;
+  /*width: 500px;*/
+  width: 35%;
   margin: auto;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -67,6 +68,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @media (max-width: 540px) {
   .global-publication-container {
-    width: 90%;
+    width: 95%;
   }
 }
+
+@media (max-width: 1444px) and (min-width: 541px) {
+  .global-publication-container {
+    width: 500px;
+  }
+}
+
+

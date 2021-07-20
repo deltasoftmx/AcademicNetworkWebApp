@@ -2,9 +2,13 @@
   <button mat-icon-button aria-label="Menu button" (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span> {{title}} </span>
+  <button mat-button routerLink = "/user-feed">
+    <h1> {{title}} </h1>
+  </button>
+
   <span class="example-spacer"></span>
   <button
+    class = "icon-toolbar-btn"
     *ngIf = "isThereSession()"
     mat-icon-button
     [matMenuTriggerFor]="notifications"
@@ -12,6 +16,7 @@
       <mat-icon>notifications</mat-icon>
   </button>
   <button
+    class = "icon-toolbar-btn"
     *ngIf = "isThereSession()"
     mat-icon-button
     [matMenuTriggerFor]="menu"
@@ -26,6 +31,7 @@
         class="img-icon">
   </button>
   <button
+    class = "icon-toolbar-btn"
     *ngIf = "!isThereSession()"
     routerLink = "/login"
     mat-icon-button

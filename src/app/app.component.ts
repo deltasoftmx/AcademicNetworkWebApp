@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
   //Establece observadores en los eventos onready y onresize
   //para mantener el contenido de la app en la posición correcta.
   ngOnInit() {
-    document.onreadystatechange = this.setSidenav
-    window.onresize = this.setSidenav
+    document.addEventListener('readystatechange', this.setSidenav);
+    window.addEventListener('resize', this.setSidenav);
   }
 
   //Establece la altura correcta para el contenido de la aplicación
