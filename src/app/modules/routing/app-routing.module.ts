@@ -1,16 +1,16 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './modules/views/login/login.component';
-import { SignUpComponent } from './modules/views/sign-up/sign-up.component';
-import { AvailableGroupsComponent } from './modules/views/available-groups/available-groups.component';
-import { MyGroupsComponent } from './modules/views/my-groups/my-groups.component';
-import { UsersComponent } from './modules/views/users/users.component';
-import { FollowersComponent } from './modules/views/followers/followers.component';
-import { FollowingComponent } from './modules/views/following/following.component';
-import { UserFeedComponent } from './modules/views/user-feed/user-feed.component';
-import { PostDetailsComponent } from './modules/views/post-details/post-details.component';
-import { FavoritePostsComponent } from './modules/views/favorite-posts/favorite-posts.component';
-import { ProfileViewComponent } from './modules/views/profile-view/profile-view.component';
+import { LoginComponent } from '../views/login/login.component';
+import { SignUpComponent } from '../views/sign-up/sign-up.component';
+import { AvailableGroupsComponent } from '../views/available-groups/available-groups.component';
+import { MyGroupsComponent } from '../views/my-groups/my-groups.component';
+import { UsersComponent } from '../views/users/users.component';
+import { FollowersComponent } from '../views/followers/followers.component';
+import { FollowingComponent } from '../views/following/following.component';
+import { UserFeedComponent } from '../views/user-feed/user-feed.component';
+import { PostDetailsComponent } from '../views/post-details/post-details.component';
+import { FavoritePostsComponent } from '../views/favorite-posts/favorite-posts.component';
+import { ProfileViewComponent } from '../views/profile-view/profile-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
