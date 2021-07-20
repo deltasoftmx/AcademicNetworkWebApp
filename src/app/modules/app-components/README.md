@@ -18,12 +18,13 @@ Los datos que se deben incluir en la documentación de cada componente son:
 ## Documentación de componentes.
 
 ### Índice.
-* [Single-Field Form n2options](#Single-field-Form-n2options)
-* [ElementCard](#ElementCard)
-* [ElementCardBox](#ElementCardBox)
-* [TextAndIMageForm](#TextAndIMageForm)
-* [CommentBox](#CommentBox)
-* [PublicationCard](#PublicationCard)
+* [Single-Field Form n2options](#single-field-form-n2options)
+* [ElementCard](#elementcard)
+* [ElementCardBox](#elementcardbox)
+* [TextAndImageForm](#textandimageform)
+* [CommentBox](#commentBox)
+* [PublicationCard](#publicationCard)
+* [PublicationDisplay](#publicationdisplay)
 
 ### Single-Field Form n2options.
 

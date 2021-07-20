@@ -20,6 +20,13 @@ Cada vista agregada debe ser documentada. Los datos que deben incluirse son:
 * [SignUp](#SignUp)
 * [AvailableGroups](#AvailableGroups)
 * [MyGroups](#MyGroups)
+* [Users](#users)
+* [Followers](#followers)
+* [Followed](#followed)
+* [User Feed](#user-feed)
+* [Post Details](#post-details)
+* [Favorite Posts](#favorite-posts)
+* [Profile view](#profile-view)
 
 ### Login.
 
@@ -34,9 +41,41 @@ todos los datos se guarden a excepción del campo de descripción que puede esta
 ### AvailableGroups
 
 **Descripción**: Despliega una lista de los grupos disponibles actualmente en el sistema, además, 
-contiene un input que permite escribir el nombre del grupo a buscar.
+contiene un input que permite escribir el nombre del grupo a buscar. Soporta paginación.
 
 ### MyGroups
 
 **Descripción**: Despliega la lista de grupos dónde el estudiante ha sido inscrito, además,
-contiene un input que permite escribir el nombre del grupo a buscar.
+contiene un input que permite escribir el nombre del grupo a buscar. Soporta paginación.
+
+### Users
+
+**Descripción**: Despliega la lista de todos los usuarios que hay en el sistema. Soporta paginación
+y búsqueda.
+
+### Followers
+
+**Descripción**: Despliega la lista de los usuarios que siguen al usuario con una sesión activa, soporta búsqueda de usuarios
+y paginación.
+
+### Followed
+
+**Descripción**: Despliega la lista de los usuario que el usuario con una sesión activa está siguiendo. Soporya búsqueda y
+paginación.
+
+### User Feed
+
+**Descripción**: Despliega las publicaciones de interés para el usuario con una sesión activa, es decir, las publicaciones
+de los usuarios a los que sigue y la de los grupos a los que el usuario pertenece.
+
+### Post Details
+
+**Descripción**: Desplega la vista detallada de una publicación. En esta vista se pueden ver los comentarios y comentar.
+
+### Favorite Posts
+
+**Descripción**: Desplega la lista de publicaciones que el usuario con una sesión activa ha marcado como favoritas.
+
+### Profile view
+
+**Descripción**: Desplega la información pública del usuario y las publicaciones que éste ha hecho.
