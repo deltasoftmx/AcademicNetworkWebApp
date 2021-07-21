@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StringFormatService } from '../../../services/string-format/string-format.service'
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-publication-card',
@@ -35,11 +36,14 @@ export class PublicationCardComponent implements OnInit {
   @Output() comment: EventEmitter<any> = new EventEmitter();
   public altProfileImg = 'Ávatar de ' + this.profileName;
   public altPublicationImg = 'Publicación de ' + this.profileName;
+  public defaultImageProfile = '/assets/account_circle-black-18dp.svg';
 
   constructor(public stringFormat: StringFormatService) { }
 
   ngOnInit(): void {
     console.log(this.stringFormat.splitByEOL(this.text))
+    this.createdAt = this.dateFormat(this.createdAt);
+    this.subCreatedAt = this.dateFormat(this.subCreatedAt);
   }
 
   favoriteEvent() {
@@ -81,6 +85,15 @@ export class PublicationCardComponent implements OnInit {
     }
 
     return false
+  }
+
+  dateFormat(date) {
+    /*
+    let momentDate = moment(date).format('DD-MMMM-YYYY')
+      .split('-');
+    return `${momentDate[0]} de ${momentDate[1]} de ${momentDate[2]}`;
+    */
+    return moment(date).format('MMMM DD, YYYY');
   }
 
 }

@@ -1,3 +1,5 @@
+import { Publication } from "./publication.model";
+
 export class Response<T> {
   code: number;
   data: T;
@@ -5,9 +7,9 @@ export class Response<T> {
 }
 
 export class UserPublicData {
-  username: string
-  firstname: string
-  lastname: string
+  username: string;
+  firstname: string;
+  lastname: string;
   description: string;
   profile_img_src: string;
   created_at: string;
@@ -16,13 +18,18 @@ export class UserPublicData {
 }
 
 export class SigninData {
-  username: string
-  firstname: string
-  lastname: string
+  username: string;
+  firstname: string;
+  lastname: string;
   description: string;
   profile_img_src: string;
   created_at: string;
   type_user: string;
   major: string;
   session_token: string;
+}
+
+export class UserTimeline {
+  posts: Publication[];
+  total_records: number;
 }

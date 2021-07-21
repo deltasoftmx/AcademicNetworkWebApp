@@ -47,4 +47,8 @@ export class SessionService {
   saveToken(sessionToken: string) {
     sessionStorage.setItem(this.keys.session_token, sessionToken);
   }
+
+  getToken(): string {
+    return sessionStorage.getItem(this.keys.session_token);
+  }
 }

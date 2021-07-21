@@ -1,7 +1,16 @@
 <!-- TODO: Put links to user profile and gorup. -->
 <mat-card class="card">
   <mat-card-header>
-    <img mat-card-avatar [src]="profileImgSrc" [alt]="altProfileImg">
+    <img
+      *ngIf = "profileImgSrc"
+      mat-card-avatar
+      [src]="profileImgSrc"
+      [alt]="altProfileImg">
+    <img
+      *ngIf = "!profileImgSrc"
+      mat-card-avatar
+      [src]="defaultImageProfile"
+      [alt]="altProfileImg">
     <mat-card-title>
       {{profileName}}
       <mat-card-subtitle class="usrname">@{{username}}</mat-card-subtitle>
@@ -21,8 +30,14 @@
   <mat-card class="card" *ngIf = "isSharedContent">
     <mat-card-header>
       <img mat-card-avatar
+        *ngIf = "subProfileImgSrc"
         [src]="subProfileImgSrc"
         [alt]="'Imagen de ' + subProfileName">
+      <img
+        *ngIf = "!subProfileImgSrc"
+        mat-card-avatar
+        [src]="defaultImageProfile"
+        [alt]="altProfileImg">
       <mat-card-title>
         {{subProfileName}}
         <mat-card-subtitle class="usrname">@{{subUsername}}</mat-card-subtitle>
