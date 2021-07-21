@@ -35,6 +35,7 @@ export class PublicationCardComponent implements OnInit {
   @Output() comment: EventEmitter<any> = new EventEmitter();
   public altProfileImg = 'Ávatar de ' + this.profileName;
   public altPublicationImg = 'Publicación de ' + this.profileName;
+  public defaultImageProfile = '/assets/account_circle-black-18dp.svg';
 
   constructor(public stringFormat: StringFormatService) { }
 

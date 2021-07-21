@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../../modules/classes/student.model';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { apikey, domain} from '../../../environments/environment';
 import * as ans from '../../modules/classes/academic-network.model';
+import { SessionService } from '../session/session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AcademicNetworkService {
 
   constructor(
     private http: HttpClient,
+    private session: SessionService
   ) { }
 
   private handleError<T>(operation) {
@@ -113,6 +115,26 @@ export class AcademicNetworkService {
       { headers: headers })
         .pipe(catchError(
           this.handleError<ans.Response<ans.SigninData>>('Signin')));
+  }
+
+  getUserTimeline(offset: number = 20, page: number = 0): Observable<ans.Response<ans.UserTimeline>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json',
+      'Authorization': this.session.getToken()
+    });
+
+
+
+    let params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('page', page.toString());
+
+    return this.http.get<ans.Response<ans.UserTimeline>>(
+      `${domain}/v1/api/social-network/posts/timeline`,
+      { headers: headers, params: params })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.UserTimeline>>('Get User User Timeline')));
   }
 
 }

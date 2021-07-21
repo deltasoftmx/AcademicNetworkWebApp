@@ -68,7 +68,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @media (max-width: 540px) {
   .global-publication-container {
-    width: 95%;
+    width: 100%;
   }
 }
 

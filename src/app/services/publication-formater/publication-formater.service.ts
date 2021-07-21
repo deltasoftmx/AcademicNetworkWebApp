@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Publication } from 'src/app/modules/classes/publication.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,11 @@ export class PublicationFormaterService {
 
   constructor() { }
 
-  isSharedContent(p) {
-    return p.post_type == 'shared'
+  isSharedContent(p: Publication) {
+    return p.referenced_post != null;
   }
 
-  getReferencedField(p, field) {
+  getReferencedField(p: Publication, field: string) {
     if(this.isSharedContent(p)) {
       switch(field) {
         case 'profile_name':
