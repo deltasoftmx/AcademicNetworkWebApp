@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Preferencias del grupo</h2>
+<section>
+  <mat-checkbox
+    class="checkbox"
+    color = "primary"
+    [(ngModel)] = "data.listenForNotifications">
+      Recibir notificaciones sobre este grupo.
+  </mat-checkbox>
+</section>
+<section mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Aplicar</button>
+</section>

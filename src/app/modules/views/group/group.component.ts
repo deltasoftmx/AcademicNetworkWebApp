@@ -1,51 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { ElementCard } from '../../classes/student.model';
 import { Publication } from '../../classes/publication.model';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
-import { NotificationsService } from 'src/app/services/notifications/notifications.service';
-import { SessionService } from 'src/app/services/session/session.service';
+import { Router } from '@angular/router';
+import { ElementCard } from '../../classes/student.model';
+import { MatDialog } from '@angular/material/dialog';
+import { GroupPreferences } from '../../classes/dialogs.model';
+import { GroupPreferencesComponent } from '../../dialogs/group-preferences/group-preferences.component';
 
 @Component({
-  selector: 'app-profile-view',
-  templateUrl: './profile-view.component.html',
-  styleUrls: ['./profile-view.component.css']
+  selector: 'app-group',
+  templateUrl: './group.component.html',
+  styleUrls: ['./group.component.css']
 })
-export class ProfileViewComponent implements OnInit {
+export class GroupComponent implements OnInit {
 
-  public user: ElementCard = new ElementCard();
-  public profileDefaultIcon: string = "/assets/account_circle-black-18dp.svg";
   public publications: Publication[] = [];
-  public displayPublicationForm: boolean;
+  public voidTimeline: boolean;
+  public groupCard: ElementCard = new ElementCard();
+  public defaultIcon: string = '/assets/people-black-18dp.svg';
+  public groupPreferences: GroupPreferences = new GroupPreferences(true);
 
   constructor(
-    public router: Router,
-    private academicNetworkService: AcademicNetworkService,
-    private route: ActivatedRoute,
-    private notifications: NotificationsService,
-    private session: SessionService
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      let username = params['username'];
-      this.academicNetworkService
-        .getUserPublicData(username)
-          .subscribe(res => {
-            console.log(res)
-            if(res.code == 0) {
-              this.setUserData(res.data);
-              this.updatePublicationForm(res.data.username);
-            } else if(res.code == 1) {
-              this.notifications.error(
-                'El usuario no existe.',
-                'Si llegasta hasta aquí a través de una URL,' +
-                ' revisa si el nombre de usario de la URL es correcto.');
-            }
-          });
-    });
+    this.publications = this.getFakePosts();
+    this.groupCard = {
+      icon: '',
+      text: [
+        {
+          text: 'Data Engineering',
+          style: 'h2'
+        },
+        {
+          text: 'Python where we can, C++ where we must.',
+          style: 'p'
+        }
+      ],
+      internalLink: null,
+      externalLink: null
+    }
 
-    this.publications = [
+    console.log(this.groupPreferences.clone())
+  }
+
+  getFakePosts() {
+    return [
       {
         id: 1112,
         user_id: 1256,
@@ -132,38 +133,8 @@ export class ProfileViewComponent implements OnInit {
     ];
   }
 
-  setUserData(userData) {
-    this.user = {
-      icon: userData.profile_img_src,
-      text: [
-        {
-          text: `${userData.firstname} ${userData.lastname}`,
-          style: 'h2'
-        },
-        {
-          text: userData.major,
-          style: 'p'
-        },
-        {
-          text: `@${userData.username}`,
-          style: 'p'
-        },
-        {
-          text: userData.type_user,
-          style: 'p'
-        },
-        {
-          text: userData.created_at,
-          style: 'p'
-        },
-        {
-          text: userData.description,
-          style: 'p'
-        }
-      ],
-      internalLink: null,
-      externalLink: null
-    }
+  newPublicationHandler(event) {
+    console.log(event);
   }
 
   favoriteEventHandler(event) {
@@ -175,19 +146,24 @@ export class ProfileViewComponent implements OnInit {
     this.router.navigateByUrl(`/post/${event.publicationId}`)
   }
 
-  updatePublicationForm(username) {
-    let userData = this.session.get_userdata();
-    if(userData) {
-      if(userData.username == username) {
-        this.displayPublicationForm = true;
-        return;
-      }
-    }
-    this.displayPublicationForm = false;
+  shareEventHandler(event) {
+    console.log(event)
   }
 
-  newPublicationHandler(event) {
-    console.log(event);
+  openPreferences() {
+    console.log(this.groupPreferences)
+    const dialogRef = this.dialog.open(GroupPreferencesComponent, {
+      width: '400px',
+      data: this.groupPreferences.clone()
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('dialog was closed');
+      console.log(result);
+      if(result) {
+        this.groupPreferences = result;
+      }
+    })
   }
 
 }

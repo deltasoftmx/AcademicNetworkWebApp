@@ -50,12 +50,11 @@ y dos botones (izquierdo y derecho) que que sirven para preguntar algo al usuari
 
 ### ElementCard
 
-**Descripción**: Se encarga de imprimir una tarjeta de elemento con un icono y un nombre. Se pueden modificar
-los valores mediante las propiedades Input icon y name.
+**Descripción**: Se encarga de imprimir una tarjeta de elemento con un icono y una lista de textos.
 
 **Entradas**:
-* `icon`: El nombre del icono. String.
-* `name`: El nombre para representar al icono. String.
+* `defaultIcon`: `string` La imágen por defecto que se mostrará en caso de no proveer una imagen en el objeto card.
+* `card`: `ElementCard` La información del card.
 
 **Salidas**: Ninguno.
 

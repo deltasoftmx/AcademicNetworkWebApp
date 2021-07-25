@@ -42,10 +42,24 @@
   <mat-menu #menu="matMenu">
     <!--Los siguientes botones deben ser editados para enlazar a las
     vistas correspondientes usando routerLink.-->
-    <button mat-menu-item (click) = "goMyProfile()">Perfil</button>
-    <button mat-menu-item>Editar perfil</button>
-    <button mat-menu-item>Crear grupo</button>
-    <button mat-menu-item (click) = "endSession()">Cerrar sesión</button>
+    <button mat-menu-item
+      (click) = "goMyProfile()">
+        <mat-icon>person</mat-icon>
+        <span>Perfil</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>manage_accounts</mat-icon>
+      <span>Editar perfil</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>group_add</mat-icon>
+      <span>Crear grupo</span>
+    </button>
+    <button mat-menu-item
+      (click) = "endSession()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar sesión</span>
+    </button>
   </mat-menu>
 
   <mat-menu #notifications="matMenu">
@@ -84,7 +98,7 @@
       mat-button
       class="sidenav-btn"
       (click)="drawer.toggle()"
-      routerLink="/available-groups">
+      routerLink="/group/available">
         <mat-icon>supervisor_account</mat-icon> GRUPOS
     </button>
 
@@ -93,7 +107,7 @@
       mat-button
       class="sidenav-btn"
       (click)="drawer.toggle()"
-      routerLink="/my-groups">
+      routerLink="/group/mine">
         <mat-icon>supervisor_account</mat-icon> MIS GRUPOS
     </button>
 

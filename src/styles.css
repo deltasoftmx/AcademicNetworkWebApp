@@ -66,6 +66,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top: 15px;
 }
 
+.global-menu-container {
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+}
+
+@media (max-width: 450px) {
+  .global-menu-container {
+    right: 15px;
+    bottom: 70px;
+  }
+}
+
 @media (max-width: 540px) {
   .global-publication-container {
     width: 100%;

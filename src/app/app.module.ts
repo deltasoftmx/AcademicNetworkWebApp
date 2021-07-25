@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewsModule } from './modules/views/views.module';
 import { HttpClientModule } from '@angular/common/http';
+import { GroupPreferencesComponent } from './modules/dialogs/group-preferences/group-preferences.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GroupPreferencesComponent
   ],
   imports: [
     BrowserModule,

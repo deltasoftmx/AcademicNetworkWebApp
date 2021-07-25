@@ -133,7 +133,9 @@ export class LoginComponent implements OnInit {
           text: `@${userData.username}`,
           style: 'p'
         }
-      ]
+      ],
+      internalLink: null,
+      externalLink: null
     }
   }
 

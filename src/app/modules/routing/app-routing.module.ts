@@ -11,13 +11,12 @@ import { UserFeedComponent } from '../views/user-feed/user-feed.component';
 import { PostDetailsComponent } from '../views/post-details/post-details.component';
 import { FavoritePostsComponent } from '../views/favorite-posts/favorite-posts.component';
 import { ProfileViewComponent } from '../views/profile-view/profile-view.component';
+import { GroupComponent } from '../views/group/group.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'available-groups', component: AvailableGroupsComponent },
-  { path: 'my-groups', component: MyGroupsComponent },
   { path: 'users', children: [
     { path: '', component: UsersComponent },
     { path: ':username', component: ProfileViewComponent }
@@ -28,6 +27,11 @@ const routes: Routes = [
   { path: 'post', children: [
     { path: 'favorites', component: FavoritePostsComponent },
     { path: ':id', component: PostDetailsComponent },
+  ] },
+  { path: 'group', children: [
+    { path: 'available', component: AvailableGroupsComponent },
+    { path: 'mine', component: MyGroupsComponent },
+    { path: ':id', component: GroupComponent }
   ] }
 ];
 
