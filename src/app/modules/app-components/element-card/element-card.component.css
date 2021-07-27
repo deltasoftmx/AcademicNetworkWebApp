@@ -14,3 +14,7 @@
   margin: auto;
   border-radius: 50%;
 }
+
+.clickeable:hover {
+  cursor: pointer;
+}

@@ -19,52 +19,72 @@ export class AvailableGroupsComponent implements OnInit {
     this.availableGroups = [
       {
         icon: 'https://rietveld-ict.nl/wp-content/uploads/2014/01/users.png',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/1111',
+        externalLink: null
       },
 
       {
         icon: 'https://juliocsantaman.com/assets/img/juliocsantaman.jpg',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/3123',
+        externalLink: null
       },
 
       {
         icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/4411',
+        externalLink: null
       },
 
       {
         icon: 'https://avatars1.githubusercontent.com/u/33400166?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/1133',
+        externalLink: null
       },
 
       {
         icon: 'https://avatars3.githubusercontent.com/u/67294504?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/5555',
+        externalLink: null
       },
 
       {
         icon: 'https://avatars2.githubusercontent.com/u/52019284?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/9838',
+        externalLink: null
       },
 
       {
         icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/1234',
+        externalLink: null
       },
 
       {
         icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/3987',
+        externalLink: null
       },
 
        {
         icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/1983',
+        externalLink: null
       },
 
       {
         icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
+        text: [{text: 'Nombre del grupo', style: 'h2'}],
+        internalLink: '/group/1334',
+        externalLink: null
       }
     ];
   }

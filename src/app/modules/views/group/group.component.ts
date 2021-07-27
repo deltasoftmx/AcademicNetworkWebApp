@@ -1,51 +1,68 @@
 import { Component, OnInit } from '@angular/core';
-import { ElementCard } from '../../classes/student.model';
 import { Publication } from '../../classes/publication.model';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { ElementCard } from '../../classes/student.model';
+import { MatDialog } from '@angular/material/dialog';
+import { GroupPreferences } from '../../classes/dialogs.model';
+import { GroupPreferencesComponent } from '../../dialogs/group-preferences/group-preferences.component';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
-import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 import { SessionService } from 'src/app/services/session/session.service';
+import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
+import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { GroupData } from '../../classes/academic-network.model';
 
 @Component({
-  selector: 'app-profile-view',
-  templateUrl: './profile-view.component.html',
-  styleUrls: ['./profile-view.component.css']
+  selector: 'app-group',
+  templateUrl: './group.component.html',
+  styleUrls: ['./group.component.css']
 })
-export class ProfileViewComponent implements OnInit {
+export class GroupComponent implements OnInit {
 
-  public user: ElementCard = new ElementCard();
-  public profileDefaultIcon: string = "/assets/account_circle-black-18dp.svg";
   public publications: Publication[] = [];
-  public displayPublicationForm: boolean;
+  public voidTimeline: boolean;
+  public groupCard: ElementCard = new ElementCard();
+  public defaultIcon: string = '/assets/people-black-18dp.svg';
+  public groupPreferences: GroupPreferences = new GroupPreferences(true);
+  public groupData: GroupData = new GroupData();
 
   constructor(
-    public router: Router,
-    private academicNetworkService: AcademicNetworkService,
+    private router: Router,
+    private dialog: MatDialog,
+    private academicNetwork: AcademicNetworkService,
+    private session: SessionService,
     private route: ActivatedRoute,
-    private notifications: NotificationsService,
-    private session: SessionService
+    private notifications: NotificationsService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      let username = params['username'];
-      this.academicNetworkService
-        .getUserPublicData(username)
-          .subscribe(res => {
-            console.log(res)
-            if(res.code == 0) {
-              this.setUserData(res.data);
-              this.updatePublicationForm(res.data.username);
-            } else if(res.code == 1) {
-              this.notifications.error(
-                'El usuario no existe.',
-                'Si llegasta hasta aquí a través de una URL,' +
-                ' revisa si el nombre de usario de la URL es correcto.');
-            }
-          });
-    });
+      let groupId = params['id'];
+      this.setGroupInformation(groupId);
+    })
 
-    this.publications = [
+    this.publications = this.getFakePosts();
+    this.groupCard = {
+      icon: '',
+      text: [
+        {
+          text: 'Data Engineering',
+          style: 'h2'
+        },
+        {
+          text: 'Python where we can, C++ where we must.',
+          style: 'p'
+        }
+      ],
+      internalLink: null,
+      externalLink: null
+    }
+
+    console.log(this.groupPreferences.clone())
+  }
+
+  getFakePosts() {
+    return [
       {
         id: 1112,
         user_id: 1256,
@@ -132,38 +149,8 @@ export class ProfileViewComponent implements OnInit {
     ];
   }
 
-  setUserData(userData) {
-    this.user = {
-      icon: userData.profile_img_src,
-      text: [
-        {
-          text: `${userData.firstname} ${userData.lastname}`,
-          style: 'h2'
-        },
-        {
-          text: userData.major,
-          style: 'p'
-        },
-        {
-          text: `@${userData.username}`,
-          style: 'p'
-        },
-        {
-          text: userData.type_user,
-          style: 'p'
-        },
-        {
-          text: userData.created_at,
-          style: 'p'
-        },
-        {
-          text: userData.description,
-          style: 'p'
-        }
-      ],
-      internalLink: null,
-      externalLink: null
-    }
+  newPublicationHandler(event) {
+    console.log(event);
   }
 
   favoriteEventHandler(event) {
@@ -175,19 +162,70 @@ export class ProfileViewComponent implements OnInit {
     this.router.navigateByUrl(`/post/${event.publicationId}`)
   }
 
-  updatePublicationForm(username) {
-    let userData = this.session.get_userdata();
-    if(userData) {
-      if(userData.username == username) {
-        this.displayPublicationForm = true;
-        return;
-      }
-    }
-    this.displayPublicationForm = false;
+  shareEventHandler(event) {
+    console.log(event)
   }
 
-  newPublicationHandler(event) {
-    console.log(event);
+  openPreferences() {
+    console.log(this.groupPreferences)
+    const dialogRef = this.dialog.open(GroupPreferencesComponent, {
+      width: '400px',
+      data: this.groupPreferences.clone()
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('dialog was closed');
+      console.log(result);
+      if(result) {
+        if(result.action == 'save-preferences') {
+          this.groupPreferences = result.data;
+        } else if(result.action == 'leave-group') {
+          //call api to leave the group.
+          //redirect to /group/available
+          alert('haz dejado el grupo');
+          this.router.navigateByUrl('/group/available');
+        }
+      }
+    })
+  }
+
+  setGroupInformation(groupId) {
+    this.academicNetwork.getGroupInformation(groupId)
+      .subscribe(data => {
+        if(data.code == 0) {
+          //Store group data
+          this.groupData = data.data.group_data;
+          //Set group card
+          this.groupCard.icon = data.data.group_data.group_image_src
+          this.groupCard.text = [
+            {
+              text: data.data.group_data.group_name,
+              style: 'h2'
+            },
+            {
+              text: data.data.group_data.group_description,
+              style: 'p'
+            },
+            {
+              text: moment(data.data.group_data.group_created_at).format('MMMM DD, YYYY'),
+              style: 'p'
+            }
+          ];
+        } else if(data.code == 1) {
+          this.notifications.error(
+            'Grupo no encontrado',
+            'Lo sentimos, el grupo al que estás intentando acceder no existe.'
+          );
+        }
+      })
+  }
+
+  isUserOwner() {
+    let userData = this.session.get_userdata()
+    if(userData.username == this.groupData.owner_username) {
+      return true;
+    }
+    return false;
   }
 
 }

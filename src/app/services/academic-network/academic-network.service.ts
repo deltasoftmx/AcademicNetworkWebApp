@@ -124,8 +124,6 @@ export class AcademicNetworkService {
       'Authorization': this.session.getToken()
     });
 
-
-
     let params = new HttpParams()
       .set('offset', offset.toString())
       .set('page', page.toString());
@@ -135,6 +133,20 @@ export class AcademicNetworkService {
       { headers: headers, params: params })
         .pipe(catchError(
           this.handleError<ans.Response<ans.UserTimeline>>('Get User User Timeline')));
+  }
+
+  getGroupInformation(groupId): Observable<ans.Response<ans.GroupInformation>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json',
+      'Authorization': this.session.getToken()
+    });
+
+    return this.http.get<ans.Response<ans.GroupInformation>>(
+      `${domain}/v1/api/social-network/groups/group/${groupId}/information`,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.GroupInformation>>('Get Group Information')));
   }
 
 }

@@ -15,6 +15,7 @@ import { UserFeedComponent } from './user-feed/user-feed.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { FavoritePostsComponent } from './favorite-posts/favorite-posts.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { GroupComponent } from './group/group.component';
 
 
 
@@ -31,6 +32,7 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
     PostDetailsComponent,
     FavoritePostsComponent,
     ProfileViewComponent,
+    GroupComponent,
   ],
   imports: [
     //MaterialModule,

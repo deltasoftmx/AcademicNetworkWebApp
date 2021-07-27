@@ -22,4 +22,6 @@ export class TextFormat {
 export class ElementCard {
   icon: string;
   text: TextFormat[];
+  internalLink: string;
+  externalLink: string;
 }

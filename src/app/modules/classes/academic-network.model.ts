@@ -33,3 +33,32 @@ export class UserTimeline {
   posts: Publication[];
   total_records: number;
 }
+
+export class GroupTag {
+  tag: string;
+}
+
+export class GroupPermission {
+  id: number;
+  name: string;
+  codename: string;
+  granted: number;
+}
+
+export class GroupData {
+  owner_firstname: string;
+  owner_lastname: string;
+  owner_username: string;
+  owner_profile_img_src: string;
+  group_name: string;
+  group_image_src: string;
+  group_description: string;
+  group_visibility: string;
+  group_created_at: string;
+}
+
+export class GroupInformation {
+  group_data: GroupData;
+  permissions: GroupPermission[];
+  tags: GroupTag[];
+}
