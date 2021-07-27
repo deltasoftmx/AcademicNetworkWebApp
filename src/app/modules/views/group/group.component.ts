@@ -5,6 +5,12 @@ import { ElementCard } from '../../classes/student.model';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupPreferences } from '../../classes/dialogs.model';
 import { GroupPreferencesComponent } from '../../dialogs/group-preferences/group-preferences.component';
+import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
+import { SessionService } from 'src/app/services/session/session.service';
+import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
+import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { GroupData } from '../../classes/academic-network.model';
 
 @Component({
   selector: 'app-group',
@@ -18,13 +24,23 @@ export class GroupComponent implements OnInit {
   public groupCard: ElementCard = new ElementCard();
   public defaultIcon: string = '/assets/people-black-18dp.svg';
   public groupPreferences: GroupPreferences = new GroupPreferences(true);
+  public groupData: GroupData = new GroupData();
 
   constructor(
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private academicNetwork: AcademicNetworkService,
+    private session: SessionService,
+    private route: ActivatedRoute,
+    private notifications: NotificationsService
   ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      let groupId = params['id'];
+      this.setGroupInformation(groupId);
+    })
+
     this.publications = this.getFakePosts();
     this.groupCard = {
       icon: '',
@@ -161,9 +177,55 @@ export class GroupComponent implements OnInit {
       console.log('dialog was closed');
       console.log(result);
       if(result) {
-        this.groupPreferences = result;
+        if(result.action == 'save-preferences') {
+          this.groupPreferences = result.data;
+        } else if(result.action == 'leave-group') {
+          //call api to leave the group.
+          //redirect to /group/available
+          alert('haz dejado el grupo');
+          this.router.navigateByUrl('/group/available');
+        }
       }
     })
+  }
+
+  setGroupInformation(groupId) {
+    this.academicNetwork.getGroupInformation(groupId)
+      .subscribe(data => {
+        if(data.code == 0) {
+          //Store group data
+          this.groupData = data.data.group_data;
+          //Set group card
+          this.groupCard.icon = data.data.group_data.group_image_src
+          this.groupCard.text = [
+            {
+              text: data.data.group_data.group_name,
+              style: 'h2'
+            },
+            {
+              text: data.data.group_data.group_description,
+              style: 'p'
+            },
+            {
+              text: moment(data.data.group_data.group_created_at).format('MMMM DD, YYYY'),
+              style: 'p'
+            }
+          ];
+        } else if(data.code == 1) {
+          this.notifications.error(
+            'Grupo no encontrado',
+            'Lo sentimos, el grupo al que estás intentando acceder no existe.'
+          );
+        }
+      })
+  }
+
+  isUserOwner() {
+    let userData = this.session.get_userdata()
+    if(userData.username == this.groupData.owner_username) {
+      return true;
+    }
+    return false;
   }
 
 }

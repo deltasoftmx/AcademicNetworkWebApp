@@ -18,7 +18,22 @@ export class GroupPreferencesComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      action: 'cancel'
+    });
+  }
+
+  apply(): void {
+    this.dialogRef.close({
+      action: 'save-preferences',
+      data: this.data
+    })
+  }
+
+  leaveGroup(): void {
+    this.dialogRef.close({
+      action: 'leave-group'
+    });
   }
 
 }

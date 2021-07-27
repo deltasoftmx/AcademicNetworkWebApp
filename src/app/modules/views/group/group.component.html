@@ -36,9 +36,10 @@
       <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>settings</mat-icon>
-      <span>Configuración</span>
+    <button mat-menu-item
+      *ngIf = "isUserOwner()">
+        <mat-icon>settings</mat-icon>
+        <span>Configuración</span>
     </button>
     <button mat-menu-item
       (click) = "openPreferences()">
