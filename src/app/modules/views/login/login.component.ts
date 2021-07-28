@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../../services/session/session.service';
 import { Router } from '@angular/router';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
-import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { PopupsService } from 'src/app/services/popups/popups.service';
 import { ElementCard } from '../../classes/student.model';
 
 @Component({
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private session: SessionService,
     private router: Router,
     private academicNetwork: AcademicNetworkService,
-    private notifications: NotificationsService
+    private popups: PopupsService
   ) { }
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
             this.set_form_visibility('username', 'hide');
             this.set_form_visibility('passwd', 'show');
           } else if(res.code == 1) {
-            this.notifications.error(
+            this.popups.error(
               'Usuario no encontrado',
               'Es probable que no hayas escrito bien tu usuario o email. Intenta de nuevo.',
               'Prueba con tu matrícula o correo institucional.');
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
             this.session.set_userdata('profile_img_src', res.data.profile_img_src);
             this.router.navigateByUrl('/user-feed');
           } else if(res.code == 1) {
-            this.notifications.error(
+            this.popups.error(
               'Credenciales incorrectas',
               'Revisa si tu usuario y contraseña son correctos.',
               '¿Seguro que el usuario que introdujiste es tuyo?');
