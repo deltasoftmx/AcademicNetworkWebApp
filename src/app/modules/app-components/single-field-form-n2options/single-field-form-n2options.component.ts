@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NotificationsService } from '../../../services/notifications/notifications.service';
+import { PopupsService } from 'src/app/services/popups/popups.service';
 
 @Component({
   selector: 'app-single-field-form-n2options',
@@ -19,7 +19,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
 
   @Output('btn-pressed') btn_pressed: EventEmitter<any> = new EventEmitter();
 
-  constructor(private notifService: NotificationsService) { }
+  constructor(private popups: PopupsService) { }
 
   ngOnInit(): void {
   }
@@ -37,7 +37,7 @@ export class SingleFieldFormN2optionsComponent implements OnInit {
     //Evitar la ejecución del flujo si el campo es
     //requerido y está vacío.
     if(!val && this.isreq && (btn == this.forward_btn || btn == 'return')) {
-      this.notifService.error('Error', `El campo ${this.label} es requerido.`, this.footer);
+      this.popups.error('Error', `El campo ${this.label} es requerido.`, this.footer);
       return;
     }
 

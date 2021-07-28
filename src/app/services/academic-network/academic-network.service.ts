@@ -7,6 +7,7 @@ import { apikey, domain} from '../../../environments/environment';
 import * as ans from '../../modules/classes/academic-network.model';
 import { SessionService } from '../session/session.service';
 import { Publication } from 'src/app/modules/classes/publication.model';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AcademicNetworkService {
 
   constructor(
     private http: HttpClient,
-    private session: SessionService
+    private session: SessionService,
+    private notifications: NotificationsService
   ) { }
 
   private handleError<T>(operation) {
@@ -25,6 +27,7 @@ export class AcademicNetworkService {
       if (error.status === 0) {
         // A client-side or network error occurred. Handle it accordingly.
         console.error('An error occurred:', error.error);
+        this.notifications.error('Error', 'Oops. Parece haber un problema de red.');
       } else {
         // The backend returned an unsuccessful response code.
         // The response body may contain clues as to what went wrong.
@@ -33,6 +36,50 @@ export class AcademicNetworkService {
         // TODO: better job of transforming error for user consumption
         console.log(
           `${operation} failed: ${error.message}`);
+        let nofitOptions = { disableTimeOut: true }
+        switch(error.error.code) {
+          case -2: //User token expired.
+            this.notifications.warning(
+              'Advertencia',
+              'Tu sesión ha expirado. Vuelve a iniciar sesión.',
+              nofitOptions);
+            break;
+          case -3: //User authentication (token) not valid.
+            this.notifications.error(
+              'Error',
+              'Qué pena. :c El identificador de sesión no es válido. ' +
+              'No te preocupes, no es tu culpa. ' +
+              'Por favor, reporta este error.',
+              nofitOptions);
+            break;
+          case -4: //Application not allowed to use the service.
+            this.notifications.error(
+              'Error',
+              'Qué pena. :c Esta aplicación no esta autorizada para usar el sistema. ' +
+              'No te preocupes, no es tu culpa. ' +
+              'Por favor, reporta este error.',
+              nofitOptions);
+            break;
+          case -5: //An unknown error. Check log/crash_reports.log and API log files to see what happened.
+            this.notifications.error(
+              'Error',
+              'Qué pena, algo extraño paso. :c No te preocupes, no es tu culpa. ' +
+              'Por favor, reporta este error.',
+              nofitOptions);
+            break;
+          case 1000: //RSA keys were not found when trying to sign o verify a token.
+            this.notifications.error(
+              'Error fatal',
+              'Qué pena, algo no está bien. :c No te preocupes, no es tu culpa. ' +
+              'Por favor, reporta el siguiente código de error: 1000.');
+            break;
+          case 1001: //Cloudinary credentials were not found when trying to use endpoints which use Cloudinary services.
+            this.notifications.error(
+              'Error fatal',
+              'Qué pena, algo no está bien. :c No te preocupes, no es tu culpa. ' +
+              'Por favor, reporta el siguiente código de error: 1001.');
+            break;
+        }
       }
 
       // Let the app keep running by returning an empty result.

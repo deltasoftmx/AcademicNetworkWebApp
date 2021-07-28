@@ -3,7 +3,7 @@ import { ElementCard } from '../../classes/student.model';
 import { Publication } from '../../classes/publication.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
-import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { PopupsService } from 'src/app/services/popups/popups.service';
 import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class ProfileViewComponent implements OnInit {
     public router: Router,
     private academicNetworkService: AcademicNetworkService,
     private route: ActivatedRoute,
-    private notifications: NotificationsService,
+    private popups: PopupsService,
     private session: SessionService
   ) { }
 
@@ -37,7 +37,7 @@ export class ProfileViewComponent implements OnInit {
               this.setUserData(res.data);
               this.updatePublicationForm(res.data.username);
             } else if(res.code == 1) {
-              this.notifications.error(
+              this.popups.error(
                 'El usuario no existe.',
                 'Si llegasta hasta aquí a través de una URL,' +
                 ' revisa si el nombre de usario de la URL es correcto.');

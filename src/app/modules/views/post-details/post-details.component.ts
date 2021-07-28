@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Publication, Comment } from '../../classes/publication.model';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
+import { PopupsService } from 'src/app/services/popups/popups.service';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class PostDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private academicNetwork: AcademicNetworkService,
-    private notification: NotificationsService
+    private popups: PopupsService,
+    private notifications: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class PostDetailsComponent implements OnInit {
 
   handlerForMoreComments(event) {
     console.log('more comments')
-    this.setComments();
+    this.setComments(true);
   }
 
   favoriteEventHandler(event) {
@@ -74,22 +76,22 @@ export class PostDetailsComponent implements OnInit {
         if(res.code == 0) {
           this.publication = res.data;
         } else if(res.code == 1) {
-          this.notification.error(
+          this.popups.error(
             'No autenticado',
             'Lo sentimo. Debes iniciar sesión para ver esta publicación.');
         } else if(res.code == 2) {
-          this.notification.error(
+          this.popups.error(
             'No autorizado',
             'Lo sentimos. Esta publicación es de un grupo privado del que no eres parte. :c');
         } else if(res.code == 3) {
-          this.notification.error(
+          this.popups.error(
             'No encontrado',
             'Lo sentimos. La publicación que solicitas no existe. :c');
         }
       })
   }
 
-  setComments() {
+  setComments(showNotif = false) {
     this.academicNetwork.getCommentsOfPost(
       this.postId,
       this.size,
@@ -102,7 +104,10 @@ export class PostDetailsComponent implements OnInit {
             if(!res.data.comments.length) {
               //all comments gotten
               this.page--;
-              alert('ya son todos');
+              if(showNotif) {
+                console.log('Notifications should be displayed')
+                this.notifications.info('Comentarios', 'No hay más comentarios');
+              }
             }
           }
         })

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewsModule } from './modules/views/views.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 import { GroupPreferencesComponent } from './modules/dialogs/group-preferences/group-preferences.component';
 
 @NgModule({
@@ -18,7 +19,11 @@ import { GroupPreferencesComponent } from './modules/dialogs/group-preferences/g
     AppRoutingModule,
     BrowserAnimationsModule,
     ViewsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 6000,
+      positionClass: 'toast-top-right',
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

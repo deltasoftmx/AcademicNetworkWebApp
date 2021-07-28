@@ -9,7 +9,7 @@ import { AcademicNetworkService } from 'src/app/services/academic-network/academ
 import { SessionService } from 'src/app/services/session/session.service';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { PopupsService } from 'src/app/services/popups/popups.service';
 import { GroupData } from '../../classes/academic-network.model';
 
 @Component({
@@ -32,7 +32,7 @@ export class GroupComponent implements OnInit {
     private academicNetwork: AcademicNetworkService,
     private session: SessionService,
     private route: ActivatedRoute,
-    private notifications: NotificationsService
+    private popups: PopupsService
   ) { }
 
   ngOnInit(): void {
@@ -212,7 +212,7 @@ export class GroupComponent implements OnInit {
             }
           ];
         } else if(data.code == 1) {
-          this.notifications.error(
+          this.popups.error(
             'Grupo no encontrado',
             'Lo sentimos, el grupo al que estás intentando acceder no existe.'
           );
