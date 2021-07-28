@@ -18,3 +18,7 @@
 .like-counter {
   display: inline;
 }
+
+.clickeable:hover {
+  cursor: pointer;
+}

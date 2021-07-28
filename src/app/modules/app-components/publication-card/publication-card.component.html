@@ -11,12 +11,17 @@
       mat-card-avatar
       [src]="defaultImageProfile"
       [alt]="altProfileImg">
-    <mat-card-title>
+    <mat-card-title (click) = "goToProfile(username)" class="clickeable">
       {{profileName}}
       <mat-card-subtitle class="usrname">@{{username}}</mat-card-subtitle>
     </mat-card-title>
-    <mat-card-subtitle *ngIf = "groupName">@{{groupName}}</mat-card-subtitle>
-    <mat-card-subtitle>{{createdAt}}</mat-card-subtitle>
+    <mat-card-subtitle
+      *ngIf = "groupName"
+      class="clickeable"
+      (click)="goToGroup(groupId)">
+        @{{groupName}}
+    </mat-card-subtitle>
+    <mat-card-subtitle>{{dateFormat(createdAt)}}</mat-card-subtitle>
     <span class="separator"></span>
   </mat-card-header>
     <img mat-card-image
@@ -38,12 +43,17 @@
         mat-card-avatar
         [src]="defaultImageProfile"
         [alt]="altProfileImg">
-      <mat-card-title>
+      <mat-card-title (click)="goToProfile(subUsername)" class="clickeable">
         {{subProfileName}}
         <mat-card-subtitle class="usrname">@{{subUsername}}</mat-card-subtitle>
       </mat-card-title>
-      <mat-card-subtitle *ngIf = "subGroupName">@{{subGroupName}}</mat-card-subtitle>
-      <mat-card-subtitle>{{subCreatedAt}}</mat-card-subtitle>
+      <mat-card-subtitle
+        *ngIf = "subGroupName"
+        (click)="goToGroup(subGroupId)"
+        class="clickeable">
+          @{{subGroupName}}
+      </mat-card-subtitle>
+      <mat-card-subtitle>{{dateFormat(subCreatedAt)}}</mat-card-subtitle>
       <span class="separator"></span>
     </mat-card-header>
     <img mat-card-image

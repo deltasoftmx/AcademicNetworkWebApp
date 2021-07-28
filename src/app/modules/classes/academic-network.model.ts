@@ -1,4 +1,4 @@
-import { Publication } from "./publication.model";
+import { Publication, Comment } from "./publication.model";
 
 export class Response<T> {
   code: number;
@@ -61,4 +61,9 @@ export class GroupInformation {
   group_data: GroupData;
   permissions: GroupPermission[];
   tags: GroupTag[];
+}
+
+export class CommentsOfPost {
+  comments: Comment[];
+  total_records: number;
 }
