@@ -2,20 +2,24 @@
   <!-- Renderización de comentarios -->
   <div *ngFor = "let c of comments">
     <mat-card-header>
-      <img mat-card-avatar 
-        [src]="c.profile_image_src" 
+      <img mat-card-avatar
+        [src]="c.profile_image_src || profileDefaultIcon"
         [alt]="c.firstname + ' ' + c.lastname" >
-      <mat-card-title>{{c.firstname}} {{c.lastname}}</mat-card-title>
-      <mat-card-subtitle>Publicado en: {{c.created_at}}</mat-card-subtitle>
+      <mat-card-title
+        (click) = "goToProfile(c.username)"
+        class="clickeable">
+          {{c.firstname}} {{c.lastname}}
+      </mat-card-title>
+      <mat-card-subtitle>Publicado en: {{dateFormat(c.created_at)}}</mat-card-subtitle>
       <br>
     </mat-card-header>
     <mat-card-content>
       <p *ngFor="let p of adjustTextOfComment(c.content)">{{p}}</p>
       <!-- <p>{{c.content}}</p> -->
     </mat-card-content>
-    <img mat-card-image 
-      [src]="c.image_src" 
-      alt="Imágen no disponible por el momento." 
+    <img mat-card-image
+      [src]="c.image_src"
+      alt="Imágen no disponible por el momento."
       *ngIf = "c.image_src">
     <hr>
   </div>
@@ -23,7 +27,7 @@
   <mat-card-actions class="global-text-right">
     <button mat-button (click) = "handlerForSeeMoreComments()">Ver más comentarios</button>
   </mat-card-actions>
-  
+
   <!-- Creación de nuevos comentarios -->
   <app-text-and-image-form
     class = "comment-field"

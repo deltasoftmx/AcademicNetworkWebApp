@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Comment } from '../../classes/publication.model'
 import { StringFormatService } from '../../../services/string-format/string-format.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comment-box',
@@ -13,8 +14,16 @@ export class CommentBoxComponent implements OnInit {
   @Output() moreComments: EventEmitter<any> = new EventEmitter();
   @Output() newComment: EventEmitter<any> = new EventEmitter();
   public _focusInput: number;
+  public profileDefaultIcon: string = '/assets/account_circle-black-18dp.svg';
 
-  constructor(public stringFormat: StringFormatService) { }
+  constructor(
+    public stringFormat: StringFormatService,
+    private router: Router
+  ) { }
+
+  @Input() set focusInput(val) {
+    this._focusInput = val;
+  }
 
   ngOnInit(): void {
   }
@@ -31,8 +40,12 @@ export class CommentBoxComponent implements OnInit {
     this.newComment.emit(event)
   }
 
-  @Input() set focusInput(val) {
-    this._focusInput = val;
+  dateFormat(date) {
+    return this.stringFormat.dateFormat(date);
+  }
+
+  goToProfile(username) {
+    this.router.navigateByUrl('/users/' + username);
   }
 
 }

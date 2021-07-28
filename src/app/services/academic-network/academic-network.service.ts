@@ -6,6 +6,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { apikey, domain} from '../../../environments/environment';
 import * as ans from '../../modules/classes/academic-network.model';
 import { SessionService } from '../session/session.service';
+import { Publication } from 'src/app/modules/classes/publication.model';
 
 @Injectable({
   providedIn: 'root'
@@ -147,6 +148,38 @@ export class AcademicNetworkService {
       { headers: headers })
         .pipe(catchError(
           this.handleError<ans.Response<ans.GroupInformation>>('Get Group Information')));
+  }
+
+  getPost(postId): Observable<ans.Response<Publication>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json',
+      'Authorization': this.session.getToken()
+    });
+
+    return this.http.get<ans.Response<Publication>>(
+      `${domain}/v1/api/social-network/posts/post/${postId}`,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<Publication>>('Get Post')));
+  }
+
+  getCommentsOfPost(postId, offset = 20, page = 0): Observable<ans.Response<ans.CommentsOfPost>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json',
+      'Authorization': this.session.getToken()
+    });
+
+    let params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('page', page.toString());
+
+    return this.http.get<ans.Response<ans.CommentsOfPost>>(
+      `${domain}/v1/api/social-network/posts/post/${postId}/comments`,
+      { headers: headers, params: params })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.CommentsOfPost>>('Get Comments of Post')));
   }
 
 }
