@@ -31,7 +31,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .global-container-bg-color {
-  background-color: rgb(230, 230, 230);
+  background-color: #FFF;
+}
+
+.global-main-bg-color {
+  background-color: rgb(240, 240, 240);
 }
 
 .global-main-title {
@@ -49,6 +53,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .global-card-element-container {
   margin: 0 auto 50px auto;
+  box-sizing: border-box;
   width: 70%;
   padding-bottom: 5%;
 }
@@ -91,4 +96,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-
+@media (max-width: 830px) {
+  .global-card-element-container {
+    width: 98%;
+  }
+}
