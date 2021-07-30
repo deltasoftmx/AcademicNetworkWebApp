@@ -1,23 +1,22 @@
 <div class="container global-flex-centering-container">
-  <div class="custom-container">
+  <div class="custom-wrapper">
     <h1 class="global-main-title ">Registrate</h1>
-    <div class="custom-container global-shadow global-container-bg-color">
+    <mat-card class="custom-container">
       <form [formGroup]="myForm" (submit) = "onSubmit($event)">
-
         <!-- Grupo: Nombre -->
         <div class="custom-sub-container group-name">
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Nombre *</mat-label>
             <input
-            matInput
-            name="firstname"
-            placeholder="Jhon"
-            formControlName="firstname">
-            <mat-icon matSuffix *ngIf="getError('firstname')">error_outline</mat-icon>
-            <mat-icon matSuffix *ngIf="!getError2('firstname')">check_circle_outline</mat-icon>
-            <mat-error *ngIf="getError('firstname')">
-              Solo se pueden poner letras (1 a 40 caracteres).
-            </mat-error>
+              matInput
+              name="firstname"
+              placeholder="Jhon"
+              formControlName="firstname">
+                <mat-icon matSuffix *ngIf="getError('firstname')">error_outline</mat-icon>
+                <mat-icon matSuffix *ngIf="!getError2('firstname')">check_circle_outline</mat-icon>
+                <mat-error *ngIf="getError('firstname')">
+                  Solo se pueden poner letras (1 a 40 caracteres).
+                </mat-error>
           </mat-form-field>
         </div>
 
@@ -26,15 +25,15 @@
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Apellidos *</mat-label>
             <input
-            matInput
-            name="lastname"
-            placeholder="Doe"
-            formControlName="lastname">
-            <mat-icon matSuffix *ngIf="getError('lastname')">error_outline</mat-icon>
-            <mat-icon matSuffix *ngIf="!getError2('lastname')">check_circle_outline</mat-icon>
-            <mat-error *ngIf="getError('lastname')">
-              Solo se pueden poner letras (1 a 40 caracteres).
-            </mat-error>
+              matInput
+              name="lastname"
+              placeholder="Doe"
+              formControlName="lastname">
+                <mat-icon matSuffix *ngIf="getError('lastname')">error_outline</mat-icon>
+                <mat-icon matSuffix *ngIf="!getError2('lastname')">check_circle_outline</mat-icon>
+                <mat-error *ngIf="getError('lastname')">
+                  Solo se pueden poner letras (1 a 40 caracteres).
+                </mat-error>
           </mat-form-field>
         </div>
 
@@ -43,15 +42,15 @@
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Correo institucional *</mat-label>
             <input
-            matInput
-            name="email"
-            placeholder="jhon.doe@gmail.com"
-            formControlName="email">
-            <mat-icon matSuffix *ngIf="getError('email')">error_outline</mat-icon>
-            <mat-icon matSuffix *ngIf="!getError2('email')">check_circle_outline</mat-icon>
-            <mat-error *ngIf="getError('email')">
-              Tienes que poner un correo válido.
-            </mat-error>
+              matInput
+              name="email"
+              placeholder="jhon.doe@gmail.com"
+              formControlName="email">
+                <mat-icon matSuffix *ngIf="getError('email')">error_outline</mat-icon>
+                <mat-icon matSuffix *ngIf="!getError2('email')">check_circle_outline</mat-icon>
+                <mat-error *ngIf="getError('email')">
+                  Tienes que poner un correo válido.
+                </mat-error>
           </mat-form-field>
         </div>
 
@@ -60,15 +59,15 @@
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Contraseña *</mat-label>
             <input
-            type="password"
-            matInput
-            name="passwd"
-            formControlName="passwd">
-            <mat-icon matSuffix *ngIf="getError('passwd')">error_outline</mat-icon>
-            <mat-icon matSuffix *ngIf="!getError2('passwd')">check_circle_outline</mat-icon>
-            <mat-error *ngIf="getError('passwd')">
-              La contraseña tiene que ser de 4 a 12 dígitos.
-            </mat-error>
+              type="password"
+              matInput
+              name="passwd"
+              formControlName="passwd">
+                <mat-icon matSuffix *ngIf="getError('passwd')">error_outline</mat-icon>
+                <mat-icon matSuffix *ngIf="!getError2('passwd')">check_circle_outline</mat-icon>
+                <mat-error *ngIf="getError('passwd')">
+                  La contraseña tiene que ser de 4 a 12 dígitos.
+                </mat-error>
           </mat-form-field>
         </div>
 
@@ -77,15 +76,15 @@
           <mat-form-field appearance="standard" class="custom-field">
             <mat-label>Confirmar contraseña *</mat-label>
             <input
-            type="password"
-            matInput
-            name="password2"
-            formControlName="password2">
-            <mat-icon matSuffix *ngIf="getError('password2') || getErrorPassword2()">error_outline</mat-icon>
-            <mat-icon matSuffix *ngIf="!getError2('password2') && !getErrorPassword2()">check_circle_outline</mat-icon>
-            <mat-error *ngIf="getError('password2')">
-              Este campo es requerido.
-            </mat-error>
+              type="password"
+              matInput
+              name="password2"
+              formControlName="password2">
+                <mat-icon matSuffix *ngIf="getError('password2') || getErrorPassword2()">error_outline</mat-icon>
+                <mat-icon matSuffix *ngIf="!getError2('password2') && !getErrorPassword2()">check_circle_outline</mat-icon>
+                <mat-error *ngIf="getError('password2')">
+                  Este campo es requerido.
+                </mat-error>
           </mat-form-field>
           <span class="password2-err" *ngIf="getError('password2') || getErrorPassword2()">
             Las contraseñas no coinciden.
@@ -128,6 +127,6 @@
         </div>
 
       </form>
-    </div>
+    </mat-card>
   </div>
 </div>

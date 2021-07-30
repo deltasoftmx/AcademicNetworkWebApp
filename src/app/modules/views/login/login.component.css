@@ -25,3 +25,14 @@ mat-icon {
   margin: auto;
   width: 400px;
 }
+
+.custom-form {
+  width: 400px;
+  margin: auto;
+}
+
+@media(max-width: 500px) {
+  .custom-form {
+    width: 100%;
+  }
+}
