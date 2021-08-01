@@ -6,13 +6,15 @@
   </app-element-card>
 
   <!-- Box to create publications -->
-  <app-text-and-image-form
-    *ngIf = "displayPublicationForm"
-    class = "publication-form"
-    textInputLabel = "Comparte algo con tus seguidores."
-    textInputPlaceholder = "Dí lo que necesites."
-    (newContent) = "newPublicationHandler($event)">
-  </app-text-and-image-form>
+  <mat-card class="publication-form-container">
+    <app-text-and-image-form
+      *ngIf = "displayPublicationForm"
+      class = "publication-form"
+      textInputLabel = "Comparte algo con tus seguidores."
+      textInputPlaceholder = "Dí lo que necesites."
+      (newContent) = "newPublicationHandler($event)">
+    </app-text-and-image-form>
+  </mat-card>
 
   <!-- Publication list -->
   <app-publication-display

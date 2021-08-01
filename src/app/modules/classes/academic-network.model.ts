@@ -38,10 +38,13 @@ export class GroupTag {
   tag: string;
 }
 
-export class GroupPermission {
+export class AvailableGroupPermission {
   id: number;
   name: string;
   codename: string;
+}
+
+export class GroupPermission extends AvailableGroupPermission {
   granted: number;
 }
 
@@ -66,4 +69,12 @@ export class GroupInformation {
 export class CommentsOfPost {
   comments: Comment[];
   total_records: number;
+}
+
+export class CreateGroup {
+  group_id: number;
+}
+
+export class GroupImage {
+  image_src: string;
 }

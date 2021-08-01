@@ -14,3 +14,10 @@ export class GroupPreferences {
     return newInstance;
   }
 }
+
+export class ImageSquareCropper {
+  public title: string;
+  public imageSelected: string;
+  public applyBtnDisabled: boolean;
+  public applyBtnLabel: string;
+}

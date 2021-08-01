@@ -25,6 +25,8 @@ Los datos que se deben incluir en la documentación de cada componente son:
 * [CommentBox](#commentBox)
 * [PublicationCard](#publicationCard)
 * [PublicationDisplay](#publicationdisplay)
+* [GroupSettings](#globalprogresscaractive)
+* [ImagePicker](#imagepicker)
 
 ### Single-Field Form n2options.
 
@@ -55,8 +57,11 @@ y dos botones (izquierdo y derecho) que que sirven para preguntar algo al usuari
 **Entradas**:
 * `defaultIcon`: `string` La imágen por defecto que se mostrará en caso de no proveer una imagen en el objeto card.
 * `card`: `ElementCard` La información del card.
+* `enableClickEvent`: `boolean` Por defecto `true`, sirve para que sin pasarle links, el card sea clickeable.
 
-**Salidas**: Ninguno.
+**Salidas**:
+* `clickOverCard`: `EventListener<Object>`
+  * `card`: `ElementCard` El card actual. Se dispara cuando se hace click sobre el card.
 
 **Selector**: `app-element-card`.
 
@@ -164,3 +169,82 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
   * `publicationId`: ID de la publicación compartida.
 
 **Selector**: `app-publication-display`.
+
+### GroupSettings
+
+**Descripción**:
+  Despluega un formulario, con validaciones por defecto o personalizables, útil para
+  recolectar información de configuración sobre los grupos.
+
+* **Entradas**:
+  * `formGroup`: `FormGroup`. 
+    Instancia con las validaciones para los campos de tipo `FormControl`.
+    Los campos tienen los siguiente nombres:
+      * `nameCtrl`: 
+        Control de tipo input text. El nombre del grupo.
+      * `descriptionCtrl`:
+        Control de tipo textarea. La descripción del grupo.
+      * `privacyCtrl`:
+        Control de tipo radio button. Si el grupo es público o provado.
+      * `tagCtrl`:
+        Las etiquetas para el grupo.
+  * `applyBtnLabel`: `string`.
+    El texto que muestro el botón para mandar la información
+    del formulario.
+  * `permissions`: `GroupPermission[]`.
+    Arreglo con los permisos disponibles para elegir.
+  * `btnDisabled`: `boolean`.
+    Si el botón para mandar los datos del formulario está desactivado.
+    Esta opción también afecta a los demás controles de formulario.
+
+* **Salidas**
+
+* `apply`:
+    Evento que se dispara cuando se presiona el botón para mandar
+    los datos del formulario.
+    * `invalid`: `boolean`.
+      Si el formulrio no pasa alguna de las validaciones.
+    * `invalidFields`: `string[]`.
+      El nombre de los controles que fallaron la validación.
+    * `formData`: `Object`.
+      * `nameCtrl`: `string`.
+        El nombre del grupo.
+      * `descriptionCtrl`: `string`.
+        La descripción del grupo.
+      * `privacyCtrl`: `string`.
+        Si el grupo es público o provado.
+      * `tagCtrl`: `GroupTag[]`.
+        Las etiquetas para el grupo.
+      * `permissions`: `GroupPermission[]`.
+        El estado de los permisos seleccionados.
+* **Selector**: `app-group-settings`.
+
+### ImagePicker
+
+**Descripción**:
+  Componente que descpliega un formulario para elegir una imagen de
+  cualquier dimencion y recortarla en un cuadrado para redondearla
+  y usarse como ícono.
+
+* **Entradas**:
+  * `formGroup`: `FormGroup`. 
+    Instancia con las validaciones para los campos de tipo `FormControl`.
+    Los campos tienen los siguiente nombres:
+      * `imageCtrl`: 
+        Control de tipo input file. La imagen a usar.
+  * `cropImageIndication`: `string`. 
+    Indicación que verá el usuario cuando tenga que recortar su imagen.
+    Por defecto `"Recorta tu imagen."`.
+  * `applyBtnLabel`: `string`.
+    El texto que muestro el botón para mandar la información
+    del formulario.
+  * `applyBtnDisabled`: `boolean`.
+    Si el botón para mandar los datos del formulario está desactivado.
+
+* **Salidas**
+
+* `apply`:
+    Evento que se dispara cuando se presiona el botón para recortar.
+    * `invalid`: `boolean`.
+    * `image`: `Blob`. La imagen recortada.
+* **Selector**: `app-image-picker`.

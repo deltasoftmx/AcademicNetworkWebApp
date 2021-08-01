@@ -21,6 +21,8 @@
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
+    "angular-cropperjs": "^1.0.2",
+    "cropperjs": "^1.5.12",
     "moment": "^2.29.1",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.5.5",

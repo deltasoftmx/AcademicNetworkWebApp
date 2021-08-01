@@ -12,6 +12,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 let modules = [
   MatToolbarModule,
@@ -26,7 +30,11 @@ let modules = [
   MatAutocompleteModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatStepperModule,
+  MatRadioModule,
+  MatChipsModule,
+  MatProgressBarModule
 ]
 
 
