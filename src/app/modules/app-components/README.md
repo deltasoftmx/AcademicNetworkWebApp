@@ -25,6 +25,7 @@ Los datos que se deben incluir en la documentación de cada componente son:
 * [CommentBox](#commentBox)
 * [PublicationCard](#publicationCard)
 * [PublicationDisplay](#publicationdisplay)
+* [GroupSettings](#globalprogresscaractive)
 
 ### Single-Field Form n2options.
 
@@ -164,3 +165,51 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
   * `publicationId`: ID de la publicación compartida.
 
 **Selector**: `app-publication-display`.
+
+### GroupSettings
+
+**Descripción**:
+  Despluega un formulario, con validaciones por defecto o personalizables, útil para
+  recolectar información de configuración sobre los grupos.
+
+* **Entradas**:
+  * `formGroup`: `FormGroup`. 
+    Instancia con las validaciones para los campos de tipo `FormControl`.
+    Los campos tienen los siguiente nombres:
+      * `nameCtrl`: 
+        Control de tipo input text. El nombre del grupo.
+      * `descriptionCtrl`:
+        Control de tipo textarea. La descripción del grupo.
+      * `privacyCtrl`:
+        Control de tipo radio button. Si el grupo es público o provado.
+      * `tagCtrl`:
+        Las etiquetas para el grupo.
+  * `applyBtnLabel`: `string`.
+    El texto que muestro el botón para mandar la información
+    del formulario.
+  * `permissions`: `GroupPermission[]`.
+    Arreglo con los permisos disponibles para elegir.
+  * `btnDisabled`: `boolean`.
+    Si el botón para mandar los datos del formulario está desactivado.
+
+* **Salidas**
+
+* `apply`:
+    Evento que se dispara cuando se presiona el botón para madnar
+    los datos del formulario.
+    * `invalid`: `boolean`.
+      Si el formulrio no pasa alguna de las validaciones.
+    * `invalidFields`: `string[]`.
+      El nombre de los controles que fallaron la validación.
+    * `formData`: `Object`.
+      * `nameCtrl`: `string`.
+        El nombre del grupo.
+      * `descriptionCtrl`: `string`.
+        La descripción del grupo.
+      * `privacyCtrl`: `string`.
+        Si el grupo es público o provado.
+      * `tagCtrl`: `GroupTag[]`.
+        Las etiquetas para el grupo.
+      * `permissions`: `GroupPermission[]`.
+        El estado de los permisos seleccionados.
+* **Selector**: `app-group-settings`.

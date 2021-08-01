@@ -34,7 +34,7 @@ export class AcademicNetworkService {
         console.error(
           `Backend returned code ${error.status}, body was: `, error.error);
         // TODO: better job of transforming error for user consumption
-        console.log(
+        console.error(
           `${operation} failed: ${error.message}`);
         let nofitOptions = { disableTimeOut: true }
         switch(error.error.code) {
@@ -227,6 +227,31 @@ export class AcademicNetworkService {
       { headers: headers, params: params })
         .pipe(catchError(
           this.handleError<ans.Response<ans.CommentsOfPost>>('Get Comments of Post')));
+  }
+
+  /**
+   *
+   * @param groupData Ab object containing:
+   * group_name: string. The name of the group.
+   * description: string. Group description, optional.
+   * visibility: string. If public or private. Posible values [public|private]
+   * permissions: Array<int>. An array of permission ids. See here to request available permissions.
+   * tags: Array<string>. An array of strings representing tags that will be used to appear in searches
+   * @returns Observable<ans.Response<ans.CreateGroup>>
+   */
+  createGroup(groupData): Observable<ans.Response<ans.CreateGroup>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json',
+      'Authorization': this.session.getToken()
+    });
+
+    return this.http.post<ans.Response<ans.CreateGroup>>(
+      `${domain}/v1/api/social-network/groups/create`,
+      groupData,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.CreateGroup>>('Create Group')));
   }
 
 }

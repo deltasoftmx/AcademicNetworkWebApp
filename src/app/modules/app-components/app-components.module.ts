@@ -10,6 +10,7 @@ import { PublicationCardComponent } from './publication-card/publication-card.co
 import { CommentBoxComponent } from './comment-box/comment-box.component';
 import { TextAndImageFormComponent } from './text-and-image-form/text-and-image-form.component';
 import { PublicationDisplayComponent } from './publication-display/publication-display.component';
+import { GroupSettingsComponent } from './group-settings/group-settings.component';
 
 let components = [
   SingleFieldFormN2optionsComponent,
@@ -18,7 +19,8 @@ let components = [
   PublicationCardComponent,
   CommentBoxComponent,
   TextAndImageFormComponent,
-  PublicationDisplayComponent
+  PublicationDisplayComponent,
+  GroupSettingsComponent
 ]
 
 let externalModules = [

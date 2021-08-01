@@ -6,12 +6,14 @@
   </app-element-card>
 
   <!-- Box to create publications -->
-  <app-text-and-image-form
-    class = "publication-form"
-    textInputLabel = "Comparte algo en el grupo."
-    textInputPlaceholder = "Dí lo que necesites."
-    (newContent) = "newPublicationHandler($event)">
-  </app-text-and-image-form>
+  <mat-card class="publication-form-container">
+    <app-text-and-image-form
+      class = "publication-form"
+      textInputLabel = "Comparte algo en el grupo."
+      textInputPlaceholder = "Dí lo que necesites."
+      (newContent) = "newPublicationHandler($event)">
+    </app-text-and-image-form>
+  </mat-card>
 
   <!-- Publication list -->
   <app-publication-display

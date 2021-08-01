@@ -27,6 +27,7 @@ Cada vista agregada debe ser documentada. Los datos que deben incluirse son:
 * [Post Details](#post-details)
 * [Favorite Posts](#favorite-posts)
 * [Profile view](#profile-view)
+* [Create New Group](#create-new-group)
 
 ### Login.
 
@@ -79,3 +80,9 @@ de los usuarios a los que sigue y la de los grupos a los que el usuario pertenec
 ### Profile view
 
 **Descripción**: Desplega la información pública del usuario y las publicaciones que éste ha hecho.
+
+### Create New Group
+
+**Descripción**: Vista para crear un nuevo grupo y establecer su imagen. En esta vista también se pude actualizar
+la información después de crear el grupo, siempre que la vista no se haya cerrado. Si la vista se cierra,
+ya no se podrá actualizar la información del grupo y se tendrá que usar la vista correspondiente para eso.

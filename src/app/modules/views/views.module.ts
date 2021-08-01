@@ -16,6 +16,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
 import { FavoritePostsComponent } from './favorite-posts/favorite-posts.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { GroupComponent } from './group/group.component';
+import { CreateNewGroupComponent } from './create-new-group/create-new-group.component';
 
 
 
@@ -33,6 +34,7 @@ import { GroupComponent } from './group/group.component';
     FavoritePostsComponent,
     ProfileViewComponent,
     GroupComponent,
+    CreateNewGroupComponent,
   ],
   imports: [
     //MaterialModule,

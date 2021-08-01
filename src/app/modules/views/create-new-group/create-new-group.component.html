@@ -1,0 +1,22 @@
+
+<mat-horizontal-stepper linear #stepper class="global-card-element-container">
+  <mat-step [stepControl]="groupSettingsFormGroup" label="Configura tu nuevo grupo">
+    <app-group-settings
+      [formGroup]="groupSettingsFormGroup"
+      [applyBtnLabel]="createGroupforwardBtnLabel"
+      [btnDisabled] = "createGroupForwardBtnDisabled"
+      (apply)="applyHandler($event)">
+    </app-group-settings>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Elige la imagen de tu grupo">
+    <!-- For image update -->
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
