@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ElementCard } from '../../classes/student.model';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,8 @@ export class ElementCardComponent implements OnInit {
 
   @Input() defaultIcon: string;
   @Input() card: ElementCard;
+  @Input() enableClickEvent: boolean = false;
+  @Output() clickOverCard: EventEmitter<any> = new EventEmitter<any>();
   public activeClasses: string = 'card';
 
   constructor(
@@ -18,7 +20,7 @@ export class ElementCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.isClickeable()) {
+    if(this.isClickeable() || this.enableClickEvent) {
       this.activeClasses += ' clickeable';
     }
   }
@@ -34,6 +36,10 @@ export class ElementCardComponent implements OnInit {
       } else if(this.card.externalLink) {
         window.open(this.card.externalLink, '_blank');
       }
+    } else if(this.enableClickEvent) {
+      this.clickOverCard.emit({
+        card: this.card
+      });
     }
   }
 

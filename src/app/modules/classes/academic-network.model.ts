@@ -74,3 +74,7 @@ export class CommentsOfPost {
 export class CreateGroup {
   group_id: number;
 }
+
+export class GroupImage {
+  image_src: string;
+}

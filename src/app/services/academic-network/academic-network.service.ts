@@ -254,4 +254,21 @@ export class AcademicNetworkService {
           this.handleError<ans.Response<ans.CreateGroup>>('Create Group')));
   }
 
+  updateGroupImage(groupId, image): Observable<ans.Response<ans.GroupImage>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Authorization': this.session.getToken()
+    });
+
+    let groupData = new FormData();
+    groupData.append('image', image);
+
+    return this.http.put<ans.Response<ans.GroupImage>>(
+      `${domain}/v1/api/social-network/groups/group/${groupId}/update-image`,
+      groupData,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.GroupImage>>('Update Group Image')));
+  }
+
 }

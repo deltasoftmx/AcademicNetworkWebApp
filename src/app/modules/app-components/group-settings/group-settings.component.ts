@@ -22,7 +22,6 @@ export class GroupSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     if(!this.groupSettingsFormGroup) {
-      console.log('form group not provided')
       this.groupSettingsFormGroup = this._formBuilder.group({
         nameCtrl: ['', Validators.required],
         descriptionCtrl: ['', Validators.required],

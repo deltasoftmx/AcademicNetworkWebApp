@@ -5,6 +5,7 @@ import { AcademicNetworkService } from 'src/app/services/academic-network/academ
 import { SessionService } from 'src/app/services/session/session.service';
 import { Router } from '@angular/router';
 import { AnimationsService } from 'src/app/services/animations/animations.service';
+import { ElementCard } from '../../classes/student.model';
 
 @Component({
   selector: 'app-create-new-group',
@@ -13,11 +14,15 @@ import { AnimationsService } from 'src/app/services/animations/animations.servic
 })
 export class CreateNewGroupComponent implements OnInit {
   public groupSettingsFormGroup: FormGroup;
-  public secondFormGroup: FormGroup;
+  public imageFormGroup: FormGroup;
   public groupCreatedFlag: boolean = false;
   public groupId: number;
   public createGroupForwardBtnDisabled: boolean = false;
   public createGroupforwardBtnLabel: string = 'Crear grupo';
+  public applyImageBtnDisabled: boolean = true;
+  public imageUpdateFinished: boolean = false;
+  public imageUpdatingOk: boolean = false;
+  public groupCard: ElementCard = new ElementCard();
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -39,9 +44,13 @@ export class CreateNewGroupComponent implements OnInit {
       privacyCtrl: ['', Validators.required],
       tagCtrl: ['', Validators.required]
     });
+
+    this.imageFormGroup = this._formBuilder.group({
+      imageCtrl: ['', Validators.required]
+    })
   }
 
-  applyHandler(event) {
+  applySettingsHandler(event) {
     this.createGroupForwardBtnDisabled = true;
     if(!event.invalid) {
       //valid
@@ -84,6 +93,8 @@ export class CreateNewGroupComponent implements OnInit {
           if(res.code == 0) {
             this.groupCreatedFlag = true;
             this.groupId = res.data.group_id;
+            this.applyImageBtnDisabled = false;
+            this.setGroupCardInfo();
             this.notifications.success('Éxito', 'Tu grupo se ha crado correctamente.');
             this.createGroupforwardBtnLabel = 'Aplicar cambios';
           } else if(res.code == 1) {
@@ -94,6 +105,7 @@ export class CreateNewGroupComponent implements OnInit {
         });
     } else{
       //invalid
+      this.createGroupForwardBtnDisabled = false;
       this.notifications.error(
         'Los siguientes campos son requeridos',
         this.prettyFieldNames(event.invalidFields).join(', '));
@@ -122,5 +134,49 @@ export class CreateNewGroupComponent implements OnInit {
     }
 
     return fields;
+  }
+
+  applyImageHandler(event) {
+    console.log(event)
+    if(event.invalid) {
+      this.notifications.error('Imagen faltante', 'Debes elegir una imagen.');
+      return;
+    }
+
+    this.applyImageBtnDisabled = true;
+    this.animations.globalProgressBarActive = true;
+    this.academicNetwork.updateGroupImage(this.groupId, event.image)
+      .subscribe(res => {
+        this.applyImageBtnDisabled = false;
+        this.animations.globalProgressBarActive = false;
+        this.imageUpdateFinished = true;
+        console.log(res)
+        if(res.code == 0) {
+          this.imageUpdatingOk = true;
+          this.groupCard.icon = res.data.image_src;
+          this.notifications.success('Éxito', 'La imagen ha sido actualizada.');
+        } else if(res.code == 1) {
+          this.notifications.error('Error', 'El grupo no existe.');
+        } else if(res.code == 2) {
+          this.notifications.error('Permiso denegado', 'No eres el propierario del grupo.');
+        }
+      });
+  }
+
+  goToView(viewName) {
+    switch(viewName) {
+      case 'group':
+        this.router.navigateByUrl(`/group/${this.groupId}`);
+        break;
+      case 'user-feed':
+        this.router.navigateByUrl('/user-feed');
+        break;
+    }
+  }
+
+  setGroupCardInfo() {
+    this.groupCard.text = [
+      { text: this.groupSettingsFormGroup.get('nameCtrl').value, style: 'h2' }
+    ];
   }
 }
