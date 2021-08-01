@@ -7,12 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewsModule } from './modules/views/views.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { GroupPreferencesComponent } from './modules/dialogs/group-preferences/group-preferences.component';
+//import { GroupPreferencesComponent } from './modules/dialogs/group-preferences/group-preferences.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GroupPreferencesComponent
+    //GroupPreferencesComponent
   ],
   imports: [
     BrowserModule,

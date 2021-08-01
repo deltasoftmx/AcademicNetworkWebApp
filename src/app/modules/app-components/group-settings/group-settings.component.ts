@@ -101,6 +101,18 @@ export class GroupSettingsComponent implements OnInit {
     let tagCtrl = this.groupSettingsFormGroup.get('tagCtrl')
     tagCtrl.setValue(this.groupTagList)
   }
+
+  controlsDisabled() {
+    if(this.btnDisabled) {
+      //
+      this.groupSettingsFormGroup.get('nameCtrl').disable();
+      this.groupSettingsFormGroup.get('descriptionCtrl').disable();
+      return true;
+    }
+    this.groupSettingsFormGroup.get('nameCtrl').enable();
+    this.groupSettingsFormGroup.get('descriptionCtrl').enable();
+    return false;
+  }
 }
 
 export class GroupTag {

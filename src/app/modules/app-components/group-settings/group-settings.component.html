@@ -25,8 +25,8 @@
     color="primary"
     formControlName="privacyCtrl">
       <p><mat-label>Privacidad:</mat-label></p>
-      <mat-radio-button value="public">Público</mat-radio-button>
-      <mat-radio-button value="private">Privado</mat-radio-button>
+      <mat-radio-button [disabled]="controlsDisabled()" value="public">Público</mat-radio-button>
+      <mat-radio-button [disabled]="controlsDisabled()" value="private">Privado</mat-radio-button>
   </mat-radio-group>
   <!-- Group permissions -->
   <section class="section-separation">
@@ -34,6 +34,7 @@
     <ul>
       <li *ngFor="let p of permissions">
         <mat-checkbox
+          [disabled]="controlsDisabled()"
           [(ngModel)]="p.granted"
           [ngModelOptions]="{standalone: true}"
           color="primary"
@@ -55,6 +56,7 @@
           <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
       <input
+        [disabled]="controlsDisabled()"
         placeholder="Escribe las etiquetas de tu grupo"
         [matChipInputFor]="tagList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -66,7 +68,6 @@
   <div class="section-separation global-btn-right">
     <button
       mat-raised-button
-      matStepperNext
       color="primary"
       [disabled]="btnDisabled">
         {{applyBtnLabel}}

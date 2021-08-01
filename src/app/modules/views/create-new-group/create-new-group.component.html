@@ -9,11 +9,11 @@
     </app-group-settings>
   </mat-step>
   <mat-step [stepControl]="imageFormGroup" label="Elige la imagen de tu grupo">
-    <app-group-image-update
+    <app-image-picker
       [formGroup]="imageFormGroup"
       [applyBtnDisabled]="applyImageBtnDisabled"
       (apply)="applyImageHandler($event)">
-    </app-group-image-update>
+    </app-image-picker>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Completado</ng-template>

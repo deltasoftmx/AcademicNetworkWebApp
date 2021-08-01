@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
@@ -6,6 +6,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { Router } from '@angular/router';
 import { AnimationsService } from 'src/app/services/animations/animations.service';
 import { ElementCard } from '../../classes/student.model';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-create-new-group',
@@ -23,6 +24,7 @@ export class CreateNewGroupComponent implements OnInit {
   public imageUpdateFinished: boolean = false;
   public imageUpdatingOk: boolean = false;
   public groupCard: ElementCard = new ElementCard();
+  @ViewChild('stepper') stepper: MatStepper;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -74,12 +76,15 @@ export class CreateNewGroupComponent implements OnInit {
         tags: tags
       };
 
+      //this.stepper.next();
+
       //If group was already created, just apply changes to the group.
       if(this.groupCreatedFlag) {
         //Call API to update groups.
         this.notifications.info(
           'Actualizando grupo',
           'Esta caractrística aún no está disponible.');
+        this.stepper.next();
         return;
       }
 
@@ -91,6 +96,7 @@ export class CreateNewGroupComponent implements OnInit {
           this.animations.globalProgressBarActive = false;
           this.createGroupForwardBtnDisabled = false;
           if(res.code == 0) {
+            this.stepper.next();
             this.groupCreatedFlag = true;
             this.groupId = res.data.group_id;
             this.applyImageBtnDisabled = false;
@@ -137,7 +143,6 @@ export class CreateNewGroupComponent implements OnInit {
   }
 
   applyImageHandler(event) {
-    console.log(event)
     if(event.invalid) {
       this.notifications.error('Imagen faltante', 'Debes elegir una imagen.');
       return;
@@ -145,13 +150,14 @@ export class CreateNewGroupComponent implements OnInit {
 
     this.applyImageBtnDisabled = true;
     this.animations.globalProgressBarActive = true;
+    //this.stepper.next();
     this.academicNetwork.updateGroupImage(this.groupId, event.image)
       .subscribe(res => {
         this.applyImageBtnDisabled = false;
         this.animations.globalProgressBarActive = false;
         this.imageUpdateFinished = true;
-        console.log(res)
         if(res.code == 0) {
+          this.stepper.next();
           this.imageUpdatingOk = true;
           this.groupCard.icon = res.data.image_src;
           this.notifications.success('Éxito', 'La imagen ha sido actualizada.');

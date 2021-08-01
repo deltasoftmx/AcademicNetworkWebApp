@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupImageUpdateComponent } from './group-image-update.component';
+import { ImageSquareCropperComponent } from './image-square-cropper.component';
 
-describe('GroupImageUpdateComponent', () => {
-  let component: GroupImageUpdateComponent;
-  let fixture: ComponentFixture<GroupImageUpdateComponent>;
+describe('ImageSquareCropperComponent', () => {
+  let component: ImageSquareCropperComponent;
+  let fixture: ComponentFixture<ImageSquareCropperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupImageUpdateComponent ]
+      declarations: [ ImageSquareCropperComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GroupImageUpdateComponent);
+    fixture = TestBed.createComponent(ImageSquareCropperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
