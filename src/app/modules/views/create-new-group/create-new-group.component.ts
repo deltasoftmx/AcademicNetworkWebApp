@@ -6,6 +6,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { Router } from '@angular/router';
 import { AnimationsService } from 'src/app/services/animations/animations.service';
 import { ElementCard } from '../../classes/student.model';
+import { AvailableGroupPermission, GroupPermission } from '../../classes/academic-network.model'
 import { MatStepper } from '@angular/material/stepper';
 
 @Component({
@@ -14,6 +15,7 @@ import { MatStepper } from '@angular/material/stepper';
   styleUrls: ['./create-new-group.component.css']
 })
 export class CreateNewGroupComponent implements OnInit {
+  public permissions: GroupPermission[] = [];
   public groupSettingsFormGroup: FormGroup;
   public imageFormGroup: FormGroup;
   public groupCreatedFlag: boolean = false;
@@ -50,6 +52,8 @@ export class CreateNewGroupComponent implements OnInit {
     this.imageFormGroup = this._formBuilder.group({
       imageCtrl: ['', Validators.required]
     })
+
+    this.setAvailablePermissions()
   }
 
   applySettingsHandler(event) {
@@ -184,5 +188,23 @@ export class CreateNewGroupComponent implements OnInit {
     this.groupCard.text = [
       { text: this.groupSettingsFormGroup.get('nameCtrl').value, style: 'h2' }
     ];
+  }
+
+  setAvailablePermissions() {
+    let availablePermissions: AvailableGroupPermission[];
+    this.academicNetwork.getAvailableGroupPermissions()
+      .subscribe(res => {
+        if(res.code == 0) {
+          availablePermissions = res.data.group_permissions
+          for(let p of availablePermissions) {
+            this.permissions.push({
+              name: p.name,
+              codename: p.codename,
+              id: p.id,
+              granted: 0
+            });
+          }
+        }
+      })
   }
 }

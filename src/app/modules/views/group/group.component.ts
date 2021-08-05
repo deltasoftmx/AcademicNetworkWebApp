@@ -25,6 +25,7 @@ export class GroupComponent implements OnInit {
   public defaultIcon: string = '/assets/people-black-18dp.svg';
   public groupPreferences: GroupPreferences = new GroupPreferences(true);
   public groupData: GroupData = new GroupData();
+  public groupId: number;
 
   constructor(
     private router: Router,
@@ -38,6 +39,7 @@ export class GroupComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let groupId = params['id'];
+      this.groupId = parseInt(groupId);
       this.setGroupInformation(groupId);
     })
 
@@ -217,7 +219,7 @@ export class GroupComponent implements OnInit {
             'Lo sentimos, el grupo al que estás intentando acceder no existe.'
           );
         }
-      })
+      });
   }
 
   isUserOwner() {
@@ -228,4 +230,7 @@ export class GroupComponent implements OnInit {
     return false;
   }
 
+  goToSettings() {
+    this.router.navigateByUrl(`/group/${this.groupId}/settings`)
+  }
 }

@@ -31,21 +31,6 @@ export class GroupSettingsComponent implements OnInit {
     }
 
     this.groupSettingsFormGroup.get('tagCtrl').setValue([]);
-
-    this.permissions = [
-      {
-        id: 1,
-        name: "Permitir publicaciones",
-        codename: "allow_posts",
-        granted: 0
-      },
-      {
-        id: 2,
-        name: "Permitir comentarios",
-        codename: "allow_comments",
-        granted: 0
-      }
-    ];
   }
 
   submitHandler() {

@@ -39,7 +39,8 @@
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item
-      *ngIf = "isUserOwner()">
+      *ngIf = "isUserOwner()"
+      (click)="goToSettings()">
         <mat-icon>settings</mat-icon>
         <span>Configuración</span>
     </button>

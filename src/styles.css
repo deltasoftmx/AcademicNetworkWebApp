@@ -55,7 +55,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 50px auto 50px auto;
   box-sizing: border-box;
   width: 70%;
-  padding-bottom: 5%;
+}
+
+.global-container {
+  margin: 50px auto 50px auto;
+  box-sizing: border-box;
+  width: 70%;
+}
+
+.global-container-main {
+  padding: 30px;
 }
 
 .global-publication-container {
@@ -98,6 +107,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @media (max-width: 830px) {
   .global-card-element-container {
+    width: 98%;
+  }
+  .global-container {
     width: 98%;
   }
 }

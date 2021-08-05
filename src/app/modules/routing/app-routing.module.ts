@@ -13,6 +13,7 @@ import { FavoritePostsComponent } from '../views/favorite-posts/favorite-posts.c
 import { ProfileViewComponent } from '../views/profile-view/profile-view.component';
 import { GroupComponent } from '../views/group/group.component';
 import { CreateNewGroupComponent } from '../views/create-new-group/create-new-group.component';
+import { GroupSettingsViewComponent } from '../views/group-settings-view/group-settings-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -33,7 +34,10 @@ const routes: Routes = [
     { path: 'available', component: AvailableGroupsComponent },
     { path: 'mine', component: MyGroupsComponent },
     { path: 'new', component: CreateNewGroupComponent },
-    { path: ':id', component: GroupComponent }
+    { path: ':id', children: [
+      { path: '', component: GroupComponent },
+      { path: 'settings', component: GroupSettingsViewComponent }
+    ] }
   ] }
 ];
 

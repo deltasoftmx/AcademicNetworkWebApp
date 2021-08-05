@@ -271,4 +271,16 @@ export class AcademicNetworkService {
           this.handleError<ans.Response<ans.GroupImage>>('Update Group Image')));
   }
 
+  getAvailableGroupPermissions(): Observable<ans.Response<ans.PermissionsForGroups>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.get<ans.Response<ans.PermissionsForGroups>>(
+      `${domain}/v1/api/social-network/groups/available-permissions`,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.PermissionsForGroups>>('Get Available Group Permissions')));
+  }
 }
