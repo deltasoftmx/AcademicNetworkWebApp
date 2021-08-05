@@ -4,6 +4,7 @@ import { NotificationsService } from 'src/app/services/notifications/notificatio
 import { GroupPermission, AvailableGroupPermission } from '../../classes/academic-network.model';
 import { ActivatedRoute } from '@angular/router';
 import { ElementCard } from '../../classes/student.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-group-settings-view',
@@ -26,7 +27,8 @@ export class GroupSettingsViewComponent implements OnInit {
   constructor(
     private academicNetwork: AcademicNetworkService,
     private notifications: NotificationsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -122,5 +124,9 @@ export class GroupSettingsViewComponent implements OnInit {
           this.groupCard.text[0].text = res.data.group_data.group_name;
         }
       })
+  }
+
+  goToGroup() {
+    this.router.navigateByUrl(`/group/${this.groupId}`);
   }
 }
