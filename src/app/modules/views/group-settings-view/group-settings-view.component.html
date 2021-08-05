@@ -1,0 +1,22 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Configuración del grupo">
+    <div class="global-container global-container-main global-container-bg-color">
+      <app-group-settings
+        applyBtnLabel="Aplicar"
+        [permissions]="permissions"
+        [btnDisabled]="groupSettingsFormDisabled"
+        (apply)="applySettings($event)">
+      </app-group-settings>
+    </div>
+  </mat-tab>
+  <mat-tab label="Imagen del grupo">
+    <div class="global-container global-container-main global-container-bg-color">
+      <app-image-picker
+        applyBtnLabel="Aplicar"
+        [card]="groupCard"
+        [applyBtnDisabled]="groupImageFormDisabled"
+        (apply)="applyImage($event)">
+      </app-image-picker>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -78,3 +78,6 @@ export class CreateGroup {
 export class GroupImage {
   image_src: string;
 }
+ export class PermissionsForGroups {
+  group_permissions: AvailableGroupPermission[];
+ }

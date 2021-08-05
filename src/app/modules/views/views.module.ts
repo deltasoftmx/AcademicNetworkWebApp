@@ -17,8 +17,7 @@ import { FavoritePostsComponent } from './favorite-posts/favorite-posts.componen
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { GroupComponent } from './group/group.component';
 import { CreateNewGroupComponent } from './create-new-group/create-new-group.component';
-
-
+import { GroupSettingsViewComponent } from './group-settings-view/group-settings-view.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +34,7 @@ import { CreateNewGroupComponent } from './create-new-group/create-new-group.com
     ProfileViewComponent,
     GroupComponent,
     CreateNewGroupComponent,
+    GroupSettingsViewComponent,
   ],
   imports: [
     //MaterialModule,

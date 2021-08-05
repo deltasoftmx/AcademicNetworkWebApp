@@ -1,10 +1,10 @@
-
-<mat-horizontal-stepper [linear]="true" #stepper class="global-card-element-container">
+<mat-horizontal-stepper [linear]="true" #stepper class="global-container">
   <mat-step [stepControl]="groupSettingsFormGroup" label="Configura tu nuevo grupo">
     <app-group-settings
       [formGroup]="groupSettingsFormGroup"
       [applyBtnLabel]="createGroupforwardBtnLabel"
       [btnDisabled] = "createGroupForwardBtnDisabled"
+      [permissions]="permissions"
       (apply)="applySettingsHandler($event)">
     </app-group-settings>
   </mat-step>

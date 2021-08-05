@@ -15,14 +15,9 @@ export class ImagePickerComponent implements OnInit {
   @Input() applyBtnDisabled: boolean = false;
   @Input() applyBtnLabel: string = 'Aplicar';
   @Input('formGroup') imageFormGroup: FormGroup;
+  @Input() card: ElementCard;
   @Output() apply: EventEmitter<any> = new EventEmitter<any>();
   public imageSelected: string;
-  public card: ElementCard = {
-    icon: '/assets/people-black-18dp.svg',
-    text: [],
-    internalLink: null,
-    externalLink: null
-  };
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -35,6 +30,15 @@ export class ImagePickerComponent implements OnInit {
       this.imageFormGroup = this._formBuilder.group({
         imageCtrl: ['', Validators.required]
       })
+    }
+
+    if(!this.card) {
+      this.card = {
+        icon: '/assets/people-black-18dp.svg',
+        text: [],
+        internalLink: null,
+        externalLink: null
+      }
     }
   }
 
