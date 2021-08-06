@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 let modules = [
   MatToolbarModule,
@@ -36,7 +37,8 @@ let modules = [
   MatRadioModule,
   MatChipsModule,
   MatProgressBarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatPaginatorModule
 ]
 
 
