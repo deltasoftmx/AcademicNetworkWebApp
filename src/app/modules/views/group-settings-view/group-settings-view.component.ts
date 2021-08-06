@@ -5,6 +5,7 @@ import { GroupPermission, AvailableGroupPermission } from '../../classes/academi
 import { ActivatedRoute } from '@angular/router';
 import { ElementCard } from '../../classes/student.model';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-group-settings-view',
@@ -28,10 +29,14 @@ export class GroupSettingsViewComponent implements OnInit {
     private academicNetwork: AcademicNetworkService,
     private notifications: NotificationsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private session: SessionService
   ) { }
 
   ngOnInit(): void {
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+    }
     this.route.params.subscribe(params => {
       this.groupId = parseInt(params['id']);
       this.setAvailablePermissions();

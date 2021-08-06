@@ -90,8 +90,6 @@
 
 <mat-drawer-container class="sidenav" hasBackdrop="true" id="sidenav">
   <mat-drawer #drawer mode="over">
-    <!--Este bontón es un ejemplo y debe ser editado para enlazar a una
-    sección de la aplicación usando el routerLink.-->
     <button
       *ngIf = "isThereSession()"
       mat-button class="sidenav-btn"
@@ -101,6 +99,7 @@
     </button>
 
     <button
+      *ngIf = "isThereSession()"
       mat-button
       class="sidenav-btn"
       (click)="drawer.toggle()"
@@ -118,6 +117,7 @@
     </button>
 
     <button
+      *ngIf = "isThereSession()"
       mat-button
       class="sidenav-btn"
       (click)="drawer.toggle()"
@@ -157,6 +157,14 @@
       (click)="drawer.toggle()"
       routerLink="/">
         <mat-icon>chat</mat-icon> CHAT
+    </button>
+
+    <button
+      mat-button
+      class="sidenav-btn"
+      (click)="drawer.toggle()"
+      routerLink="/">
+        <mat-icon>info</mat-icon> INFORMACIÓN
     </button>
   </mat-drawer>
   <mat-drawer-content class="global-main-bg-color">

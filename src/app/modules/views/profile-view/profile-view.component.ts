@@ -27,6 +27,10 @@ export class ProfileViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.route.params.subscribe(params => {
       let username = params['username'];
       this.academicNetworkService

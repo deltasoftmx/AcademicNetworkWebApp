@@ -37,6 +37,10 @@ export class GroupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.route.params.subscribe(params => {
       let groupId = params['id'];
       this.groupId = parseInt(groupId);

@@ -4,6 +4,7 @@ import { Publication, Comment } from '../../classes/publication.model';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 import { PopupsService } from 'src/app/services/popups/popups.service';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-post-details',
@@ -23,10 +24,16 @@ export class PostDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private academicNetwork: AcademicNetworkService,
     private popups: PopupsService,
-    private notifications: NotificationsService
+    private notifications: NotificationsService,
+    private session: SessionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.route.params.subscribe(params => {
       this.postId = Number(params['id']);
       this.setPublication();

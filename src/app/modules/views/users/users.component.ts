@@ -3,6 +3,8 @@ import { ElementCard } from '../../classes/student.model';
 import { PaginatorData } from '../../classes/components.models';
 import { ElementCardBoxComponent } from '../../app-components/element-card-box/element-card-box.component';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
+import { SessionService } from 'src/app/services/session/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -24,10 +26,16 @@ export class UsersComponent implements OnInit {
   @ViewChild('elementCardBox') elementCardBox: ElementCardBoxComponent;
 
   constructor(
-    private academicNetwork: AcademicNetworkService
+    private academicNetwork: AcademicNetworkService,
+    private session: SessionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.searchUsers();
   }
 
