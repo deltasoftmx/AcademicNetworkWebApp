@@ -283,4 +283,46 @@ export class AcademicNetworkService {
         .pipe(catchError(
           this.handleError<ans.Response<ans.PermissionsForGroups>>('Get Available Group Permissions')));
   }
+
+  searchGroups(type = 'all', search = '', offset = 10, page = 0, asc = 1): Observable<ans.Response<ans.GroupSearching>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json',
+      'Authorization': this.session.getToken()
+    });
+
+    let params = new HttpParams()
+      .set('group_relative_type', type)
+      .set('search', search)
+      .set('offset', offset.toString())
+      .set('page', page.toString())
+      .set('asc', asc.toString());
+
+    return this.http.get<ans.Response<ans.GroupSearching>>(
+      `${domain}/v1/api/social-network/groups/search`,
+      { headers: headers, params: params })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.GroupSearching>>('Search Groups')));
+  }
+
+  searchUsers(type = 'all', search = '', offset = 10, page = 0, asc = 1): Observable<ans.Response<ans.UserSearching>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Content-Type': 'application/json',
+      'Authorization': this.session.getToken()
+    });
+
+    let params = new HttpParams()
+      .set('user_relative_type', type)
+      .set('search', search)
+      .set('offset', offset.toString())
+      .set('page', page.toString())
+      .set('asc', asc.toString());
+
+    return this.http.get<ans.Response<ans.UserSearching>>(
+      `${domain}/v1/api/social-network/users/search`,
+      { headers: headers, params: params })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.UserSearching>>('Search Users')));
+  }
 }

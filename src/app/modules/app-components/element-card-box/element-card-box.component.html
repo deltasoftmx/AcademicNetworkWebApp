@@ -7,3 +7,13 @@
     </app-element-card>
   </article>
 </div>
+
+<div>
+  <mat-paginator
+    #paginator
+    [length]="paginatorData.length"
+    [pageSize]="paginatorData.pageSize"
+    [pageSizeOptions]="paginatorData.pageSizeOptions"
+    (page)="pageHandler($event)">
+  </mat-paginator>
+</div>

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ElementCard } from '../../classes/student.model';
 import { SessionService } from 'src/app/services/session/session.service';
 import { Router } from '@angular/router';
+import { PaginatorData } from '../../classes/components.models';
+import { ElementCardBoxComponent } from '../../app-components/element-card-box/element-card-box.component';
+import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 
 @Component({
   selector: 'app-my-groups',
@@ -12,10 +15,20 @@ export class MyGroupsComponent implements OnInit {
 
   public defaultIcon: string = '/assets/people-black-18dp.svg';
   public myGroups: ElementCard[];
+  public paginator: PaginatorData = {
+    length: null,
+    pageSize: 10,
+    pageSizeOptions: [10, 20, 30]
+  }
+  public searchVal: string = '';
+  private currentSearchVal: string = '';
+  private currentPageSize: number = 10;
+  @ViewChild('elementCardBox') elementCardBox: ElementCardBoxComponent;
 
   constructor(
     private router: Router,
-    private session: SessionService
+    private session: SessionService,
+    private academicNetwork: AcademicNetworkService
   ) { }
 
   ngOnInit(): void {
@@ -23,80 +36,37 @@ export class MyGroupsComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
 
-    //Simulando que estos son los grupos
-    //a los que está inscrito el estudiante.
-    //Pienso en traer estos datos desde la API.
-    this.myGroups = [
-      {
-        icon: 'https://rietveld-ict.nl/wp-content/uploads/2014/01/users.png',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
+    this.searchGroups();
+  }
 
-      {
-        icon: 'https://juliocsantaman.com/assets/img/juliocsantaman.jpg',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
+  pageHandler(event) {
+    this.currentPageSize = event.pageSize;
+    this.searchGroups(this.currentSearchVal, this.currentPageSize, event.pageIndex);
+  }
 
-      {
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
+  searchGroups(search = '', offset = this.paginator.pageSize, page = 0, asc = 1) {
+    this.academicNetwork.searchGroups('user', search, offset, page, asc)
+      .subscribe(res => {
+        let groups = [];
+        if(res.code == 0) {
+          this.paginator.length = res.data.total_records;
+          for(let g of res.data.groups) {
+            groups.push({
+              icon: g.image_src,
+              text: [{text: g.name, style: 'h2'}],
+              internalLink: `/group/${g.id}`,
+              externalLink: null
+            })
+          }
+          this.myGroups = groups;
+        }
+      });
+  }
 
-      {
-        icon: 'https://avatars1.githubusercontent.com/u/33400166?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
-
-      {
-        icon: 'https://avatars3.githubusercontent.com/u/67294504?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
-
-      {
-        icon: 'https://avatars2.githubusercontent.com/u/52019284?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
-
-      {
-        icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
-
-      {
-        icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
-
-       {
-        icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      },
-
-      {
-        icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}],
-        internalLink: null,
-        externalLink: null
-      }
-    ];
+  submitSearch() {
+    this.currentSearchVal = this.searchVal;
+    this.searchGroups(this.currentSearchVal, this.currentPageSize, 0);
+    this.elementCardBox.firstPage();
   }
 
 }

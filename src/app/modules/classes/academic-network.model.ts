@@ -78,6 +78,31 @@ export class CreateGroup {
 export class GroupImage {
   image_src: string;
 }
- export class PermissionsForGroups {
+
+export class PermissionsForGroups {
   group_permissions: AvailableGroupPermission[];
- }
+}
+
+export class GroupMinInfo {
+  id: number;
+  name: string;
+  image_src: string;
+  description: string;
+}
+
+export class GroupSearching {
+  groups: GroupMinInfo[];
+  total_records: number;
+}
+
+export class UserMinInfo {
+  username: string;
+  firstname: string;
+  lastname: string;
+  profile_img_src: string;
+}
+
+export class UserSearching {
+  users: UserMinInfo[];
+  total_records: number;
+}
