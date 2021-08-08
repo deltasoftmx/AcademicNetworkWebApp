@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 import { PopupsService } from 'src/app/services/popups/popups.service';
 import { SessionService } from 'src/app/services/session/session.service';
+import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { AnimationsService } from 'src/app/services/animations/animations.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -20,10 +22,12 @@ export class ProfileViewComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private academicNetworkService: AcademicNetworkService,
+    private academicNetwork: AcademicNetworkService,
     private route: ActivatedRoute,
     private popups: PopupsService,
-    private session: SessionService
+    private session: SessionService,
+    private notifications: NotificationsService,
+    private animations: AnimationsService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +37,7 @@ export class ProfileViewComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       let username = params['username'];
-      this.academicNetworkService
+      this.academicNetwork
         .getUserPublicData(username)
           .subscribe(res => {
             console.log(res)
@@ -191,7 +195,42 @@ export class ProfileViewComponent implements OnInit {
   }
 
   newPublicationHandler(event) {
-    console.log(event);
+    if(!event.text && !event.image) {
+      this.notifications.info(
+        'Publicación vacía',
+        'Debes escribir algo o agregar una imagen para publicar');
+      return;
+    }
+
+    let postData = {
+      content: event.text,
+      image: event.image
+    };
+
+    this.makePost(postData);
+  }
+
+  private makePost(postData) {
+    this.animations.globalProgressBarActive = true;
+    this.academicNetwork.createUserPost(postData)
+      .subscribe(res => {
+        console.log(res)
+        this.animations.globalProgressBarActive = false;
+        if(res.code == 0) {
+          this.notifications.success(
+            'Publicación creada',
+            'Tu publicación se ha creado');
+          this.publications.unshift(res.data);
+        } else if(res.code == 1) {
+          this.notifications.info(
+            'Publicación vacía',
+            'Debes escribir algo o agregar una imagen para publicar');
+        } else if(res.code == 2) {
+          this.notifications.info(
+            'No se puede compartir',
+            'La publicación pertenece a un grupo privado');
+        }
+      });
   }
 
 }

@@ -38,7 +38,7 @@ export class TextAndImageFormComponent implements OnInit {
     //13 is the ASCII code for "return".
     if(event.keyCode == 13 && !event.shiftKey) {
       //Send text and image if exists.
-      this.sendContent(textField, imageField, imagePreview)      
+      this.sendContent(textField, imageField, imagePreview)
     }
     this.setTextareSize(textField)
   }
@@ -62,12 +62,6 @@ export class TextAndImageFormComponent implements OnInit {
     textField.value = '';
     imageField.value = '';
     imagePreview.src = '';
-
-    if(text == '' && !image) {
-      //display message informing that the content can't be sent.
-      alert('Debes escribir un comentario o adjuntar una imagen para comentar.');
-      return;
-    }
 
     this.newContent.emit({
       text,

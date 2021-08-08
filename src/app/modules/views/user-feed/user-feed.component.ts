@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Publication } from '../../classes/publication.model';
 import { SessionService } from 'src/app/services/session/session.service';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
+import { NotificationsService } from 'src/app/services/notifications/notifications.service';
+import { AnimationsService } from 'src/app/services/animations/animations.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -17,7 +19,9 @@ export class UserFeedComponent implements OnInit {
   constructor(
     public router: Router,
     private session: SessionService,
-    private academicNetwork: AcademicNetworkService
+    private academicNetwork: AcademicNetworkService,
+    private notifications: NotificationsService,
+    private animations: AnimationsService
   ) { }
 
   ngOnInit(): void {
@@ -38,8 +42,43 @@ export class UserFeedComponent implements OnInit {
       })
   }
 
+  private makePost(postData) {
+    this.animations.globalProgressBarActive = true;
+    this.academicNetwork.createUserPost(postData)
+      .subscribe(res => {
+        console.log(res)
+        this.animations.globalProgressBarActive = false;
+        if(res.code == 0) {
+          this.notifications.success(
+            'Publicación creada',
+            'Tu publicación se ha creado');
+          this.publications.unshift(res.data);
+        } else if(res.code == 1) {
+          this.notifications.info(
+            'Publicación vacía',
+            'Debes escribir algo o agregar una imagen para publicar');
+        } else if(res.code == 2) {
+          this.notifications.info(
+            'No se puede compartir',
+            'La publicación pertenece a un grupo privado');
+        }
+      });
+  }
+
   newPublicationHandler(event) {
-    console.log(event);
+    if(!event.text && !event.image) {
+      this.notifications.info(
+        'Publicación vacía',
+        'Debes escribir algo o agregar una imagen para publicar');
+      return;
+    }
+
+    let postData = {
+      content: event.text,
+      image: event.image
+    };
+
+    this.makePost(postData);
   }
 
   favoriteEventHandler(event) {
