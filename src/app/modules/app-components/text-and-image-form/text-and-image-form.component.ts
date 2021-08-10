@@ -36,7 +36,7 @@ export class TextAndImageFormComponent implements OnInit {
 
   typingHandlerForTextbox(textField, imageField, imagePreview, event) {
     //13 is the ASCII code for "return".
-    if(event.keyCode == 13 && !event.shiftKey) {
+    if(event.keyCode == 13 && event.shiftKey) {
       //Send text and image if exists.
       this.sendContent(textField, imageField, imagePreview)
     }
