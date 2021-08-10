@@ -20,8 +20,12 @@
     (share) = "shareEventHandler($event)">
   </app-publication-display>
 
-  <div *ngIf = "voidTimeline" class="global-text-center">
+  <div *ngIf = "voidTimeline" class="global-text-center top-separation">
     <p>Parece que aún no hay publicaciones que ver.</p>
     <p>Únete a algunos grupos o sigue a algunas personas. :D</p>
+  </div>
+
+  <div *ngIf = "!voidTimeline && emptyPostsResponse" class="global-text-center top-separation">
+    <p>Hemos llegado al final de las publicaciones disponibles para mostrarte.</p>
   </div>
 </div>
