@@ -5,6 +5,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 import { AnimationsService } from 'src/app/services/animations/animations.service';
+import { GlobalEventsService } from 'src/app/services/global-events/global-events.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -15,31 +16,32 @@ export class UserFeedComponent implements OnInit {
 
   public publications: Publication[] = [];
   public voidTimeline: boolean;
+  public emptyPostsResponse: boolean;
+  private currentPage = 0;
+  private pageSize = 20;
+  private waitingForPosts = false;
 
   constructor(
     public router: Router,
     private session: SessionService,
     private academicNetwork: AcademicNetworkService,
     private notifications: NotificationsService,
-    private animations: AnimationsService
+    private animations: AnimationsService,
+    private globalEvents: GlobalEventsService
   ) { }
 
   ngOnInit(): void {
     if(!this.session.get_userdata()) {
       this.router.navigateByUrl('/login');
     }
+
+    this.globalEvents.onEndOfPage('user-feed-posts', '/user-feed', (e) => {
+      console.log('END OF PAGE')
+      this.getMorePosts();
+    });
+
     //Call the timeline api.
-    this.academicNetwork.getUserTimeline()
-      .subscribe(res => {
-        if(res.code == 0) {
-          this.publications = res.data.posts;
-          if(res.data.total_records == 0) {
-            this.voidTimeline = true;
-          } else {
-            this.voidTimeline = false;
-          }
-        }
-      })
+    this.getMorePosts();
   }
 
   private makePost(postData) {
@@ -94,4 +96,33 @@ export class UserFeedComponent implements OnInit {
     console.log(event)
   }
 
+  getMorePosts() {
+    console.log('current page:', this.currentPage)
+    if(this.waitingForPosts)
+      return;
+
+    this.waitingForPosts = true;
+    this.animations.globalProgressBarActive = true;
+    this.academicNetwork.getUserTimeline(this.pageSize, this.currentPage)
+      .subscribe(res => {
+        this.waitingForPosts = false;
+        this.animations.globalProgressBarActive = false;
+        if(res.code == 0) {
+          this.publications = this.publications.concat(res.data.posts);
+
+          if(res.data.total_records == 0) {
+            this.voidTimeline = true;
+          } else {
+            this.voidTimeline = false;
+          }
+
+          if(res.data.posts.length) {
+            this.currentPage++;
+            this.emptyPostsResponse = false;
+          } else {
+            this.emptyPostsResponse = true;
+          }
+        }
+      })
+  }
 }
