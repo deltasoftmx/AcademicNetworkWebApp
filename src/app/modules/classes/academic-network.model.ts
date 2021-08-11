@@ -113,3 +113,8 @@ export class MembershipInformation {
   active_notifications: boolean;
   created_at: string;
 }
+
+export class GroupPosts {
+  group_posts: Publication[];
+  total_records: number;
+}
