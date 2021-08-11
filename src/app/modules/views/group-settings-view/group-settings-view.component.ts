@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ElementCard } from '../../classes/student.model';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session/session.service';
+import { GroupInformation } from '../../classes/academic-network.model';
+import { AnimationsService } from 'src/app/services/animations/animations.service';
 
 @Component({
   selector: 'app-group-settings-view',
@@ -24,13 +26,15 @@ export class GroupSettingsViewComponent implements OnInit {
     internalLink: null,
     externalLink: null
   };
+  public groupInformation: GroupInformation;
 
   constructor(
     private academicNetwork: AcademicNetworkService,
     private notifications: NotificationsService,
     private route: ActivatedRoute,
     private router: Router,
-    private session: SessionService
+    private session: SessionService,
+    private animations: AnimationsService
   ) { }
 
   ngOnInit(): void {
@@ -122,10 +126,15 @@ export class GroupSettingsViewComponent implements OnInit {
   }
 
   setGroupCard() {
+    this.animations.globalProgressBarActive = true;
+    this.groupSettingsFormDisabled = true;
     this.academicNetwork.getGroupInformation(this.groupId)
       .subscribe(res => {
+        this.animations.globalProgressBarActive = false;
+        this.groupSettingsFormDisabled = false;
         if(res.code == 0) {
-          this.groupCard.icon = res.data.group_data.group_image_src;
+          this.groupInformation = res.data;
+          this.groupCard.icon = res.data.group_data.group_image_src || '/assets/people-black-18dp.svg';
           this.groupCard.text[0].text = res.data.group_data.group_name;
         }
       })

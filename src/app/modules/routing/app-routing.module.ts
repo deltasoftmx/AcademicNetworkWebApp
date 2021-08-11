@@ -14,6 +14,7 @@ import { ProfileViewComponent } from '../views/profile-view/profile-view.compone
 import { GroupComponent } from '../views/group/group.component';
 import { CreateNewGroupComponent } from '../views/create-new-group/create-new-group.component';
 import { GroupSettingsViewComponent } from '../views/group-settings-view/group-settings-view.component';
+import { UserSettingsComponent } from '../views/user-settings/user-settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,7 +22,10 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'users', children: [
     { path: '', component: UsersComponent },
-    { path: ':username', component: ProfileViewComponent }
+    { path: ':username', children: [
+      { path: '', component: ProfileViewComponent },
+      { path: 'settings', component: UserSettingsComponent }
+    ] }
   ] },
   { path: 'followers', component: FollowersComponent },
   { path: 'following', component: FollowingComponent },

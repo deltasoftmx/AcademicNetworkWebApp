@@ -89,6 +89,7 @@ export class LoginComponent implements OnInit {
             this.session.set_userdata('firstname', res.data.firstname);
             this.session.set_userdata('lastname', res.data.lastname);
             this.session.set_userdata('profile_img_src', res.data.profile_img_src);
+            this.session.set_userdata('description', res.data.description);
             this.router.navigateByUrl('/user-feed');
           } else if(res.code == 1) {
             this.popups.error(
