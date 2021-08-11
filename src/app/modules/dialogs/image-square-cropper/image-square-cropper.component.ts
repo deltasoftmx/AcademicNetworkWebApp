@@ -38,6 +38,6 @@ export class ImageSquareCropperComponent implements OnInit {
           image: image,
           imageTrustedUrl: trustedUrl
         });
-      }, "image/jpeg", 0.95);
+      }, 'image/jpeg', 1);
   }
 }

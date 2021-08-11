@@ -22,7 +22,7 @@ export class Publication {
   post_type: string;
   like_counter: number;
   created_at: string;
-  liked_by_user: number;
+  liked_by_user: boolean;
   group_name: string;
   group_id: number;
   referenced_post: Publication;

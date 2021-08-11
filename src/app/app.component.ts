@@ -44,6 +44,13 @@ export class AppComponent implements OnInit {
     }
   }
 
+  goUserSettings() {
+    let userData = this.session.get_userdata()
+    if(userData) {
+      this.router.navigateByUrl(`/users/${userData.username}/settings`);
+    }
+  }
+
   isThereSession() {
     return this.session.get_userdata() != null;
   }

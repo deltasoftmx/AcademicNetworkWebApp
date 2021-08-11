@@ -159,6 +159,7 @@ export class SignUpComponent implements OnInit {
           this.sessionService.set_userdata('firstname', data.data.firstname);
           this.sessionService.set_userdata('lastname', data.data.lastname);
           this.sessionService.set_userdata('profile_img_src', data.data.profile_img_src);
+          this.sessionService.set_userdata('description', data.data.description)
 
           setTimeout(() => {
             this.router.navigate(['/user-feed']);
