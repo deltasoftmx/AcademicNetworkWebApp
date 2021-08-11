@@ -177,6 +177,10 @@ export class GroupComponent implements OnInit {
   }
 
   getMorePosts() {
+    if (this.waitingForPosts) {
+      return;
+    }
+    
     this.waitingForPosts = true;
     this.animations.globalProgressBarActive = true;
     this.academicNetwork.getGroupPosts(this.groupId, this.pageSize, this.page)

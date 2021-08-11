@@ -56,6 +56,10 @@ export class FavoritePostsComponent implements OnInit {
   }
 
   getMorePosts() {
+    if (this.waitingForPosts) {
+      return;
+    }
+    
     this.waitingForPosts = true;
     this.animations.globalProgressBarActive = true;
     this.academicNetwork.getFavoritePosts(this.pageSize, this.page)
