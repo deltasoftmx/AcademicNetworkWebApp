@@ -10,7 +10,8 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { PopupsService } from 'src/app/services/popups/popups.service';
-import { GroupData } from '../../classes/academic-network.model';
+import { GroupData, MembershipInformation } from '../../classes/academic-network.model';
+import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 
 @Component({
   selector: 'app-group',
@@ -26,6 +27,7 @@ export class GroupComponent implements OnInit {
   public groupPreferences: GroupPreferences = new GroupPreferences(true);
   public groupData: GroupData = new GroupData();
   public groupId: number;
+  public membershipInfo: MembershipInformation = new MembershipInformation();
 
   constructor(
     private router: Router,
@@ -33,7 +35,8 @@ export class GroupComponent implements OnInit {
     private academicNetwork: AcademicNetworkService,
     private session: SessionService,
     private route: ActivatedRoute,
-    private popups: PopupsService
+    private popups: PopupsService,
+    private notifications: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +49,7 @@ export class GroupComponent implements OnInit {
       let groupId = params['id'];
       this.groupId = parseInt(groupId);
       this.setGroupInformation(groupId);
+      this.setMembershipInfo(groupId)
     })
 
     this.publications = this.getFakePosts();
@@ -186,6 +190,15 @@ export class GroupComponent implements OnInit {
       if(result) {
         if(result.action == 'save-preferences') {
           this.groupPreferences = result.data;
+          let state = (this.groupPreferences.listenForNotifications) ? 1 : 0;
+          this.academicNetwork.swicthGroupNotifications(this.groupId, state)
+            .subscribe(res => {
+              if (res.code == 0) {
+                this.notifications.success(
+                  'Preferencias actualizadas',
+                  'Las preferencias de para este grupo se han guardado exitosamente');
+              }
+            });
         } else if(result.action == 'leave-group') {
           //call api to leave the group.
           //redirect to /group/available
@@ -237,5 +250,19 @@ export class GroupComponent implements OnInit {
 
   goToSettings() {
     this.router.navigateByUrl(`/group/${this.groupId}/settings`)
+  }
+
+  setMembershipInfo(groupId) {
+    this.academicNetwork.getMembershipInfo(groupId)
+      .subscribe(res => {
+        if (res.code == 0) {
+          this.membershipInfo = res.data;
+          this.groupPreferences.listenForNotifications = res.data.active_notifications;
+        }
+      })
+  }
+
+  isMember() {
+    return this.membershipInfo.is_member
   }
 }

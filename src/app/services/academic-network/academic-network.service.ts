@@ -355,4 +355,35 @@ export class AcademicNetworkService {
         .pipe(catchError(
           this.handleError<ans.Response<Publication>>('Create User Post')));
   }
+
+  swicthGroupNotifications(groupId: number, state: number): Observable<ans.Response<Object>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Authorization': this.session.getToken()
+    });
+
+    let formData = {
+      state
+    };
+
+    return this.http.put<ans.Response<Object>>(
+      `${domain}/v1/api/social-network/groups/group/${groupId}/switch-notifications`,
+      formData,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<Object>>('Switch Group Notifications')));
+  }
+
+  getMembershipInfo(groupId: number): Observable<ans.Response<ans.MembershipInformation>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Authorization': this.session.getToken()
+    });
+
+    return this.http.get<ans.Response<ans.MembershipInformation>>(
+      `${domain}/v1/api/social-network/groups/group/${groupId}/membership-info`,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.MembershipInformation>>('Get Membership Information')));
+  }
 }

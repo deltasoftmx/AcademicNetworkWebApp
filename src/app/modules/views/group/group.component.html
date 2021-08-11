@@ -45,6 +45,7 @@
         <span>Configuración</span>
     </button>
     <button mat-menu-item
+      *ngIf="isMember()"
       (click) = "openPreferences()">
         <mat-icon>tune</mat-icon>
         <span>Preferencias</span>
