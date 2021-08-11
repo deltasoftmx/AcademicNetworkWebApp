@@ -10,4 +10,11 @@
     (comment) = "commentEventHandler($event)"
     (share) = "shareEventHandler($event)">
   </app-publication-display>
+
+  <div *ngIf = "voidTimeline" class="global-text-center top-separation">
+    <p>Aún no has marcado alguna publicación como favorita.</p>
+  </div>
+  <div *ngIf = "!voidTimeline && noMorePosts" class="global-text-center top-separation">
+    <p>Hemos llegado al final de las publicaciones.</p>
+  </div>
 </div>

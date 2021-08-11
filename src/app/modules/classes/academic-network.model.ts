@@ -106,3 +106,20 @@ export class UserSearching {
   users: UserMinInfo[];
   total_records: number;
 }
+
+export class MembershipInformation {
+  is_member: boolean;
+  is_owner: boolean;
+  active_notifications: boolean;
+  created_at: string;
+}
+
+export class GroupPosts {
+  group_posts: Publication[];
+  total_records: number;
+}
+
+export class FavoritePosts {
+  favorite_posts: Publication[];
+  total_records: number;
+}

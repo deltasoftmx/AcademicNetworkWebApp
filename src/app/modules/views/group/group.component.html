@@ -6,7 +6,7 @@
   </app-element-card>
 
   <!-- Box to create publications -->
-  <mat-card class="publication-form-container">
+  <mat-card *ngIf="isMember()" class="publication-form-container">
     <app-text-and-image-form
       class = "publication-form"
       textInputLabel = "Comparte algo en el grupo."
@@ -26,8 +26,11 @@
     (share) = "shareEventHandler($event)">
   </app-publication-display>
 
-  <div *ngIf = "voidTimeline" class="global-text-center">
+  <div *ngIf = "voidTimeline" class="global-text-center publication-form-container">
     <p>Parece que aún no hay publicaciones que ver.</p>
+  </div>
+  <div *ngIf = "!voidTimeline && noMorePosts" class="global-text-center publication-form-container">
+    <p>Hemos llegado al final de las publicaciones.</p>
   </div>
 </div>
 
@@ -45,6 +48,7 @@
         <span>Configuración</span>
     </button>
     <button mat-menu-item
+      *ngIf="isMember()"
       (click) = "openPreferences()">
         <mat-icon>tune</mat-icon>
         <span>Preferencias</span>

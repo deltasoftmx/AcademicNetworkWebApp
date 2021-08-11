@@ -2,7 +2,24 @@
 
 ## Tabla de contenidos
 
+* [GroupPreferences](#grouppreferences)
 * [ImagePicker](#imagepicker)
+
+### GroupPreferences
+
+**Descripción**:
+  Dialogo que despliega diferentes formularios para configurar
+  un grupo a nivel de miembro.
+
+* **Entradas**
+  * `data`: `GroupPreferences`
+
+* **Salidas**
+
+Objeto con los siguientes campos
+
+  * `action`: `string`. Sus valores pueden ser: ["cancel" | "save-preferences" | "leave-group"]
+  * `data`: `GroupPreferences`
 
 ### ImagePicker
 

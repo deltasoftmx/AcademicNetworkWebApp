@@ -19,7 +19,8 @@ export class GroupPreferencesComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close({
-      action: 'cancel'
+      action: 'cancel',
+      data: null
     });
   }
 
@@ -32,7 +33,8 @@ export class GroupPreferencesComponent implements OnInit {
 
   leaveGroup(): void {
     this.dialogRef.close({
-      action: 'leave-group'
+      action: 'leave-group',
+      data: null
     });
   }
 
