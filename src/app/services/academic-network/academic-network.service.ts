@@ -403,4 +403,21 @@ export class AcademicNetworkService {
         .pipe(catchError(
           this.handleError<ans.Response<ans.GroupPosts>>('Get Group Posts')));
   }
+
+  getFavoritePosts(offset: number = 20, page: number = 0): Observable<ans.Response<ans.FavoritePosts>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Authorization': this.session.getToken()
+    });
+
+    let params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('page', page.toString());
+
+    return this.http.get<ans.Response<ans.FavoritePosts>>(
+      `${domain}/v1/api/social-network/posts/favorite`,
+      { headers: headers, params: params })
+        .pipe(catchError(
+          this.handleError<ans.Response<ans.FavoritePosts>>('Get Favorite Posts')));
+  }
 }

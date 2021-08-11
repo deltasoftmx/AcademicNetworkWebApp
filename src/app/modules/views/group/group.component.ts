@@ -133,6 +133,10 @@ export class GroupComponent implements OnInit {
               style: 'p'
             },
             {
+              text: data.data.group_data.group_visibility == 'public' ? 'Público' : 'Privado',
+              style: 'p'
+            },
+            {
               text: moment(data.data.group_data.group_created_at).format('MMMM DD, YYYY'),
               style: 'p'
             }

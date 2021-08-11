@@ -118,3 +118,8 @@ export class GroupPosts {
   group_posts: Publication[];
   total_records: number;
 }
+
+export class FavoritePosts {
+  favorite_posts: Publication[];
+  total_records: number;
+}
