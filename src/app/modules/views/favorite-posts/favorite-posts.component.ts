@@ -20,6 +20,7 @@ export class FavoritePostsComponent implements OnInit {
   ngOnInit(): void {
     if(!this.session.get_userdata()) {
       this.router.navigateByUrl('/login');
+      return;
     }
 
     this.publications = [
