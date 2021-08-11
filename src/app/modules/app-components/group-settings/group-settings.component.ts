@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { GroupPermission } from '../../classes/academic-network.model';
+import { GroupPermission, GroupInformation } from '../../classes/academic-network.model';
 
 @Component({
   selector: 'app-group-settings',
@@ -17,6 +17,7 @@ export class GroupSettingsComponent implements OnInit {
   @Output() apply: EventEmitter<any> = new EventEmitter<any>();
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   public groupTagList: GroupTag[] = [];
+  private _groupInformation: GroupInformation;
 
   constructor(private _formBuilder: FormBuilder) { }
 
@@ -32,6 +33,23 @@ export class GroupSettingsComponent implements OnInit {
 
     this.groupSettingsFormGroup.get('tagCtrl').setValue([]);
   }
+
+  @Input() set groupInformation(groupInformation: GroupInformation) {
+    console.log('group information')
+    console.log(groupInformation)
+    if (groupInformation) {
+      this.groupSettingsFormGroup.get('nameCtrl')
+        .setValue(groupInformation.group_data.group_name);
+      this.groupSettingsFormGroup.get('descriptionCtrl')
+        .setValue(groupInformation.group_data.group_description);
+      this.groupSettingsFormGroup.get('privacyCtrl')
+        .setValue(groupInformation.group_data.group_visibility);
+      this.groupTagList = groupInformation.tags;
+      this.updateTagCtrl();
+      this.permissions = groupInformation.permissions;
+    }
+  }
+  
 
   submitHandler() {
     let formData = this.groupSettingsFormGroup.value;
