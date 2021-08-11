@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ElementCard } from '../../classes/student.model';
 import { SessionService } from 'src/app/services/session/session.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-settings',
@@ -16,11 +17,15 @@ export class UserSettingsComponent implements OnInit {
 
   constructor(
     private session: SessionService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.session.needsUserAuth();
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+      return;
+    }
 
     this.userSettingFormGroup = this._formBuilder.group({
       firstname: ['', Validators.required],

@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     //en la vista de login.
     if(this.session.get_userdata()) {
       this.router.navigateByUrl('/user-feed');
+      return;
     }
 
     this.set_form_visibility('passwd', 'hide');
