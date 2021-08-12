@@ -31,7 +31,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .global-container-bg-color {
-  background-color: rgb(230, 230, 230);
+  background-color: #FFF;
+}
+
+.global-main-bg-color {
+  background-color: rgb(240, 240, 240);
 }
 
 .global-main-title {
@@ -48,13 +52,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .global-card-element-container {
-  margin: 0 auto 50px auto;
+  margin: 50px auto 50px auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.global-container {
+  margin: 15px auto 15px auto;
+  box-sizing: border-box;
   width: 70%;
-  padding-bottom: 5%;
+}
+
+.global-container-main {
+  padding: 30px;
 }
 
 .global-publication-container {
-  width: 500px;
+  /*width: 500px;*/
+  width: 35%;
   margin: auto;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -65,8 +80,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top: 15px;
 }
 
+.global-menu-container {
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+}
+
+@media (max-width: 450px) {
+  .global-menu-container {
+    right: 15px;
+    bottom: 70px;
+  }
+}
+
 @media (max-width: 540px) {
   .global-publication-container {
-    width: 90%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1444px) and (min-width: 541px) {
+  .global-publication-container {
+    width: 500px;
+  }
+}
+
+@media (max-width: 830px) {
+  .global-card-element-container {
+    width: 100%;
+  }
+  .global-container {
+    width: 100%;
   }
 }

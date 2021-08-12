@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from './services/session/session.service';
 import { Router } from '@angular/router';
+import { AnimationsService } from 'src/app/services/animations/animations.service';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,15 @@ export class AppComponent implements OnInit {
 
   constructor(
     public session: SessionService,
-    private router: Router
+    private router: Router,
+    public animations: AnimationsService
   ) { }
 
   //Establece observadores en los eventos onready y onresize
   //para mantener el contenido de la app en la posición correcta.
   ngOnInit() {
-    document.onreadystatechange = this.setSidenav
-    window.onresize = this.setSidenav
+    document.addEventListener('readystatechange', this.setSidenav);
+    window.addEventListener('resize', this.setSidenav);
   }
 
   //Establece la altura correcta para el contenido de la aplicación
@@ -39,6 +41,13 @@ export class AppComponent implements OnInit {
     let userData = this.session.get_userdata()
     if(userData) {
       this.router.navigateByUrl(`/users/${userData.username}`);
+    }
+  }
+
+  goUserSettings() {
+    let userData = this.session.get_userdata()
+    if(userData) {
+      this.router.navigateByUrl(`/users/${userData.username}/settings`);
     }
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StringFormatService } from '../../../services/string-format/string-format.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publication-card',
@@ -12,7 +13,7 @@ export class PublicationCardComponent implements OnInit {
   @Input() profileImgSrc:string;
   @Input() profileName:string = '';
   @Input() publicationImgSrc:string;
-  @Input() text:string;
+  @Input() text:string = '';
   @Input() username:string;
   @Input() groupName: string;
   @Input() groupId: number; // to link the gorup in the view
@@ -24,7 +25,7 @@ export class PublicationCardComponent implements OnInit {
   @Input() subProfileImgSrc:string;
   @Input() subProfileName:string = '';
   @Input() subPublicationImgSrc:string;
-  @Input() subText:string;
+  @Input() subText:string = '';
   @Input() subUsername:string;
   @Input() subGroupName: string;
   @Input() subGroupId: number; // to link the gorup in the view
@@ -35,8 +36,12 @@ export class PublicationCardComponent implements OnInit {
   @Output() comment: EventEmitter<any> = new EventEmitter();
   public altProfileImg = 'Ávatar de ' + this.profileName;
   public altPublicationImg = 'Publicación de ' + this.profileName;
+  public defaultImageProfile = '/assets/account_circle-black-18dp.svg';
 
-  constructor(public stringFormat: StringFormatService) { }
+  constructor(
+    public stringFormat: StringFormatService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     console.log(this.stringFormat.splitByEOL(this.text))
@@ -81,6 +86,20 @@ export class PublicationCardComponent implements OnInit {
     }
 
     return false
+  }
+
+  dateFormat(date) {
+    return this.stringFormat.dateFormat(date)
+  }
+
+  goToProfile(username) {
+    this.router.navigateByUrl(`/users/${username}`);
+  }
+
+  goToGroup(groupId) {
+    if(groupId) {
+      this.router.navigateByUrl(`/group/${groupId}`);
+    }
   }
 
 }

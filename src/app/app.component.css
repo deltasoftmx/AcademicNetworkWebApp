@@ -32,6 +32,10 @@ mat-icon {
   width: 100%;
 }
 
+.icon-toolbar-btn {
+  margin-left: 15px;
+}
+
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   mat-drawer {

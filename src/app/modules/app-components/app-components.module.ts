@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../material/material.module'; //All material design modules to be used.
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DialogsModule } from '../dialogs/dialogs.module';
 
 import { SingleFieldFormN2optionsComponent } from './single-field-form-n2options/single-field-form-n2options.component';
 import { ElementCardComponent } from './element-card/element-card.component';
@@ -10,6 +11,8 @@ import { PublicationCardComponent } from './publication-card/publication-card.co
 import { CommentBoxComponent } from './comment-box/comment-box.component';
 import { TextAndImageFormComponent } from './text-and-image-form/text-and-image-form.component';
 import { PublicationDisplayComponent } from './publication-display/publication-display.component';
+import { GroupSettingsComponent } from './group-settings/group-settings.component';
+import { ImagePickerComponent } from './image-picker/image-picker.component';
 
 let components = [
   SingleFieldFormN2optionsComponent,
@@ -18,14 +21,17 @@ let components = [
   PublicationCardComponent,
   CommentBoxComponent,
   TextAndImageFormComponent,
-  PublicationDisplayComponent
+  PublicationDisplayComponent,
+  GroupSettingsComponent,
+  ImagePickerComponent
 ]
 
 let externalModules = [
   MaterialModule,
   FormsModule,
   ReactiveFormsModule,
-  CommonModule
+  CommonModule,
+  DialogsModule
 ]
 
 @NgModule({

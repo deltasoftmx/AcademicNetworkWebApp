@@ -1,10 +1,19 @@
+<mat-progress-bar
+  *ngIf="animations.globalProgressBarActive"
+  mode="indeterminate"
+  color="warn">
+</mat-progress-bar>
 <mat-toolbar color="primary" class="toolbar" id="toolbar">
   <button mat-icon-button aria-label="Menu button" (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span> {{title}} </span>
+  <button mat-button routerLink = "/user-feed">
+    <h1> {{title}} </h1>
+  </button>
+
   <span class="example-spacer"></span>
   <button
+    class = "icon-toolbar-btn"
     *ngIf = "isThereSession()"
     mat-icon-button
     [matMenuTriggerFor]="notifications"
@@ -12,6 +21,7 @@
       <mat-icon>notifications</mat-icon>
   </button>
   <button
+    class = "icon-toolbar-btn"
     *ngIf = "isThereSession()"
     mat-icon-button
     [matMenuTriggerFor]="menu"
@@ -26,6 +36,7 @@
         class="img-icon">
   </button>
   <button
+    class = "icon-toolbar-btn"
     *ngIf = "!isThereSession()"
     routerLink = "/login"
     mat-icon-button
@@ -36,10 +47,26 @@
   <mat-menu #menu="matMenu">
     <!--Los siguientes botones deben ser editados para enlazar a las
     vistas correspondientes usando routerLink.-->
-    <button mat-menu-item (click) = "goMyProfile()">Perfil</button>
-    <button mat-menu-item>Editar perfil</button>
-    <button mat-menu-item>Crear grupo</button>
-    <button mat-menu-item (click) = "endSession()">Cerrar sesión</button>
+    <button mat-menu-item
+      (click) = "goMyProfile()">
+        <mat-icon>person</mat-icon>
+        <span>Perfil</span>
+    </button>
+    <button mat-menu-item
+      (click)="goUserSettings()">
+        <mat-icon>manage_accounts</mat-icon>
+        <span>Editar perfil</span>
+    </button>
+    <button mat-menu-item
+      routerLink="/group/new">
+        <mat-icon>group_add</mat-icon>
+        <span>Crear grupo</span>
+    </button>
+    <button mat-menu-item
+      (click) = "endSession()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar sesión</span>
+    </button>
   </mat-menu>
 
   <mat-menu #notifications="matMenu">
@@ -64,8 +91,6 @@
 
 <mat-drawer-container class="sidenav" hasBackdrop="true" id="sidenav">
   <mat-drawer #drawer mode="over">
-    <!--Este bontón es un ejemplo y debe ser editado para enlazar a una
-    sección de la aplicación usando el routerLink.-->
     <button
       *ngIf = "isThereSession()"
       mat-button class="sidenav-btn"
@@ -75,10 +100,11 @@
     </button>
 
     <button
+      *ngIf = "isThereSession()"
       mat-button
       class="sidenav-btn"
       (click)="drawer.toggle()"
-      routerLink="/available-groups">
+      routerLink="/group/available">
         <mat-icon>supervisor_account</mat-icon> GRUPOS
     </button>
 
@@ -87,11 +113,12 @@
       mat-button
       class="sidenav-btn"
       (click)="drawer.toggle()"
-      routerLink="/my-groups">
+      routerLink="/group/mine">
         <mat-icon>supervisor_account</mat-icon> MIS GRUPOS
     </button>
 
     <button
+      *ngIf = "isThereSession()"
       mat-button
       class="sidenav-btn"
       (click)="drawer.toggle()"
@@ -132,8 +159,16 @@
       routerLink="/">
         <mat-icon>chat</mat-icon> CHAT
     </button>
+
+    <button
+      mat-button
+      class="sidenav-btn"
+      (click)="drawer.toggle()"
+      routerLink="/">
+        <mat-icon>info</mat-icon> INFORMACIÓN
+    </button>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="global-main-bg-color" id="element-mat-drawer">
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

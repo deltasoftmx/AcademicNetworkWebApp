@@ -7,3 +7,7 @@
 .comment-field {
     width: 100%;
 }
+
+.clickeable:hover {
+  cursor: pointer;
+}

@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ElementCard } from '../../classes/student.model';
+import { PaginatorData } from '../../classes/components.models';
+import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
+import { ElementCardBoxComponent } from '../../app-components/element-card-box/element-card-box.component';
+import { SessionService } from 'src/app/services/session/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-available-groups',
@@ -9,63 +14,58 @@ import { ElementCard } from '../../classes/student.model';
 export class AvailableGroupsComponent implements OnInit {
 
   public defaultIcon: string = '/assets/people-black-18dp.svg';
-  public availableGroups: ElementCard[];
+  public availableGroups: ElementCard[] = [];
+  public paginator: PaginatorData = {
+    length: null,
+    pageSize: 10,
+    pageSizeOptions: [10, 20, 30]
+  }
+  public searchVal: string = '';
+  private currentSearchVal: string = '';
+  private currentPageSize: number = 10;
+  @ViewChild('elementCardBox') elementCardBox: ElementCardBoxComponent;
 
-  constructor() { }
+  constructor(
+    private academicNetwork: AcademicNetworkService,
+    private session: SessionService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    //Simulando que estos son los grupos disponibles.
-    //Pienso en traer estos datos desde la API.
-    this.availableGroups = [
-      {
-        icon: 'https://rietveld-ict.nl/wp-content/uploads/2014/01/users.png',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
+    if(!this.session.get_userdata()) {
+      this.router.navigateByUrl('/login');
+      return;
+    }
+    this.searchGroups()
+  }
 
-      {
-        icon: 'https://juliocsantaman.com/assets/img/juliocsantaman.jpg',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
+  pageHandler(event) {
+    this.currentPageSize = event.pageSize;
+    this.searchGroups(this.currentSearchVal, this.currentPageSize, event.pageIndex);
+  }
 
-      {
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
+  searchGroups(search = '', offset = this.paginator.pageSize, page = 0, asc = 1) {
+    this.academicNetwork.searchGroups('all', search, offset, page, asc)
+      .subscribe(res => {
+        let groups = [];
+        if(res.code == 0) {
+          this.paginator.length = res.data.total_records;
+          for(let g of res.data.groups) {
+            groups.push({
+              icon: g.image_src,
+              text: [{text: g.name, style: 'h2'}],
+              internalLink: `/group/${g.id}`,
+              externalLink: null
+            })
+          }
+          this.availableGroups = groups;
+        }
+      });
+  }
 
-      {
-        icon: 'https://avatars1.githubusercontent.com/u/33400166?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
-
-      {
-        icon: 'https://avatars3.githubusercontent.com/u/67294504?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
-
-      {
-        icon: 'https://avatars2.githubusercontent.com/u/52019284?s=96&v=4',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
-
-      {
-        icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
-
-      {
-        icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
-
-       {
-        icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      },
-
-      {
-        icon: '',
-        text: [{text: 'Nombre del grupo', style: 'h2'}]
-      }
-    ];
+  submitSearch() {
+    this.currentSearchVal = this.searchVal;
+    this.searchGroups(this.currentSearchVal, this.currentPageSize, 0);
+    this.elementCardBox.firstPage();
   }
 }

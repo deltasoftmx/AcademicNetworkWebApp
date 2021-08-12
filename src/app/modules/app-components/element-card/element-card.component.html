@@ -1,5 +1,4 @@
-
-<mat-card class="card">
+<mat-card [class]="activeClasses" (click) = "clickHandler()">
   <img *ngIf="!card.icon" mat-card-image class="image" [src]="defaultIcon" alt="Ícono">
   <img *ngIf="card.icon" mat-card-image class="image" [src]="card.icon" alt="Ícono">
   <mat-card-content>

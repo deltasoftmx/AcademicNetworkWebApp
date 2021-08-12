@@ -15,8 +15,10 @@ import { UserFeedComponent } from './user-feed/user-feed.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { FavoritePostsComponent } from './favorite-posts/favorite-posts.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
-
-
+import { GroupComponent } from './group/group.component';
+import { CreateNewGroupComponent } from './create-new-group/create-new-group.component';
+import { GroupSettingsViewComponent } from './group-settings-view/group-settings-view.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,10 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
     PostDetailsComponent,
     FavoritePostsComponent,
     ProfileViewComponent,
+    GroupComponent,
+    CreateNewGroupComponent,
+    GroupSettingsViewComponent,
+    UserSettingsComponent,
   ],
   imports: [
     //MaterialModule,

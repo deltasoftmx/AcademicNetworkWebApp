@@ -1,8 +1,8 @@
 .custom-container {
   box-sizing: border-box;
   padding: 20px;
-  width: 400px;
-  margin: auto;
+  width: inherit;
+  margin: inherit;
 }
 
 .custom-field {
@@ -11,10 +11,4 @@
 
 .custom-sub-container {
   margin-bottom: 10px;
-}
-
-@media(max-width: 500px) {
-  .custom-container {
-    width: 100%;
-  }
 }

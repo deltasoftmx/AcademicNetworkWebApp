@@ -1,42 +1,29 @@
 import { Injectable } from '@angular/core';
-import swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
 
-  constructor() { }
+  constructor(
+    private toastr: ToastrService
+  ) { }
 
-  //Información de la librería swal.
-  //Descripción de las propiedades del objeto como parámetro:
-  //1. icon = agrega un icono (success, error, warning, info y question)
-  //2. title = título de la alerta.
-  //3. text = descripción del mensaje/alerta.
-  //4. footer = footer de la alerta.
-
-
-  //Métodos.
-  
-  //Mensaje de error.
-  error(title, text, footer?): void {
-     
-    swal.fire({
-      icon: 'error',
-      title: `<strong> ${title} </strong>`,
-      text: text,
-      footer: footer
-    });
+  info(title: string, message: string, options?) {
+    return this.toastr.info(message, title, options);
   }
 
-  //Mensaje éxitoso.
-  success(title, text, footer?): void {
-    swal.fire({
-      icon: 'success',
-      title: `<strong> ${title} </strong>`,
-      text: text,
-      footer: footer
-    });
+  success(title: string, message: string, options?) {
+    return this.toastr.success(message, title, options);
+  }
+
+  error(title: string, message: string, options?) {
+    return this.toastr.error(message, title, options);
+  }
+
+  warning(title: string, message: string, options?) {
+    return this.toastr.warning(message, title, options);
   }
 
 }

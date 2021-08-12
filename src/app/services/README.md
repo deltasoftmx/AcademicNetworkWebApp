@@ -25,10 +25,11 @@ Los datos que se deben incluir son:
 
 ### Índice.
 
-* [Session](#Session)
-* [Sign-Up](#Sign-Up)
-* [Notifications](#Notifications)
-* [StringFormat](#StringFormat)
+* [Session](#session)
+* [Sign-Up](#sign-up)
+* [Notifications](#notifications)
+* [StringFormat](#stringformat)
+* [AnimationService](#animationservice)
 
 ### Session.
 
@@ -135,3 +136,20 @@ sólo estan disponibles mientras el navegador esté corriendo.
   * **Parámetros**: 
     * `text`: String que será procesado.
   * **Tipo de dato de retorno**: `Array<string>`.
+
+### AnimationService.
+
+**Clase**: AnimationService
+
+**Descripción**: Maneja las animaciones globales en la aplicación.
+
+**Atributos públicos**:
+
+* `globalProgressBarActive`
+  * **Descripción**:
+    Activa o desactiva la barra de carga indeterminada situada en la parte superior
+    de la aplicación. Puede usarse para indicar que hay un proceso que requiere
+    que el usuario espere, pero cuyo tiempo de terminación es indiferente.
+  * **Tipo**: boolean
+
+**Métodos públicos**: Ninguno.
