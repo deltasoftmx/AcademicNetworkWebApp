@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ElementCard } from '../../classes/student.model';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupPreferences } from '../../classes/dialogs.model';
-import { GroupPreferencesComponent } from '../../dialogs/group-preferences/group-preferences.component';
+import { GroupPreferencesComponent } from '../../app-components/dialogs/group-preferences/group-preferences.component';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { GroupData, MembershipInformation } from '../../classes/academic-network
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 import { GlobalEventsService } from 'src/app/services/global-events/global-events.service';
 import { AnimationsService } from 'src/app/services/animations/animations.service';
+import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
 
 @Component({
   selector: 'app-group',
@@ -44,7 +45,8 @@ export class GroupComponent implements OnInit {
     private popups: PopupsService,
     private notifications: NotificationsService,
     private globalEvents: GlobalEventsService,
-    private animations: AnimationsService
+    private animations: AnimationsService,
+    private utilities: UtilitiesService
   ) { }
 
   ngOnInit(): void {
@@ -86,6 +88,10 @@ export class GroupComponent implements OnInit {
 
   shareEventHandler(event) {
     console.log(event)
+    this.utilities.startProcessToSharePost(event)
+      .subscribe((newPost: Publication) => {
+        this.publications.unshift(newPost);
+      });
   }
 
   openPreferences() {

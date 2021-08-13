@@ -450,4 +450,19 @@ export class AcademicNetworkService {
         .pipe(catchError(
           this.handleError<ans.Response<Publication>>('Create Post of Group')));
   }
+
+  /**
+   * Creates a new post of group.
+   * @param postData An object that contains.
+   * - content: string.
+   * - referenced_post_id: number.
+   * @returns Observable<ans.Response<Publication>>
+   */
+  sharePost(postData, groupId): Observable<ans.Response<Publication>> {
+    if (groupId == 0) { //User-level post.
+      return this.createUserPost(postData);
+    } else { //Group-level post.
+      return this.createGroupPost(postData, groupId);
+    }
+  }
 }
