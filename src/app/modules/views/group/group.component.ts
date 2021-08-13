@@ -68,6 +68,11 @@ export class GroupComponent implements OnInit {
 
   newPublicationHandler(event) {
     console.log(event);
+    let postData = {
+      content: event.text,
+      image: event.image
+    };
+    this.createPost(postData, this.groupId);
   }
 
   favoriteEventHandler(event) {
@@ -207,6 +212,45 @@ export class GroupComponent implements OnInit {
           this.notifications.info(
             'Grupo privado',
             'Sólo los miembros de este grupo pueden ver sus publicaciones');
+        }
+      });
+  }
+
+  createPost(postData, groupId) {
+    this.waitingForPosts = true;
+    this.animations.globalProgressBarActive = true;
+    this.academicNetwork.createGroupPost(postData, groupId)
+      .subscribe(res => {
+        this.waitingForPosts = false;
+        this.animations.globalProgressBarActive = false;
+        switch(res.code) {
+          case 0: //success
+            this.publications.unshift(res.data);
+          break;
+          case 1: //group does not exist.
+            this.notifications.error(
+              'No se pudo crear la publicación',
+              'El grupo no existe');
+          break;
+          case 2: //group doesn't have create-post permission.
+            this.notifications.info(
+              'No se pudo crear la publicación.',
+              'El grupo no tiene permiso de publicación');
+          case 3: //No data was sent.
+            this.notifications.info(
+              'No se pudo crear la publicación.',
+              'No se enviaron datos');
+          break;
+          case 4: //user is not member of the group.
+            this.notifications.error(
+              'No se pudo crear la publicación.',
+              'El usuario no es parte del grupo');
+          break;
+          case 5: //shared post belongs to a private group.
+            this.notifications.info(
+              'No se pudo crear la publicación.',
+              'El grupo al que pertenece la publicación compartida es privado');
+          break;
         }
       });
   }

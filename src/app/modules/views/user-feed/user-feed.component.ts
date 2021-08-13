@@ -46,10 +46,12 @@ export class UserFeedComponent implements OnInit {
   }
 
   private makePost(postData) {
+    this.waitingForPosts = true;
     this.animations.globalProgressBarActive = true;
     this.academicNetwork.createUserPost(postData)
       .subscribe(res => {
         console.log(res)
+        this.waitingForPosts = false;
         this.animations.globalProgressBarActive = false;
         if(res.code == 0) {
           this.notifications.success(
