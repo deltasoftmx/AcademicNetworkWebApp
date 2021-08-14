@@ -29,6 +29,7 @@ Los datos que se deben incluir en la documentación de cada componente son:
 * [Dialogs](#dialogs)
   * [GroupPreferences](#grouppreferences)
   * [ImageSquareCropper](#imagesquarecropper)
+  * [SharePost](#SharePost)
 
 ### TagComponents
 
@@ -289,3 +290,24 @@ Objeto con los siguiente atributos:
 recortada. Sanitizada con las herramientas de angular.
 
 * **Selector**: `app-image-picker`.
+
+#### SharePost
+
+**Descripción**:
+  Despliega un modal que permite compartir una publicación. En el se puede
+  especificar el destino en el que se va a publicar (un grupo o el perfil)
+  y un texto adicional.
+
+* **Entradas**:
+  * `data`: `SharePostDialog`.
+
+* **Salidas**
+
+Objeto de tipo: `SharePostDialogResult`
+
+* `action`: `string`. Puede ser [share|cancel]
+* `content`: `string | null`. El texto que se adjunto a la publicación.
+* `groupId`: `int | null`. El destino de la publicación, 0 para el perfil.
+* `postId`: `int | null`. El id de la publicación a compartir.
+
+* **Selector**: `app-share-post`.
