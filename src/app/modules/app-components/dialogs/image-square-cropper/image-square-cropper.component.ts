@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ImageSquareCropper } from '../../classes/dialogs.model';
+import { ImageSquareCropper } from '../../../classes/dialogs.model';
 import { CropperComponent } from 'angular-cropperjs';
 import { DomSanitizer } from '@angular/platform-browser';
 

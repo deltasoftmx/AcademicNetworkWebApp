@@ -15,20 +15,25 @@ Los datos que se deben incluir en la documentación de cada componente son:
 * Selector.
 * Un enlace a su documentación debe ser agregado al índice.
 
-## Documentación de componentes.
+## Índice.
+* [TagComponents](#tagcomponents)
+  * [Single-Field Form n2options](#single-field-form-n2options)
+  * [ElementCard](#elementcard)
+  * [ElementCardBox](#elementcardbox)
+  * [TextAndImageForm](#textandimageform)
+  * [CommentBox](#commentBox)
+  * [PublicationCard](#publicationCard)
+  * [PublicationDisplay](#publicationdisplay)
+  * [GroupSettings](#globalprogresscaractive)
+  * [ImagePicker](#imagepicker)
+* [Dialogs](#dialogs)
+  * [GroupPreferences](#grouppreferences)
+  * [ImageSquareCropper](#imagesquarecropper)
+  * [SharePost](#SharePost)
 
-### Índice.
-* [Single-Field Form n2options](#single-field-form-n2options)
-* [ElementCard](#elementcard)
-* [ElementCardBox](#elementcardbox)
-* [TextAndImageForm](#textandimageform)
-* [CommentBox](#commentBox)
-* [PublicationCard](#publicationCard)
-* [PublicationDisplay](#publicationdisplay)
-* [GroupSettings](#globalprogresscaractive)
-* [ImagePicker](#imagepicker)
+### TagComponents
 
-### Single-Field Form n2options.
+#### Single-Field Form n2options.
 
 **Descripción**: Pequeño recuadro centrado responsivo de 400px de ancho con un único campo de entrada de texto (modificable: text, password, email, etc)
 y dos botones (izquierdo y derecho) que que sirven para preguntar algo al usuario.
@@ -50,7 +55,7 @@ y dos botones (izquierdo y derecho) que que sirven para preguntar algo al usuari
 
 **Selector**: `app-single-field-form-n2options`
 
-### ElementCard
+#### ElementCard
 
 **Descripción**: Se encarga de imprimir una tarjeta de elemento con un icono y una lista de textos.
 
@@ -65,7 +70,7 @@ y dos botones (izquierdo y derecho) que que sirven para preguntar algo al usuari
 
 **Selector**: `app-element-card`.
 
-### ElementCardBox
+#### ElementCardBox
 
 **Descripción**: Se encarga de almacenar e imprimir una colección de tarjetas de elementos.
 
@@ -76,7 +81,7 @@ y dos botones (izquierdo y derecho) que que sirven para preguntar algo al usuari
 
 **Selector**: `app-element-card-box`.
 
-### TextAndImageForm.
+#### TextAndImageForm.
 
 **Descripción**: Formulario con una caja de texto de tamaño auto-ajustable al texto contenido con soporte para adjuntar una imágen.
 El envío del contenido se dispara mediante "enter" o el botón dedicado.
@@ -92,7 +97,7 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
 
 **Selector**: `app-text-and-image-form`.
 
-### CommentBox.
+#### CommentBox.
 
 **Descripción**: Caja para desplegar comentarios y crear comentarios. Los comentarios soportan texto e imagen.
 
@@ -107,7 +112,7 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
 
 **Selector**: `app-comment-box`.
 
-### PublicationCard.
+#### PublicationCard.
 
 **Descripción**: Card para desplegar la información de una publicación.
 
@@ -149,7 +154,7 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
 
 **Selector**: `app-publication-card`.
 
-### PublicationDisplay.
+#### PublicationDisplay.
 
 **Descripción**: Componente que muestra un `PublicationCard` a partir de un objeto de clase `Publication`.
 
@@ -170,7 +175,7 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
 
 **Selector**: `app-publication-display`.
 
-### GroupSettings
+#### GroupSettings
 
 **Descripción**:
   Despluega un formulario, con validaciones por defecto o personalizables, útil para
@@ -219,7 +224,7 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
         El estado de los permisos seleccionados.
 * **Selector**: `app-group-settings`.
 
-### ImagePicker
+#### ImagePicker
 
 **Descripción**:
   Componente que descpliega un formulario para elegir una imagen de
@@ -248,3 +253,61 @@ El envío del contenido se dispara mediante "enter" o el botón dedicado.
     * `invalid`: `boolean`.
     * `image`: `Blob`. La imagen recortada.
 * **Selector**: `app-image-picker`.
+
+### Dialogs
+
+#### GroupPreferences
+
+**Descripción**:
+  Dialogo que despliega diferentes formularios para configurar
+  un grupo a nivel de miembro.
+
+* **Entradas**
+  * `data`: `GroupPreferences`
+
+* **Salidas**
+
+Objeto con los siguientes campos
+
+  * `action`: `string`. Sus valores pueden ser: ["cancel" | "save-preferences" | "leave-group"]
+  * `data`: `GroupPreferences`
+
+#### ImageSquareCropper
+
+**Descripción**:
+  Dialogo de despliega un modal donde se puede recortar la imagen
+  proveida en los argumentos.
+
+* **Entradas**:
+  * `data`: `ImageSquareCropper`.
+
+* **Salidas**
+
+Objeto con los siguiente atributos:
+
+* `image`: `blob`. La imagen recortada.
+* `imageTrustedUrl`: `string`. Una representación en base64 de la imagen
+recortada. Sanitizada con las herramientas de angular.
+
+* **Selector**: `app-image-picker`.
+
+#### SharePost
+
+**Descripción**:
+  Despliega un modal que permite compartir una publicación. En el se puede
+  especificar el destino en el que se va a publicar (un grupo o el perfil)
+  y un texto adicional.
+
+* **Entradas**:
+  * `data`: `SharePostDialog`.
+
+* **Salidas**
+
+Objeto de tipo: `SharePostDialogResult`
+
+* `action`: `string`. Puede ser [share|cancel]
+* `content`: `string | null`. El texto que se adjunto a la publicación.
+* `groupId`: `int | null`. El destino de la publicación, 0 para el perfil.
+* `postId`: `int | null`. El id de la publicación a compartir.
+
+* **Selector**: `app-share-post`.

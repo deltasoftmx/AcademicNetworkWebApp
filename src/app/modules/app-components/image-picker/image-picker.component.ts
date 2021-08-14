@@ -3,7 +3,7 @@ import { ElementCard } from '../../classes/student.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ImageSquareCropperComponent } from '../../dialogs/image-square-cropper/image-square-cropper.component';
+import { ImageSquareCropperComponent } from '../../app-components/dialogs/image-square-cropper/image-square-cropper.component';
 
 @Component({
   selector: 'app-image-picker',

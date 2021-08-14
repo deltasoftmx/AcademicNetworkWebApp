@@ -6,6 +6,7 @@ import { AcademicNetworkService } from 'src/app/services/academic-network/academ
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 import { AnimationsService } from 'src/app/services/animations/animations.service';
 import { GlobalEventsService } from 'src/app/services/global-events/global-events.service';
+import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
 
 @Component({
   selector: 'app-user-feed',
@@ -27,7 +28,8 @@ export class UserFeedComponent implements OnInit {
     private academicNetwork: AcademicNetworkService,
     private notifications: NotificationsService,
     private animations: AnimationsService,
-    private globalEvents: GlobalEventsService
+    private globalEvents: GlobalEventsService,
+    private utilities: UtilitiesService
   ) { }
 
   ngOnInit(): void {
@@ -46,10 +48,12 @@ export class UserFeedComponent implements OnInit {
   }
 
   private makePost(postData) {
+    this.waitingForPosts = true;
     this.animations.globalProgressBarActive = true;
     this.academicNetwork.createUserPost(postData)
       .subscribe(res => {
         console.log(res)
+        this.waitingForPosts = false;
         this.animations.globalProgressBarActive = false;
         if(res.code == 0) {
           this.notifications.success(
@@ -95,6 +99,10 @@ export class UserFeedComponent implements OnInit {
 
   shareEventHandler(event) {
     console.log(event)
+    this.utilities.startProcessToSharePost(event)
+      .subscribe((newPost: Publication) => {
+        this.publications.unshift(newPost);
+      });
   }
 
   getMorePosts() {

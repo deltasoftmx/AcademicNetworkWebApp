@@ -64,7 +64,7 @@ export class PublicationCardComponent implements OnInit {
 
   shareEvent() {
     this.share.emit({
-      publicationId: this.postId
+      publicationId: this.subPostId || this.postId
     })
   }
 
@@ -75,10 +75,6 @@ export class PublicationCardComponent implements OnInit {
   }
 
   isButtonInList(name) {
-    //If there is no restriction, show all.
-    if(!this.activeButtons.length) {
-      return true
-    }
     //show it only if it is in list.
     for(let btnName of this.activeButtons) {
       if(btnName == name)
