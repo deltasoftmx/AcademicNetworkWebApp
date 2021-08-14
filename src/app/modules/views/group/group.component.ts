@@ -90,7 +90,9 @@ export class GroupComponent implements OnInit {
     console.log(event)
     this.utilities.startProcessToSharePost(event)
       .subscribe((newPost: Publication) => {
-        this.publications.unshift(newPost);
+        if(newPost.group_id == this.groupId) {
+          this.publications.unshift(newPost);
+        }
       });
   }
 
