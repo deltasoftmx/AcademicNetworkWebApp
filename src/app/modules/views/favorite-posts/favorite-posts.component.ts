@@ -5,6 +5,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 import { AnimationsService } from 'src/app/services/animations/animations.service';
 import { GlobalEventsService } from 'src/app/services/global-events/global-events.service';
+import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
 
 @Component({
   selector: 'app-favorite-posts',
@@ -26,7 +27,8 @@ export class FavoritePostsComponent implements OnInit {
     private session: SessionService,
     private academicNetwork: AcademicNetworkService,
     private animations: AnimationsService,
-    private globalEvents: GlobalEventsService
+    private globalEvents: GlobalEventsService,
+    private utilities: UtilitiesService
   ) { }
 
   ngOnInit(): void {
@@ -53,6 +55,8 @@ export class FavoritePostsComponent implements OnInit {
 
   shareEventHandler(event) {
     console.log(event)
+    this.utilities.startProcessToSharePost(event)
+      .subscribe();
   }
 
   getMorePosts() {

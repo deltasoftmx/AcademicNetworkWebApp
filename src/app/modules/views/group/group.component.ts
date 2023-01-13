@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ElementCard } from '../../classes/student.model';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupPreferences } from '../../classes/dialogs.model';
-import { GroupPreferencesComponent } from '../../dialogs/group-preferences/group-preferences.component';
+import { GroupPreferencesComponent } from '../../app-components/dialogs/group-preferences/group-preferences.component';
 import { AcademicNetworkService } from 'src/app/services/academic-network/academic-network.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { GroupData, MembershipInformation } from '../../classes/academic-network
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 import { GlobalEventsService } from 'src/app/services/global-events/global-events.service';
 import { AnimationsService } from 'src/app/services/animations/animations.service';
+import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
 
 @Component({
   selector: 'app-group',
@@ -44,7 +45,8 @@ export class GroupComponent implements OnInit {
     private popups: PopupsService,
     private notifications: NotificationsService,
     private globalEvents: GlobalEventsService,
-    private animations: AnimationsService
+    private animations: AnimationsService,
+    private utilities: UtilitiesService
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +70,11 @@ export class GroupComponent implements OnInit {
 
   newPublicationHandler(event) {
     console.log(event);
+    let postData = {
+      content: event.text,
+      image: event.image
+    };
+    this.createPost(postData, this.groupId);
   }
 
   favoriteEventHandler(event) {
@@ -81,6 +88,12 @@ export class GroupComponent implements OnInit {
 
   shareEventHandler(event) {
     console.log(event)
+    this.utilities.startProcessToSharePost(event)
+      .subscribe((newPost: Publication) => {
+        if(newPost.group_id == this.groupId) {
+          this.publications.unshift(newPost);
+        }
+      });
   }
 
   openPreferences() {
@@ -207,6 +220,45 @@ export class GroupComponent implements OnInit {
           this.notifications.info(
             'Grupo privado',
             'Sólo los miembros de este grupo pueden ver sus publicaciones');
+        }
+      });
+  }
+
+  createPost(postData, groupId) {
+    this.waitingForPosts = true;
+    this.animations.globalProgressBarActive = true;
+    this.academicNetwork.createGroupPost(postData, groupId)
+      .subscribe(res => {
+        this.waitingForPosts = false;
+        this.animations.globalProgressBarActive = false;
+        switch(res.code) {
+          case 0: //success
+            this.publications.unshift(res.data);
+          break;
+          case 1: //group does not exist.
+            this.notifications.error(
+              'No se pudo crear la publicación',
+              'El grupo no existe');
+          break;
+          case 2: //group doesn't have create-post permission.
+            this.notifications.info(
+              'No se pudo crear la publicación.',
+              'El grupo no tiene permiso de publicación');
+          case 3: //No data was sent.
+            this.notifications.info(
+              'No se pudo crear la publicación.',
+              'No se enviaron datos');
+          break;
+          case 4: //user is not member of the group.
+            this.notifications.error(
+              'No se pudo crear la publicación.',
+              'El usuario no es parte del grupo');
+          break;
+          case 5: //shared post belongs to a private group.
+            this.notifications.info(
+              'No se pudo crear la publicación.',
+              'El grupo al que pertenece la publicación compartida es privado');
+          break;
         }
       });
   }

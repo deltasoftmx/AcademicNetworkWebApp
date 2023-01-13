@@ -21,3 +21,14 @@ export class ImageSquareCropper {
   public applyBtnDisabled: boolean;
   public applyBtnLabel: string;
 }
+
+export class SharePostDialog {
+  postId: number;
+}
+
+export class SharePostDialogResult {
+  action: string;
+  groupId: number;
+  content: string;
+  postId: number;
+}

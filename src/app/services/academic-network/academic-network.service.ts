@@ -420,4 +420,49 @@ export class AcademicNetworkService {
         .pipe(catchError(
           this.handleError<ans.Response<ans.FavoritePosts>>('Get Favorite Posts')));
   }
+
+  /**
+   * Creates a new post of group.
+   * @param postData An object that contains.
+   * - content: string.
+   * - image: blob.
+   * - referenced_post_id: number.
+   * @returns
+   */
+   createGroupPost(postData, groupId): Observable<ans.Response<Publication>> {
+    let headers = new HttpHeaders({
+      'x-api-key': apikey,
+      'Authorization': this.session.getToken()
+    });
+
+    let formData = new FormData();
+    if(postData.content)
+      formData.append('content', postData.content);
+    if(postData.image)
+      formData.append('image', postData.image);
+    if(postData.referenced_post_id)
+      formData.append('referenced_post_id', postData.referenced_post_id)
+
+    return this.http.post<ans.Response<Publication>>(
+      `${domain}/v1/api/social-network/groups/group/${groupId}/post`,
+      formData,
+      { headers: headers })
+        .pipe(catchError(
+          this.handleError<ans.Response<Publication>>('Create Post of Group')));
+  }
+
+  /**
+   * Creates a new post of group.
+   * @param postData An object that contains.
+   * - content: string.
+   * - referenced_post_id: number.
+   * @returns Observable<ans.Response<Publication>>
+   */
+  sharePost(postData, groupId): Observable<ans.Response<Publication>> {
+    if (groupId == 0) { //User-level post.
+      return this.createUserPost(postData);
+    } else { //Group-level post.
+      return this.createGroupPost(postData, groupId);
+    }
+  }
 }

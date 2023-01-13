@@ -6,7 +6,7 @@ export const environment = {
   production: false
 };
 
-export const apikey = '370bd078aa5beaff45ba3e4581c42bdf90f02eaf082c89f39fd2234562cd9a4b';
+export const apikey = '915e891d3f7b22a519fe72eed866a5c57be1ad874f35a934cc5909dd7904c0a1';
 export const domain = 'http://localhost:3000';
 
 /*
