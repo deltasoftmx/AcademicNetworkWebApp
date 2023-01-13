@@ -2,5 +2,5 @@ export const environment = {
   production: true
 };
 
-export const apikey = '36c8366e259f08583cc28df4634e609b95c0a9dde0c91341cedde20980bae16e';
+export const apikey = '041e68356e063cc8cb72c3e83a8d05753e39d6c64f6eac01987003881e956e5c';
 export const domain = 'https://academic-network-backend.herokuapp.com';
